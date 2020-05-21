@@ -4,3 +4,4 @@ We want to create a web application where students can find other people taking 
 
 
 P1: https://docs.google.com/document/d/1RpfMvzZ_ug7mo98eW3XWPqW45XAi-AyYrzW7C79BV2Q/edit?usp=sharing
+P2: https://docs.google.com/document/d/1DNzTmLp-4gKG7NydHz4bcM0R_ihsv4d7dztOTZVEok0/edit?usp=sharing
