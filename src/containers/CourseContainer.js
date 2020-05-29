@@ -1,4 +1,5 @@
 import React from "react";
+<<<<<<< HEAD
 import ReactDOM from 'react-dom'
 import CourseTableComponent from '../components/CourseTableComponent'
 import SearchService from "../services/SearchService";
@@ -47,10 +48,22 @@ class CourseContainer extends React.Component {
 
     setKeyword = (keyword) => {
         this.props.history.push(`/search/${keyword}`)
+=======
+import CourseTableComponent from "../components/CourseTableComponent";
+import CourseSearchComponent from "../components/CourseSearchComponent";
+
+export default class CourseContainer extends React.Component{
+    state = {
+        courses:[
+            {course:"CS3500", title:"Object-Oriented Design", term:"Fall 2020", enrollment:"200"},
+            {course:"CS4550", title: "Web Development", term:"Summer 1 2020", enrollment: "60"}
+        ]
+>>>>>>> 7d3fb8e43a0611c3b8aec2616f43321b2ad501da
     }
 
     render() {
         return (
+<<<<<<< HEAD
             <div>
                 <h2>Course Search</h2>
                 <div className="input-group">
@@ -73,9 +86,14 @@ class CourseContainer extends React.Component {
                         keyword={this.state.keyword}
                         setKeyword={this.setKeyword} />
                 </div>
+=======
+            <div className="container">
+                <h2>Course Search </h2>
+                <CourseSearchComponent/>
+                <CourseTableComponent
+                    courses={this.state.courses}/>
+>>>>>>> 7d3fb8e43a0611c3b8aec2616f43321b2ad501da
             </div>
         )
     }
 }
-
-export default CourseContainer
