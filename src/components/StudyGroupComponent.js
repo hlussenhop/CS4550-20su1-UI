@@ -2,6 +2,7 @@ import React from 'react';
 import CourseContainer from '../containers/CourseContainer'
 import CourseDetailsComponent from "./CourseDetailsComponent";
 import CourseSearchComponent from "./CourseSearchComponent";
+import NavBarComponent from "./NavBarComponent";
 import { BrowserRouter, Link, Route } from "react-router-dom";
 
 class StudyGroupComponent extends React.Component {
@@ -10,7 +11,7 @@ class StudyGroupComponent extends React.Component {
         return (
             <BrowserRouter>
                 <div>
-                    <h1>Study Group</h1>
+                    <NavBarComponent/>
                     <Route
                         path="/search"
                         exact={true}
@@ -24,6 +25,11 @@ class StudyGroupComponent extends React.Component {
                     <Route path='search/:course_id/details/'
                         exact={true}
                         component={CourseDetailsComponent} />
+
+                {/*For test*/}
+                   <Route path='/details/'
+                    exact={true}
+                    component={CourseDetailsComponent} />
                 </div>
             </BrowserRouter>
         )
