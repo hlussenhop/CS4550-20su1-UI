@@ -25,7 +25,7 @@ const declareTerm = (termCode) =>
     })
 
 const findAllCourses = () =>
-    fetch("https://searchneu.com/search?query=cs&termId=202060&minIndex=0&maxIndex=1")
+    fetch("https://tranquil-castle-29276.herokuapp.com/"+ "https://searchneu.com/search?query=cs&termId=202060&minIndex=0&maxIndex=1")
         .then(response => response.json())
         .then(data => console.log(data));
 
