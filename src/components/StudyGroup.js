@@ -1,10 +1,23 @@
 import React from 'react'
+import {BrowserRouter, Route} from 'react-router-dom'
+import CourseContainer from "../containers/CourseContainer";
+import CourseDetailsComponent from "./CourseDetailsComponent";
 
 class StudyGroup extends React.Component {
     render() {
-        return (
+        return(
             <div>
-                <h1>Course Study Group Search</h1>
+                <BrowserRouter>
+
+                    <Route path='/'
+                           exact={true}
+                           component={CourseContainer}/>
+
+                    <Route path='/details/'
+                           exact={true}
+                           component={CourseDetailsComponent}/>
+
+                </BrowserRouter>
             </div>
         )
     }
