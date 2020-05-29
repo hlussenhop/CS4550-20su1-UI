@@ -8,10 +8,10 @@ export default class CourseTableComponent extends React.Component {
                 <table className="table table-hover table-light">
                     <thead>
                     <tr className="table-secondary">
-                        <th className="course-header course-owner d-none d-md-table-cell">Course</th>
-                        <th className="course-header course-title">Title</th>
+                        <th className="course-header course-owner">Course</th>
+                        <th className="course-header d-none d-sm-table-cell course-title">Title</th>
                         {/*<th className="course-header d-none d-lg-table-cell">CRN</th>*/}
-                        <th className="course-header d-none d-lg-table-cell">Term</th>
+                        <th className="course-header d-none d-md-table-cell">Term</th>
                         {/*<th className="course-header d-none d-lg-table-cell">Instructors</th>*/}
                         <th className="course-header d-none d-lg-table-cell">Enrollment</th>
                         <th>&nbsp;</th>
