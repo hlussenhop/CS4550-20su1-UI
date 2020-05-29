@@ -1,15 +1,16 @@
 import React from 'react';
 import CourseContainer from '../containers/CourseContainer'
-import { BrowserRouter as Router, Link, Route } from "react-router-dom";
+import CourseDetailsComponent from "./CourseDetailsComponent";
+import CourseSearchComponent from "./CourseSearchComponent";
+import { BrowserRouter, Link, Route } from "react-router-dom";
 
 class StudyGroupComponent extends React.Component {
 
     render() {
         return (
-            <Router>
+            <BrowserRouter>
                 <div>
                     <h1>Study Group</h1>
-                    <Link className="btn btn-primary" to="/search">Search for courses</Link>
                     <Route
                         path="/search"
                         exact={true}
@@ -19,8 +20,12 @@ class StudyGroupComponent extends React.Component {
                         path='/search/:keyword'
                         exact={true}
                         component={CourseContainer} />
+
+                    <Route path='search/:course_id/details/'
+                        exact={true}
+                        component={CourseDetailsComponent} />
                 </div>
-            </Router>
+            </BrowserRouter>
         )
     }
 }

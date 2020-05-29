@@ -1,31 +1,9 @@
-<<<<<<< HEAD
-import React from 'react';
-import CourseRowComponent from '../components/CourseRowComponent'
-=======
 import React from "react";
 import CourseRowComponent from "./CourseRowComponent";
->>>>>>> 7d3fb8e43a0611c3b8aec2616f43321b2ad501da
 
 export default class CourseTableComponent extends React.Component {
     render() {
         return (
-<<<<<<< HEAD
-            <div>
-                <table className="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>Title</th>
-                            <th className="d-none d-sm-table-cell">CRN</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            this.props.courses.map(course =>
-                                <CourseRowComponent
-                                    key={course._id}
-                                    course={course} />
-                            )}
-=======
             <div className="table-responsive">
                 <table className="table table-hover table-light">
                     <thead>
@@ -46,7 +24,6 @@ export default class CourseTableComponent extends React.Component {
                                 course={course}/>
                         )
                     }
->>>>>>> 7d3fb8e43a0611c3b8aec2616f43321b2ad501da
                     </tbody>
                 </table>
             </div>
