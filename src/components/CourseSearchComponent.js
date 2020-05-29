@@ -3,21 +3,6 @@ import React from "react";
 import SearchService from '../services/SearchService'
 
 class CourseSearchComponent extends React.Component {
-    findTerm = (keyword) => {
-        console.log(SearchService.findAllCourses())
-        /*
-        SearchService.findTerm(keyword)
-            .then(theActualNewCourse =>
-                this.setState((prevState) => {
-                    return {
-                        courses: [
-                            ...prevState.courses,
-                            theActualNewCourse
-                        ]
-                    }
-                }))
-                */
-    }
 
     render() {
         return (
@@ -31,7 +16,7 @@ class CourseSearchComponent extends React.Component {
                     <div className="input-group-append">
                         <button id="button-addon1"
                             type="submit" className="btn btn-link text-primary"
-                            onClick={() => this.findTerm(this.props.keyword)}>
+                            onClick={() => this.props.findTerm(this.props.keyword)}>
                             <i className="fa fa-search"></i>
                         </button>
                     </div>
