@@ -1,41 +1,38 @@
-const createCourse = (course) => 
-    fetch("https://wbdv-generic-server.herokuapp.com/api/001452943/courses", {
+const findCourseById = (courseId) => {
+    fetch ("https://searchneu.com/search?query=cs&termId=202060&minIndex=0&maxIndex=0")
+        .then(response => response.json())
+}
+
+const findTerm = (keyword) => {
+    fetch(`https://nubanner.neu.edu/StudentRegistrationSsb/ssb/classSearch/getTerms?offset=1&max=10&searchTerm=${keyword}`)
+        .then(response => response.json())
+}
+
+const findCourseByKeyword = (keyword) => {
+    fetch ("https://searchneu.com/search?query=cs&termId=202060&minIndex=0&maxIndex=1")
+        //.then(response => response.json())
+}
+
+const declareTerm = (termCode) =>
+    fetch("https://nubanner.neu.edu/StudentRegistrationSsb/ssb/term/search", {
         method: 'POST',
-        body: JSON.stringify(course),
+        request: termCode,
+        body: `term=${termCode}`,
         headers: {
-            'content-type': 'application/json'
+            'content-type': '/x-www-form-urlencoded; charset=UT',
+            'cookie': 'JSESSIONID=ABCDEF0123456789ABCDEF0123456789; nubanner-cookie=0123456789.12345.1234'
         }
     })
-        .then(response => response.json())
 
-
-const updateCourse = (courseId, course) =>
-    fetch("https://wbdv-generic-server.herokuapp.com/api/001452943/courses/" + courseId, {
-        method: 'PUT',
-        body: JSON.stringify(course),
-        headers: {
-            'content-type': 'application/json'
-        }
-    })
-        .then(response => response.json())
-
-const deleteCourse = (courseId) => 
-    fetch("https://wbdv-generic-server.herokuapp.com/api/001452943/courses/" + courseId, {
-        method: 'DELETE'
-    })
-        .then(response => response.json())
-
-const findCourseById = (courseId) => { }
-
-const findAllCourses = () => 
-    fetch("https://wbdv-generic-server.herokuapp.com/api/001452943/courses")
+const findAllCourses = () =>
+    fetch("https://searchneu.com/search?query=cs&termId=202060&minIndex=0&maxIndex=0")
         .then(response => response.json())
 
 
 export default {
-    createCourse,
-    deleteCourse,
     findCourseById,
+    findCourseByKeyword,
     findAllCourses,
-    updateCourse
+    declareTerm,
+    findTerm
 }

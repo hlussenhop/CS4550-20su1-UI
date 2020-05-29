@@ -1,11 +1,11 @@
 import React from 'react';
-import './App.css';
-import StudyGroup from "./components/StudyGroup"
+//import './App.css';
+import StudyGroupComponent from "./components/StudyGroupComponent"
 
 function App() {
   return (
     <div className="container">
-      <StudyGroup/>
+      <StudyGroupComponent/>
     </div>
   );
 }
