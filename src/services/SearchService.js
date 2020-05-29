@@ -27,6 +27,7 @@ const declareTerm = (termCode) =>
 const findAllCourses = () =>
     fetch("https://searchneu.com/search?query=cs&termId=202060&minIndex=0&maxIndex=1")
         .then(response => response.json())
+        .then(data => console.log(data));
 
 
 export default {
