@@ -37,10 +37,10 @@ export default class CourseRowComponent extends React.Component{
                             DETAILS
                         </button>
                     </Link>
-                    <button className="btn btn-success"
-                            onClick={() => {}}>
-                        ENROLL
-                    </button>
+                    {/*<button className="btn btn-success"*/}
+                    {/*        onClick={() => {}}>*/}
+                    {/*    ENROLL*/}
+                    {/*</button>*/}
                 </td>
             </tr>
         )
