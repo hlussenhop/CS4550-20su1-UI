@@ -8,7 +8,11 @@ export default class CourseDetailsComponent extends React.Component {
         return (
             <div className="container">
                 <div className="card mb-3">
-                    <div className="card-header"><b>{this.props.location.state.course.class.name}</b></div>
+                    <div className="card-header">
+                        <h5>
+                            <b>{this.props.location.state.course.class.name}</b>
+                        </h5>
+                    </div>
                     <div className="card-body">
                         <p className="card-text">{this.props.location.state.course.class.desc}
                         </p>
