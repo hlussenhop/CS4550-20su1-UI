@@ -4,11 +4,9 @@ import CourseSearchComponent from "../components/CourseSearchComponent";
 import SearchService from "../services/SearchService"
 
 export default class CourseContainer extends React.Component {
-
-    _isMounted = true
     state = {
-        subject: '',
-        term: '',
+        subject: 'cs',
+        term: '202110',
         courses: []
         //{ course: "CS3500", title: "Object-Oriented Design", term: "Fall 2020", enrollment: "200" },
         //{ course: "CS4550", title: "Web Development", term: "Summer 1 2020", enrollment: "60" }
@@ -48,7 +46,6 @@ export default class CourseContainer extends React.Component {
             */
 
     componentDidMount() {
-        this._isMounted = true
         if ((this.state.subject !== "") && (this.state.term !== "")) {
             SearchService.findCoursesBySubject(this.state.subject, this.state.term)
                 .then(actualArrayOfCourses =>
@@ -56,10 +53,6 @@ export default class CourseContainer extends React.Component {
                         courses: actualArrayOfCourses
                     }))
         }
-    }
-
-    componentWillUnmount() {
-        this._isMounted = false
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {

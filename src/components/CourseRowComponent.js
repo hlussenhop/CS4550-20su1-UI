@@ -13,12 +13,7 @@ export default class CourseRowComponent extends React.Component{
             <tr className="course-row">
                 <td>{this.props.course["class"]["subject"] + this.props.course["class"]["classId"]}</td>
                 <td className="d-none d-sm-table-cell">{this.props.course["class"]["name"]}</td>
-<<<<<<< HEAD
-                <td className="d-none d-md-table-cell">Not Enrolled</td>
-                <td className="d-none d-lg-table-cell">&nbsp;</td>
-=======
                 <td className="d-none d-lg-table-cell">Not Enrolled</td>
->>>>>>> d6ae59f6f9cee0110b76653a8ec2c48078aa0f58
                 <td className="float-right">
                     <Link to={{ pathname: '/details/' + this.props.course.class.classId,
                     state: {

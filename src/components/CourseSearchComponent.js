@@ -44,13 +44,13 @@ export default class CourseSearchComponent extends React.Component {
                                 onChange={(e) => this.props.setSubject(e.target.value)}
                                 className="form-control"
                                 id="subjectFld">
-                                <option selected={true} value="arth">ARTH</option>
+                                <option value="arth">ARTH</option>
                                 <option value="biol">BIOL</option>
                                 <option value="chem">CHEM</option>
                                 <option value="cive">CIVE</option>
                                 <option value="comm">COMM</option>
                                 <option value="crim">CRIM</option>
-                                <option value="cs">CS</option>
+                                <option selected={true} value="cs">CS</option>
                                 <option value="econ">ECON</option>
                                 <option value="eece">EECE</option>
                                 <option value="engl">ENGL</option>
