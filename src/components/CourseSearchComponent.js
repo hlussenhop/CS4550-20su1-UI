@@ -1,27 +1,9 @@
 import React from "react";
 
-import SearchService from '../services/SearchService'
-
-class CourseSearchComponent extends React.Component {
+export default class CourseSearchComponent extends React.Component {
 
     render() {
         return (
-<<<<<<< HEAD
-            <div className="p-1 bg-light rounded rounded-pill shadow-sm mb-4">
-                <div className="input-group">
-                    <input type="search" placeholder="Search Courses"
-                        onChange={(event) =>
-                            this.props.setKeyword(event.target.value)}
-                        aria-describedby="button-addon1"
-                        className="form-control border-0 bg-light" />
-                    <div className="input-group-append">
-                        <button id="button-addon1"
-                            type="submit" className="btn btn-link text-primary"
-                            onClick={() => this.props.findTerm(this.props.keyword)}>
-                            <i className="fa fa-search"></i>
-                        </button>
-=======
-
             // <div className="p-1 bg-light rounded rounded-pill shadow-sm mb-4">
             //     <div className="input-group">
             //         <input type="search" placeholder="Search Courses"
@@ -57,52 +39,53 @@ class CourseSearchComponent extends React.Component {
                             <label htmlFor="subjectFld" className="col-form-label float-left">Select Subject: </label>
                         </div>
                         <div className="col-6">
-                        <select className="form-control"
+                        <select onChange={(e) => this.props.setSubject(e.target.value)}
+                                className="form-control"
                                 id="subjectFld">
-                            <option>ARTH</option>
-                            <option>BIOL</option>
-                            <option>CHEM</option>
-                            <option>CIVE</option>
-                            <option>COMM</option>
-                            <option>CRIM</option>
-                            <option>CS</option>
-                            <option>ECON</option>
-                            <option>EECE</option>
-                            <option>ENGL</option>
-                            <option>ENVR</option>
-                            <option>HIST</option>
-                            <option>MATH</option>
-                            <option>MUSC</option>
-                            <option>PHIL</option>
-                            <option>PHMD</option>
-                            <option>PHYS</option>
-                            <option>POLS</option>
-                            <option>PSYC</option>
-                            <option>THTR</option>
-                            <option>SOCL</option>
+                            <option value="arth">ARTH</option>
+                            <option value="biol">BIOL</option>
+                            <option value="chem">CHEM</option>
+                            <option value="cive">CIVE</option>
+                            <option value="comm">COMM</option>
+                            <option value="crim">CRIM</option>
+                            <option value="cs">CS</option>
+                            <option value="econ">ECON</option>
+                            <option value="eece">EECE</option>
+                            <option value="engl">ENGL</option>
+                            <option value="envr">ENVR</option>
+                            <option value="hist">HIST</option>
+                            <option value="math">MATH</option>
+                            <option value="musc">MUSC</option>
+                            <option value="phil">PHIL</option>
+                            <option value="phmd">PHMD</option>
+                            <option value="phys">PHYS</option>
+                            <option value="pols">POLS</option>
+                            <option value="psyc">PSYC</option>
+                            <option value="thtr">THTR</option>
+                            <option value="socl">SOCL</option>
                         </select>
                         </div>
->>>>>>> 246666ee25d1e7acc8d77633bca33caf58d63a9a
                     </div>
                 </div>
                 <div className="col-5">
                     <div className="form-inline">
                         <div className="col-6">
-                            <label htmlFor="subjectFld" className="col-form-label float-left">Select Term: </label>
+                            <label htmlFor="termFld" className="col-form-label float-left">Select Term: </label>
                         </div>
                         <div className="col-6">
-                            <select className="form-control"
-                                    id="subjectFld">
-                                <option>Summer 1 2020</option>
-                                <option>Summer 2 2020</option>
-                                <option>Fall 2020</option>
+                            <select onChange={(e) => this.props.setTerm(e.target.value)}
+                                    className="form-control"
+                                    id="termFld">
+                                <option value="202040">Summer 1 2020</option>
+                                <option value="202060">Summer 2 2020</option>
+                                <option value="202110">Fall 2020</option>
                             </select>
                         </div>
                     </div>
                 </div>
                 <div className="col-2">
                     <button className="btn btn-success float-right"
-                            onClick={() => {}}>
+                            onClick={() => {this.props.findTerm()}}>
                         SUBMIT
                     </button>
                 </div>
@@ -110,5 +93,3 @@ class CourseSearchComponent extends React.Component {
         )
     }
 }
-
-export default CourseSearchComponent

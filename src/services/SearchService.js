@@ -20,19 +20,10 @@ const declareTerm = (termCode) =>
         }
     })
 */
-
-<<<<<<< HEAD
-const findCoursesBySubject = (subject, termCode) =>
-    fetch(`https://searchneu.com/search?query=${subject}&term=${termCode}&minIndex=0&maxIndex=1`)
+const findCoursesBySubject = (subject, term) =>
+    fetch(`https://tranquil-castle-29276.herokuapp.com/` + `https://searchneu.com/search?query=${subject}&termId=${term}&minIndex=0&maxIndex=100`)
         .then(response => response.json())
-        .then(course => course[0])
-=======
-const findAllCourses = () =>
-    fetch("https://tranquil-castle-29276.herokuapp.com/"+ "https://searchneu.com/search?query=cs&termId=202060&minIndex=0&maxIndex=1")
-        .then(response => response.json())
-        .then(data => console.log(data));
-
->>>>>>> 246666ee25d1e7acc8d77633bca33caf58d63a9a
+        .then(data => data);
 
 export default {
     findCourseById,

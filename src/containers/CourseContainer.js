@@ -8,20 +8,31 @@ export default class CourseContainer extends React.Component {
         subject: 'cs',
         term: 202110,
         keyword: '',
-        courses: [
-            { course: "CS3500", title: "Object-Oriented Design", term: "Fall 2020", enrollment: "200" },
-            { course: "CS4550", title: "Web Development", term: "Summer 1 2020", enrollment: "60" }
-        ]
+        courses: []
+            //{ course: "CS3500", title: "Object-Oriented Design", term: "Fall 2020", enrollment: "200" },
+            //{ course: "CS4550", title: "Web Development", term: "Summer 1 2020", enrollment: "60" }
     }
 
-    findTerm = (subject, term) => {
-        SearchService.findCoursesBySubject(subject, term)
+    findTerm = () => {
+        SearchService.findCoursesBySubject(this.state.subject, this.state.term)
             .then(coursesFound =>
                 this.setState({
-                    courses: coursesFound[0]
+                    courses: coursesFound
                 }))
-        console.log(this.state.courses)
     }
+
+    setTerm = (term) => {
+        this.setState({
+            term: term
+        })
+    }
+
+    setSubject = (subject) => {
+        this.setState({
+            subject: subject
+        })
+    }
+
     /*
     SearchService.findTerm(keyword)
         .then(theActualNewCourse =>
@@ -60,12 +71,13 @@ export default class CourseContainer extends React.Component {
             <div>
                 <h2>Course Search </h2>
                 <CourseSearchComponent
-                    keyword={this.state.keyword}
-                    setKeyword={this.setKeyword} 
-                    findTerm={this.findTerm}/>
+                    findTerm={this.findTerm}
+                    term={this.state.term}
+                    subject={this.state.subject}
+                    setTerm={this.setTerm}
+                    setSubject={this.setSubject}/>
                 <CourseTableComponent
-                    courses={this.state.courses}
-                    keyword={this.state.keyword} />
+                    courses={this.state.courses} />
             </div>
         )
     }
