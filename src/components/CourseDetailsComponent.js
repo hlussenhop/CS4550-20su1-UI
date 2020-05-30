@@ -1,12 +1,10 @@
 import React from "react";
-import CourseRowComponent from "./CourseRowComponent";
 import SectionCardComponent from "./SectionCardComponent";
 
 export default class CourseDetailsComponent extends React.Component {
 
 
     render() {
-        //console.log(this.props)
         return (
             <div className="container">
                 <div className="card mb-3">
