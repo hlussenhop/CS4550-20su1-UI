@@ -7,9 +7,7 @@ export default class SectionCardComponent extends React.Component{
 
             <div className="col mb-4">
                 <div className="card bg-light">
-                    <div className="card-header">
-                        <div className="card-header"><b>CRN {this.props.section.crn}</b></div>
-                    </div>
+                    <div className="card-header"><b>CRN {this.props.section.crn}</b></div>
                     <div className="card-body">
                         <div className="row">
                             <div className="col-6">
