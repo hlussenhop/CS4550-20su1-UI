@@ -13,7 +13,7 @@ export default class CourseTableComponent extends React.Component {
                         {/*<th className="course-header d-none d-lg-table-cell">CRN</th>*/}
                         {/*<th className="course-header d-none d-lg-table-cell">Instructors</th>*/}
                         <th className="course-header d-none d-md-table-cell">Enrollment</th>
-                        <th>&nbsp;</th>
+                        <th className="course-header d-none d-lg-table-cell">&nbsp;</th>
                     </tr>
                     </thead>
                     <tbody>

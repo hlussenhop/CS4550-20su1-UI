@@ -5,8 +5,8 @@ import SearchService from "../services/SearchService"
 
 export default class CourseContainer extends React.Component {
     state = {
-        subject: 'cs',
-        term: '202110',
+        subject: '',
+        term: '',
         keyword: '',
         courses: []
             //{ course: "CS3500", title: "Object-Oriented Design", term: "Fall 2020", enrollment: "200" },
