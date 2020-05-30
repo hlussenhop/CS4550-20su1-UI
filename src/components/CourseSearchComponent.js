@@ -85,7 +85,9 @@ export default class CourseSearchComponent extends React.Component {
                 </div>
                 <div className="col-2">
                     <button className="btn btn-success float-right"
-                            onClick={() => {this.props.findTerm()}}>
+                            onClick={() => {
+                                this.props.findTerm()
+                                this.props.setURL()}}>
                         SUBMIT
                     </button>
                 </div>
