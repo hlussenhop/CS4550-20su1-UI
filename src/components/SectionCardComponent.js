@@ -1,13 +1,22 @@
 import React from "react";
 
-export default class SectioneCardComponent extends React.Component{
+export default class SectionCardComponent extends React.Component{
     render() {
         console.log(this.props)
         return (
 
             <div className="col mb-4">
                 <div className="card bg-light">
-                    <div className="card-header"><b>CRN {this.props.section.crn}</b></div>
+                    <div className="card-header">
+                        <div className="row">
+                            <div className="col-10">
+                                <b>CRN {this.props.section.crn}</b>
+                            </div>
+                            <div className="col-2">
+                                <button href="#" className="btn btn-success float-right card-link">Enroll</button>
+                            </div>
+                        </div>
+                    </div>
                     <div className="card-body">
                         <div className="row">
                             <div className="col-6">
@@ -24,9 +33,6 @@ export default class SectioneCardComponent extends React.Component{
                                 <h6 className="card-text course-location text-muted">{this.props.section.meetings[0].where}</h6>
                                 <h6 className="card-text course-enrollment text-muted">{this.props.section.seatsCapacity - this.props.section.seatsRemaining
                                 }</h6>
-                                <button href="#" className="btn btn-success float-right card-link">Enroll
-                                </button>
-                                {/*<button href="#" className="btn btn-danger float-right card-link">UnEnroll</button>*/}
                             </div>
                         </div>
                     </div>
