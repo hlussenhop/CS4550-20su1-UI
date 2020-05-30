@@ -1,8 +1,11 @@
 import React from 'react';
 import CourseContainer from '../containers/CourseContainer'
 import CourseDetailsComponent from "./CourseDetailsComponent";
+import CourseSearchComponent from "./CourseSearchComponent";
 import NavBarComponent from "./NavBarComponent";
-import { BrowserRouter, Link, Route } from "react-router-dom";
+import {BrowserRouter, Link, Route} from "react-router-dom";
+import CourseTableComponent from "./CourseTableComponent";
+import CourseRowComponent from "./CourseRowComponent";
 
 class StudyGroupComponent extends React.Component {
 
@@ -10,25 +13,21 @@ class StudyGroupComponent extends React.Component {
         return (
             <BrowserRouter>
                 <div>
-                    <NavBarComponent />
+                    <NavBarComponent/>
                     <Route
                         path="/search"
                         exact={true}
-                        component={CourseContainer} />
+                        component={CourseContainer}/>
 
                     <Route
-                        path='/search/:term/:subject'
+                        path='/search/:keyword'
                         exact={true}
-                        component={CourseContainer} />
+                        component={CourseContainer}/>
 
-                    <Route path='search/:term/:subject/:classId/details'
-                        exact={true}
-                        component={CourseDetailsComponent} />
-
-                    {/*For test*/}
-                    <Route path='/details/'
-                        exact={true}
-                        component={CourseDetailsComponent} />
+                    <Route path='/details/:id'
+                           exact={true}
+                           render={(props) => <CourseRowComponent {...props} someProp={100}/>}
+                           component={CourseDetailsComponent}/>
                 </div>
             </BrowserRouter>
         )

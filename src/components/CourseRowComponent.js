@@ -14,8 +14,12 @@ export default class CourseRowComponent extends React.Component{
                 <td>{this.props.course["class"]["subject"] + this.props.course["class"]["classId"]}</td>
                 <td className="d-none d-sm-table-cell">{this.props.course["class"]["name"]}</td>
                 <td className="d-none d-lg-table-cell">Not Enrolled</td>
+                <td className="d-none d-md-table-cell">&nbsp;</td>
                 <td className="float-right">
-                    <Link to={`/details/`}>
+                    <Link to={{ pathname: '/details/' + this.props.course.class.classId,
+                    state: {
+                        course: this.props.course
+                    }}}>
                         <button className="btn btn-primary"
                                 onClick={() => {}}>
                             DETAILS
