@@ -14,6 +14,7 @@ export default class CourseRowComponent extends React.Component{
                 <td>{this.props.course["class"]["subject"] + this.props.course["class"]["classId"]}</td>
                 <td className="d-none d-sm-table-cell">{this.props.course["class"]["name"]}</td>
                 <td className="d-none d-md-table-cell">&nbsp;</td>
+                <td className="d-none d-lg-table-cell">&nbsp;</td>
                 <td className="float-right">
                     <Link to={`/details/`}>
                         <button className="btn btn-primary"
