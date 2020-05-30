@@ -19,8 +19,7 @@ export default class CourseTableComponent extends React.Component {
                     <tbody>
                     {
                         this.props.courses.map(course =>
-                            <CourseRowComponent
-                                key={course["class"]["classId"]}
+                            <CourseRowComponent key={course["class"]["subject"] + course["class"]["classId"]}
                                 course={course}/>
                         )
                     }

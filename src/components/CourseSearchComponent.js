@@ -39,7 +39,8 @@ export default class CourseSearchComponent extends React.Component {
                             <label htmlFor="subjectFld" className="col-form-label float-left">Select Subject: </label>
                         </div>
                         <div className="col-6">
-                        <select onChange={(e) => this.props.setSubject(e.target.value)}
+                        <select value="cs"
+                                onChange={(e) => this.props.setSubject(e.target.value)}
                                 className="form-control"
                                 id="subjectFld">
                             <option value="arth">ARTH</option>
@@ -73,7 +74,8 @@ export default class CourseSearchComponent extends React.Component {
                             <label htmlFor="termFld" className="col-form-label float-left">Select Term: </label>
                         </div>
                         <div className="col-6">
-                            <select onChange={(e) => this.props.setTerm(e.target.value)}
+                            <select value="202110"
+                                    onChange={(e) => this.props.setTerm(e.target.value)}
                                     className="form-control"
                                     id="termFld">
                                 <option value="202040">Summer 1 2020</option>
@@ -85,7 +87,9 @@ export default class CourseSearchComponent extends React.Component {
                 </div>
                 <div className="col-2">
                     <button className="btn btn-success float-right"
-                            onClick={() => {this.props.findTerm()}}>
+                            onClick={() => {
+                                this.props.findTerm()
+                                this.props.setURL()}}>
                         SUBMIT
                     </button>
                 </div>

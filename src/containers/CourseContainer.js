@@ -6,7 +6,7 @@ import SearchService from "../services/SearchService"
 export default class CourseContainer extends React.Component {
     state = {
         subject: 'cs',
-        term: 202110,
+        term: '202110',
         keyword: '',
         courses: []
             //{ course: "CS3500", title: "Object-Oriented Design", term: "Fall 2020", enrollment: "200" },
@@ -47,7 +47,7 @@ export default class CourseContainer extends React.Component {
             */
 
     componentDidMount() {
-        SearchService.findCourseByKeyword(this.state.subject, this.state.term)
+        SearchService.findCoursesBySubject(this.state.subject, this.state.term)
             .then(actualArrayOfCourses =>
                 this.setState({
                     courses: actualArrayOfCourses
@@ -55,15 +55,17 @@ export default class CourseContainer extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevProps.match.params.keyword !== this.props.match.params.keyword) {
+        if ((prevProps.match.params.subject !== this.props.match.params.subject)
+            || prevProps.match.params.term !== this.props.match.params.term) {
             this.setState({
-                keyword: this.props.match.params.keyword
+                subject: this.props.match.params.subject,
+                term: this.props.match.params.term
             })
         }
     }
 
-    setKeyword = (keyword, term) => {
-        this.props.history.push(`/search/${term}/${keyword}`)
+    setURL = () => {
+        this.props.history.push(`/search/${this.state.term}/${this.state.subject}`)
     }
 
     render() {
@@ -75,7 +77,8 @@ export default class CourseContainer extends React.Component {
                     term={this.state.term}
                     subject={this.state.subject}
                     setTerm={this.setTerm}
-                    setSubject={this.setSubject}/>
+                    setSubject={this.setSubject}
+                    setURL={this.setURL}/>
                 <CourseTableComponent
                     courses={this.state.courses} />
             </div>
