@@ -8,8 +8,8 @@ export default class CourseContainer extends React.Component {
         subject: '',
         term: '',
         courses: []
-            //{ course: "CS3500", title: "Object-Oriented Design", term: "Fall 2020", enrollment: "200" },
-            //{ course: "CS4550", title: "Web Development", term: "Summer 1 2020", enrollment: "60" }
+        //{ course: "CS3500", title: "Object-Oriented Design", term: "Fall 2020", enrollment: "200" },
+        //{ course: "CS4550", title: "Web Development", term: "Summer 1 2020", enrollment: "60" }
     }
 
     findTerm = () => {
@@ -46,11 +46,13 @@ export default class CourseContainer extends React.Component {
             */
 
     componentDidMount() {
-        SearchService.findCoursesBySubject(this.state.subject, this.state.term)
-            .then(actualArrayOfCourses =>
-                this.setState({
-                    courses: actualArrayOfCourses
-                }))
+        if (this.state.subject !== "" && this.state.term !== "") {
+            SearchService.findCoursesBySubject(this.state.subject, this.state.term)
+                .then(actualArrayOfCourses =>
+                    this.setState({
+                        courses: actualArrayOfCourses
+                    }))
+        }
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -77,7 +79,7 @@ export default class CourseContainer extends React.Component {
                     subject={this.state.subject}
                     setTerm={this.setTerm}
                     setSubject={this.setSubject}
-                    setURL={this.setURL}/>
+                    setURL={this.setURL} />
                 <CourseTableComponent
                     courses={this.state.courses} />
             </div>
