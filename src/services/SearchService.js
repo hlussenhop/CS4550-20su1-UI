@@ -1,13 +1,3 @@
-const findCourseById = (courseId) => {
-    fetch ("https://searchneu.com/search?query=cs&termId=202060&minIndex=0&maxIndex=0")
-        .then(response => response.json())
-}
-
-const findCourseByKeyword = (keyword) => 
-    fetch(`https://nubanner.neu.edu/StudentRegistrationSsb/ssb/classSearch/getTerms?offset=1&max=10&searchTerm=${keyword}`)
-        .then(response => response.json())
-
-
 /*
 const declareTerm = (termCode) =>
     fetch("https://nubanner.neu.edu/StudentRegistrationSsb/ssb/term/search", {
@@ -26,7 +16,5 @@ const findCoursesBySubject = (subject, term) =>
         .then(data => data);
 
 export default {
-    findCourseById,
-    findCourseByKeyword,
     findCoursesBySubject,
 }
