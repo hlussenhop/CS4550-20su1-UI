@@ -8,14 +8,7 @@ export default class SectionCardComponent extends React.Component{
             <div className="col mb-4">
                 <div className="card bg-light">
                     <div className="card-header">
-                        <div className="row">
-                            <div className="col-10">
-                                <b>CRN {this.props.section.crn}</b>
-                            </div>
-                            <div className="col-2">
-                                <button href="#" className="btn btn-success float-right card-link">Enroll</button>
-                            </div>
-                        </div>
+                        <div className="card-header"><b>CRN {this.props.section.crn}</b></div>
                     </div>
                     <div className="card-body">
                         <div className="row">
@@ -29,6 +22,7 @@ export default class SectionCardComponent extends React.Component{
                                 <h6 className="card-text course-location text-muted">{this.props.section.meetings[0].where}</h6>
                                 <h6 className="card-text course-enrollment text-muted">{this.props.section.seatsCapacity - this.props.section.seatsRemaining
                                 }</h6>
+                                <button href="#" className="btn btn-success float-right card-link">Enroll</button>
                             </div>
                         </div>
                     </div>
