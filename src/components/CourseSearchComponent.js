@@ -4,6 +4,7 @@ export default class CourseSearchComponent extends React.Component {
 
     render() {
         return (
+            //Implement in future possibly
             // <div className="p-1 bg-light rounded rounded-pill shadow-sm mb-4">
             //     <div className="input-group">
             //         <input type="search" placeholder="Search Courses"
