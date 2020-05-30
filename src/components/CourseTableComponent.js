@@ -11,9 +11,8 @@ export default class CourseTableComponent extends React.Component {
                         <th className="course-header course-owner">Course</th>
                         <th className="course-header d-none d-sm-table-cell course-title">Title</th>
                         {/*<th className="course-header d-none d-lg-table-cell">CRN</th>*/}
-                        <th className="course-header d-none d-md-table-cell">Term</th>
                         {/*<th className="course-header d-none d-lg-table-cell">Instructors</th>*/}
-                        <th className="course-header d-none d-lg-table-cell">Enrollment</th>
+                        <th className="course-header d-none d-md-table-cell">Enrollment</th>
                         <th>&nbsp;</th>
                     </tr>
                     </thead>
@@ -21,6 +20,7 @@ export default class CourseTableComponent extends React.Component {
                     {
                         this.props.courses.map(course =>
                             <CourseRowComponent
+                                key={course["class"]["classId"]}
                                 course={course}/>
                         )
                     }
