@@ -8,6 +8,8 @@ import CourseTableComponent from "./CourseTableComponent";
 import CourseRowComponent from "./CourseRowComponent";
 import LoginComponent from "./LoginComponent";
 import SignUpComponent from "./SignUpComponent";
+import StudentStudyGroupComponent from "./StudentStudyGroupComponent";
+import AdminStudyGroupComponent from "./AdminStudyGroupComponent";
 
 class StudyGroupComponent extends React.Component {
 
@@ -40,6 +42,16 @@ class StudyGroupComponent extends React.Component {
                         path="/signup"
                         exact={true}
                         component={SignUpComponent} />
+
+                        <Route
+                            path="/student/group"
+                            exact={true}
+                            component={StudentStudyGroupComponent}/>
+
+                    <Route
+                        path="/admin/group"
+                        exact={true}
+                        component={AdminStudyGroupComponent}/>
                 </div>
             </BrowserRouter>
         )

@@ -1,12 +1,12 @@
 import React from 'react';
 //import './App.css';
-import StudyGroupRoutesComponent from "./components/StudyGroupRoutesComponent"
+import StudyGroupComponent from "./components/StudyGroupComponent";
 //import '../node_modules/font-awesome/css/font-awesome.min.css';
 
 function App() {
   return (
     <div className="container">
-      <StudyGroupRoutesComponent/>
+      <StudyGroupComponent/>
     </div>
   );
 }

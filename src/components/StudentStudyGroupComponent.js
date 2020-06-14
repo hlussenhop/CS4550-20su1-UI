@@ -36,6 +36,9 @@ export default class StudentStudyGroupComponent extends React.Component {
                             <GroupPostComponent/>
                             <GroupPostComponent/>
                             <NewPostComponent/>
+                            <button className="btn btn-success">
+                                New Post
+                            </button>
                         </div>
                     </div>
                 </div>

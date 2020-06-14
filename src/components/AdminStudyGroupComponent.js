@@ -3,7 +3,7 @@ import NavBarComponent from "./NavBarComponent";
 import GroupPostComponent from "./GroupPostComponent";
 import NewPostComponent from "./NewPostComponent";
 
-export default class StudentStudyGroupComponent extends React.Component {
+export default class AdminStudyGroupComponent extends React.Component {
     render() {
         return (
             <div className="container">
@@ -49,6 +49,9 @@ export default class StudentStudyGroupComponent extends React.Component {
                         <div className="row">
                             <GroupPostComponent/>
                             <NewPostComponent/>
+                            <button className="btn btn-success">
+                                New Post
+                            </button>
                         </div>
                     </div>
                 </div>
