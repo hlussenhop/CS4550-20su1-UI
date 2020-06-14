@@ -21,10 +21,10 @@ const NavBarComponent = () =>
         </div>
         <ul className="navbar-nav">
             <li className="nav-item">
-                <a className="nav-link" href="#">Sign In/Log Out</a>
+                <a className="nav-link" href="/login">Sign In/Log Out</a>
             </li>
             <li className="nav-item">
-                <a className="nav-link" href="#">Sign Up</a>
+                <a className="nav-link" href="/signup">Sign Up</a>
             </li>
         </ul>
     </nav>
