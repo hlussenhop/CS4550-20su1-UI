@@ -6,6 +6,8 @@ import NavBarComponent from "./NavBarComponent";
 import { BrowserRouter, Link, Route } from "react-router-dom";
 import CourseTableComponent from "./CourseTableComponent";
 import CourseRowComponent from "./CourseRowComponent";
+import LoginComponent from "./LoginComponent";
+import SignUpComponent from "./SignUpComponent";
 
 class StudyGroupComponent extends React.Component {
 
@@ -28,6 +30,16 @@ class StudyGroupComponent extends React.Component {
                         exact={true}
                         render={(props) => <CourseRowComponent {...props} someProp={100} />}
                         component={CourseDetailsComponent} />
+
+                    <Route
+                        path="/login"
+                        exact={true}
+                        component={LoginComponent} />
+
+                    <Route
+                        path="/signup"
+                        exact={true}
+                        component={SignUpComponent} />
                 </div>
             </BrowserRouter>
         )
