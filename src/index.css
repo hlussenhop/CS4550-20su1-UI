@@ -12,5 +12,42 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.post-comment {
+  border: 1px solid #dedede;
+  background-color: #f1f1f1;
+  border-radius: 10px;
+  padding-top: 0px;
+  margin: 2px 0;
+}
+
+.post-comment-name {
+  font-size: 9px;
+  float: left
+}
+
+.post-comment-text {
+  font-size: 13px;
+  padding-top: 10px;
+  float: left;
+}
+
+.post-comment-time {
+  font-size: 9px;
+  float: right;
+}
+
+.post-comment-body {
+  padding: 1px;
+}
+
+.post-input {
+  font-size: 10px;
+  padding: 10px;
+}
+
+.group-post {
+  padding: 10px
+}
+
 
 @import "~bootstrap/dist/css/bootstrap.min.css";
