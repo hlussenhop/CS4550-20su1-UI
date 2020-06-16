@@ -4,11 +4,43 @@ import GroupPostComponent from "./GroupPostComponent";
 import NewPostComponent from "./NewPostComponent";
 
 export default class AdminStudyGroupComponent extends React.Component {
+    state = {
+        viewingAdmin: {
+            name: "Admin"
+        },
+
+        studentsInGroup: [
+            {name: "Alice"}
+        ],
+        groupName: "Group 1",
+        posts: [
+            {
+                title: "Post 2 from admin",
+                text: "example text for a group post",
+                poster: {name: "Admin"},
+                comments: [
+                    {
+                        commenterName: "Alice",
+                        commentText: "this is some comment text"
+                    },
+                    {
+                        commenterName: "Alice",
+                        commentText: "this is some more comment text"
+                    },
+                    {
+                        commenterName: "Admin",
+                        commentText: "this is some more comment text from an Admin"
+                    }
+                ]
+            }
+        ]
+    }
+
     render() {
         return (
             <div className="container">
                 <NavBarComponent/>
-                <h1>Study Group 1</h1>
+                <h1>{this.state.groupName}</h1>
                 <div className="row">
                     <table className="col-sm-4">
                         <thead>
@@ -20,27 +52,15 @@ export default class AdminStudyGroupComponent extends React.Component {
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>Group member 1
-                                <button className="btn btn-sm btn-danger pull-right">
-                                    Remove
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Group member 2
-                                <button className="btn btn-sm btn-danger">
-                                    Remove
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Group member 3
-                                <button className="btn btn-sm btn-danger">
-                                    Remove
-                                </button>
-                            </td>
-                        </tr>
+                        {this.state.studentsInGroup.map(student =>
+                            <span>
+                                <tr>
+                                    <td>
+                                        <p>student.name</p>
+                                    </td>
+                                </tr>
+                            </span>
+                        )}
                         </tbody>
 
                     </table>
