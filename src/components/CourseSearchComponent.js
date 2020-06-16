@@ -33,13 +33,13 @@ export default class CourseSearchComponent extends React.Component {
             //         <a className="dropdown-item" href="#">Something else here</a>
             //     </div>
             // </div>
-            <div className=" form-group row">
+            <div className=" form-group row container">
                 <div className="col-5">
                     <div className="form-inline row">
                         <div className="col-6">
                             <label htmlFor="subjectFld" className="col-form-label float-left">Select Subject: </label>
                         </div>
-                        <div className="col-6">
+                        <div className="col-5">
                             <select
                                 onChange={(e) => this.props.setSubject(e.target.value)}
                                 className="form-control"
@@ -85,6 +85,14 @@ export default class CourseSearchComponent extends React.Component {
                             </select>
                         </div>
                     </div>
+                </div>
+                <div className="col-5">
+                    <label>
+                        Course Number (optional)
+                        <input className="form-control"
+                           type="number"
+                            onChange={(e) => this.props.setCourseNumber(e.target.value.toString())}/>
+                    </label>
                 </div>
                 <div className="col-2">
                     <button className="btn btn-success float-right"
