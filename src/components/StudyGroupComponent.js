@@ -10,8 +10,8 @@ import LoginComponent from "./LoginComponent";
 import SignUpComponent from "./SignUpComponent";
 import StudentStudyGroupComponent from "./StudentStudyGroupComponent";
 import AdminStudyGroupComponent from "./AdminStudyGroupComponent";
-import EditProfileComponent from "./EditProfileComponent";
-import ProfileComponent from "./ProfileComponent";
+import EditProfileComponent from "./ProfileComponents/EditProfileComponent";
+import ProfileComponent from "./ProfileComponents/ProfileComponent";
 
 class StudyGroupComponent extends React.Component {
 
