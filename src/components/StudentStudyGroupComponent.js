@@ -10,17 +10,17 @@ export default class StudentStudyGroupComponent extends React.Component {
         },
 
         studentsInGroup: [
-            {name: "Alice"}
+            { name: "Alice" }
         ],
         groupName: "Group 1",
         posts: [
             {
                 title: "Post 1",
                 text: "example text for a group post",
-                poster: {name: "Alice"},
+                poster: { name: "Alice" },
                 comments: [
                     {
-                         commenterName: "Alice",
+                        commenterName: "Alice",
                         commentText: "this is some comment text"
                     },
                     {
@@ -36,7 +36,7 @@ export default class StudentStudyGroupComponent extends React.Component {
             {
                 title: "Post 2 from admin",
                 text: "example text for a group post",
-                poster: {name: "Admin"},
+                poster: { name: "Admin" },
                 comments: [
                     {
                         commenterName: "Alice",
@@ -58,34 +58,34 @@ export default class StudentStudyGroupComponent extends React.Component {
     render() {
         return (
             <div className="container">
-                <NavBarComponent/>
+                <NavBarComponent />
                 <h1>Study Group 1</h1>
                 <div className="row">
                     <table className="col-sm-4">
                         <thead>
-                        <table className="table table-hover table-light"/>
-                        <tr className="table-secondary">
-                            <th>Group Members</th>
-                        </tr>
+                            <table className="table table-hover table-light" />
+                            <tr className="table-secondary">
+                                <th>Group Members</th>
+                            </tr>
                         </thead>
                         <tbody>
-                        {this.state.studentsInGroup.map(student =>
-                            <span>
-                                <tr>
-                                    <td>
-                                        <p>{student.name}</p>
-                                    </td>
-                                </tr>
-                            </span>
-                        )}
+                            {this.state.studentsInGroup.map(student =>
+                                <span>
+                                    <tr>
+                                        <td>
+                                            <p>{student.name}</p>
+                                        </td>
+                                    </tr>
+                                </span>
+                            )}
                         </tbody>
                     </table>
                     <div className="col-sm-8">
                         <h2>Group Posts</h2>
                         <div className="row">
                             {this.state.posts.map(post =>
-                            <GroupPostComponent post={post}/>)}
-                            <NewPostComponent/>
+                                <GroupPostComponent post={post} />)}
+                            <NewPostComponent />
                             <button className="btn btn-success">
                                 New Post
                             </button>

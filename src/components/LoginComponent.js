@@ -1,7 +1,7 @@
 import React from "react";
 import {faUser, faKey} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import LoginComponentCSS from "./LoginComponent.css";
+import LoginStyle from "../styles/LoginStyle.css";
 import {Link} from "react-router-dom";
 
 class LoginComponent extends React.Component {

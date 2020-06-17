@@ -16,5 +16,5 @@ const findCoursesBySubject = (subject, term) =>
         .then(data => data);
 
 export default {
-    findCoursesBySubject,
+    findCoursesBySubject
 }
