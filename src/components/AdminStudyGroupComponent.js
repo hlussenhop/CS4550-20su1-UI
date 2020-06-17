@@ -15,6 +15,7 @@ export default class AdminStudyGroupComponent extends React.Component {
         groupName: "Group 1",
         posts: [
             {
+                id:123,
                 title: "Post 2 from admin",
                 text: "example text for a group post",
                 poster: {name: "Admin"},
@@ -33,8 +34,17 @@ export default class AdminStudyGroupComponent extends React.Component {
                     }
                 ]
             }
-        ]
+        ],
+        makingNewPost: false
     }
+
+
+    changeIsMakingNewPost = (bool) =>
+        this.setState({makingNewPost: bool});
+
+    makeNewPost = (post) =>
+        this.state.posts.push(post)
+
 
     render() {
         return (
@@ -56,7 +66,7 @@ export default class AdminStudyGroupComponent extends React.Component {
                             <span>
                                 <tr>
                                     <td>
-                                        <p>student.name</p>
+                                        <p>{student.name}</p>
                                     </td>
                                 </tr>
                             </span>
@@ -67,11 +77,19 @@ export default class AdminStudyGroupComponent extends React.Component {
                     <div className="col-sm-8">
                         <h2>Group Posts</h2>
                         <div className="row">
-                            <GroupPostComponent/>
-                            <NewPostComponent/>
-                            <button className="btn btn-success">
-                                New Post
-                            </button>
+                            {this.state.posts.map(post =>
+                                <GroupPostComponent post={post}/>)}
+                            {this.state.makingNewPost &&
+                                <NewPostComponent poster={this.state.viewingAdmin}
+                                                  makeNewPost={this.makeNewPost}
+                                                  changeIsMakingNewPost={this.changeIsMakingNewPost}/>
+                            }
+                            {!this.state.makingNewPost &&
+                                <button className="btn btn-success"
+                                onClick={() => this.setState({makingNewPost: true})}>
+                                    New Post
+                                </button>
+                            }
                         </div>
                     </div>
                 </div>
