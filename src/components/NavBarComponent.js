@@ -15,7 +15,7 @@ const NavBarComponent = () =>
                     <Link className="nav-link" to="/search">Search Courses</Link>
                 </li>
                 <li className="nav-item">
-                    <a className="nav-link" href="#">Profile</a>
+                    <a className="nav-link" href="/profile">Profile</a>
                 </li>
             </ul>
         </div>

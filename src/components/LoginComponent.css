@@ -9,10 +9,10 @@
 /*}*/
 
 .login_card{
-    height: 370px;
+    height: 80%;
     margin-top: auto;
     margin-bottom: auto;
-    width: 400px;
+    width: 80%;
     background-color: rgba(0, 0, 0, 0.84) !important;
 }
 
