@@ -1,14 +1,25 @@
 import React from "react";
-import {faUser, faKey} from "@fortawesome/free-solid-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import LoginComponentCSS from "./LoginComponent.css";
-import {Link} from "react-router-dom";
+import { faUser, faKey } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import "../styles/LoginStyle.css";
+import { Link } from "react-router-dom";
+import UserService from "../services/UserService"
 
-class LoginComponent extends React.Component {
-
+export default class LoginComponent extends React.Component {
     state = {
-        email: '',
+        username: '',
         password: ''
+    }
+
+    login = () => {
+        UserService.login()
+            .catch(e => {
+                this.props.history.push("/login")
+            })
+            .then(currentUser => {
+                if (currentUser)
+                    this.props.history.push("/profile")
+            })
     }
 
     render() {
@@ -23,44 +34,43 @@ class LoginComponent extends React.Component {
                             <form>
                                 <div className="input-group form-group">
                                     <div className="input-group-prepend">
-                                <span className="input-group-text">
-                                    <FontAwesomeIcon icon={faUser}/>
-                                </span>
+                                        <span className="input-group-text">
+                                            <FontAwesomeIcon icon={faUser} />
+                                        </span>
                                     </div>
                                     <input type="text"
-                                           className="form-control"
-                                           placeholder="Email"
-                                           onChange={(event) =>
-                                               this.setState({email: event.target.value})}/>
+                                        className="form-control"
+                                        placeholder="Username"
+                                        onChange={(event) =>
+                                            this.setState({ username: event.target.value })} />
                                 </div>
 
                                 <div className="input-group form-group">
                                     <div className="input-group-prepend">
-                                <span className="input-group-text">
-                                    <FontAwesomeIcon icon={faKey}/>
-                                </span>
+                                        <span className="input-group-text">
+                                            <FontAwesomeIcon icon={faKey} />
+                                        </span>
                                     </div>
                                     <input type="password"
-                                           className="form-control"
-                                           placeholder="Password"
-                                           onChange={(event) =>
-                                               this.setState({role: event.target.value})}/>
+                                        className="form-control"
+                                        placeholder="Password"
+                                        onChange={(event) =>
+                                            this.setState({ password: event.target.value })} />
                                 </div>
 
                                 <div className="form-group">
-                                    <Link to={"/search"}>
+                                    <button to={"/search"}>
                                         <button className="btn float-right login_btn"
-                                        // onClick={() => this.props.findUserId(this.state.email, this.state.password)}
-                                        >
+                                            onClick={this.login}>
                                             Sign Up
                                         </button>
-                                    </Link>
+                                    </button>
                                 </div>
                             </form>
                         </div>
                         <div className="card-footer">
                             <div className="d-flex justify-content-center links">
-                                Don't have an account?<a href="/signup">Sign Up</a>
+                                Don't have an account?<Link to="/signup">Sign Up</Link>
                             </div>
                         </div>
                     </div>
@@ -69,6 +79,3 @@ class LoginComponent extends React.Component {
         )
     }
 }
-
-
-export default LoginComponent
