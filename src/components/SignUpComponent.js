@@ -13,8 +13,9 @@ class SignUpComponent extends React.Component {
         username: '',
         password: '',
         confirmPassword: '',
-        role: ''
+        role: 'STUDENT'
     }
+
 
     signup = () => {
             UserService.signup({
@@ -33,9 +34,11 @@ class SignUpComponent extends React.Component {
                 .then(currentUser => {
                     if (currentUser)
                         this.props.history.push("/profile")
-                })
 
+                })
     }
+
+
 
 
     render() {
@@ -142,9 +145,10 @@ class SignUpComponent extends React.Component {
 
                                 <div className="form-group">
                                     {
-                                        (this.state.firstName !== '' && this.state.lastName !== '' && this.state.email !== ''
+                                        ((this.state.firstName !== '' && this.state.lastName !== '' && this.state.email !== ''
                                         && this.state.username !== '' && this.state.password !== '' && this.state.confirmPassword !== ''
                                         && this.state.role !== '') &&
+                                        (this.state.password === this.state.confirmPassword)) &&
                                             <Link to={"/profile"}>
                                                 <button className="btn float-right login_btn"
                                                         onClick={this.signup}>
@@ -153,12 +157,17 @@ class SignUpComponent extends React.Component {
                                             </Link>
                                     }
                                     {
-                                        (this.state.password !== this.state.confirmPassword) &&
-                                            <button className="btn float-right login_btn"
-                                                    onClick={() => alert("The two passwords do not match. Please type the same password twice.")}>
-                                                Sign Up
-                                            </button>
+                                        ((this.state.firstName !== '' && this.state.lastName !== '' && this.state.email !== ''
+                                            && this.state.username !== '' && this.state.password !== '' && this.state.confirmPassword !== ''
+                                            && this.state.role !== '') &&
+                                        (this.state.password !== this.state.confirmPassword)) &&
+                                        <button className="btn float-right login_btn"
+                                                onClick={() =>
+                                                    alert("Make sure the two passwords are the same")}>
+                                            Sign Up
+                                        </button>
                                     }
+
                                 </div>
                             </form>
                         </div>
