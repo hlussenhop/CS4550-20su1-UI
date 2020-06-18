@@ -19,14 +19,26 @@ export default class NavBarComponent extends React.Component {
             })
     }
 
+    componentDidUpdate(prevPros, prevState, snapshot) {
+        if ((prevState.currentUser.username !== this.state.currentUser.username)) {
+            UserService.fetchProfile()
+                .catch(e => { })
+                .then(currentUser => {
+                    if (currentUser) {
+                        this.setState({ currentUser: currentUser })
+                    }
+                })
+        }
+    }
+
     logout = () => {
         UserService.logout()
-        .catch(e => {})
-        .then(currentUser => {
-            if (currentUser) {
-                this.setState({ currentUser: {username: ''}})
-            }
-        })
+            .catch(e => { })
+            .then(currentUser => {
+                if (currentUser) {
+                    this.setState({ currentUser: { username: '' } })
+                }
+            })
     }
 
     render() {
@@ -43,6 +55,7 @@ export default class NavBarComponent extends React.Component {
                             <Link className="nav-link" to="/search">Search Courses</Link>
                         </li>
                         {
+                            this.state.currentUser.username &&
                             <li className="nav-item">
                                 <a className="nav-link" href="/profile">Profile</a>
                             </li>

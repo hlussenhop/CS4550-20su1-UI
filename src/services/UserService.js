@@ -1,10 +1,6 @@
 
 const login = (username, password) => {
-<<<<<<< HEAD
     return fetch("https://neustudyserver.herokuapp.com/api/login", {
-=======
-    return fetch("http://localhost:8080/api/login", {
->>>>>>> a0e4cc003787a99f552fc9aa412d3ee34d5a0a08
         body: JSON.stringify({
             username: username,
             password: password
