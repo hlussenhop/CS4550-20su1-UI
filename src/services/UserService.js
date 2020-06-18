@@ -23,7 +23,12 @@ const signup = (newUser) => {
     }).then(response => response.json())
 }
 
+const getUserById = (uid) =>
+    fetch(`http://localhost:8080/api/users/${uid}/`)
+        .then(response => response.json());
+
 export default {
     login,
-    signup
+    signup,
+    getUserById
 }
