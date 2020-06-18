@@ -24,12 +24,22 @@ const signup = (newUser) => {
     }).then(response => response.json())
 }
 
-const getUserById = (uid) =>
-    fetch(`http://localhost:8080/api/users/${uid}/`)
+const findUserById = (uid) =>
+    fetch(`http://neustudyserver.herokuapp.com/api/users/${uid}/`)
         .then(response => response.json());
+
+const fetchProfile = () =>
+    fetch("http://neustudyserver.herokuapp.com/api/profile", {
+        method: 'POST',
+        credentials: "include"
+    })
+        .then(response => {
+            return response.json()
+        })
 
 export default {
     login,
     signup,
-    getUserById
+    findUserById,
+    fetchProfile
 }

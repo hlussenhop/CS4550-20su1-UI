@@ -2,6 +2,7 @@ import React from "react";
 import {Link} from "react-router-dom";
 import FollowList from "./FollowList";
 import RecentPostListComponent from "./RecentPostListComponent";
+import UserService from "../../services/UserService"
 
 class ProfileComponent extends React.Component{
 
@@ -30,7 +31,27 @@ class ProfileComponent extends React.Component{
         followers: [this.user, this.user],
         following: [this.user, this.user, this.user],
         courseList: [this.course, this.course],
-        recentPosts: [this.post, this.post, this.post, this.post]
+        recentPosts: [this.post, this.post, this.post, this.post],
+        currentUser: {
+            id: 0,
+            username: "",
+            password:"",
+            firstName:"",
+            lastName:"",
+            email:"",
+            role:"",
+            studyGroups:[]
+        }
+    }
+
+    componentDidMount() {
+        UserService.fetchProfile()
+            .catch(e => { })
+            .then(currentUser => {
+                if (currentUser) {
+                    this.setState({ currentUser: currentUser })
+                }
+            })
     }
 
     render() {
@@ -45,6 +66,8 @@ class ProfileComponent extends React.Component{
                     <h2 className="d-flex justify-content-center">{this.user.firstName} {this.user.lastName}</h2>
                     <p className="d-flex justify-content-center">{this.state.location}</p>
                     <h5 className="d-flex justify-content-center">{this.state.bio}</h5>
+                    <h3>Welcome {this.state.currentUser.username}</h3>
+
                 </div>
 
 

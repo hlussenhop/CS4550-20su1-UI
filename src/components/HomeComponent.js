@@ -4,7 +4,9 @@ class HomeComponent extends React.Component {
 
     render() {
         return (
-            <h1>Study Group</h1>
+            <div>
+                <h2>Study Group</h2>
+            </div>
         )
     }
 }
