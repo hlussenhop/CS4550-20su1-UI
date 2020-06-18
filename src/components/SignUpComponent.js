@@ -12,27 +12,29 @@ class SignUpComponent extends React.Component {
         email: '',
         username: '',
         password: '',
+        confirmPassword: '',
         role: ''
     }
 
     signup = () => {
-        UserService.signup({
-            id: 1,
-            username: this.state.username, 
-            password: this.state.password,
-            firstName: this.state.firstName,
-            lastName: this.state.lastName,
-            email: this.state.email,
-            role: this.state.role,
-            studyGroups: []
-        })
-            .catch(e => {
-                this.props.history.push("/signup")
+            UserService.signup({
+                id: 1,
+                username: this.state.username,
+                password: this.state.password,
+                firstName: this.state.firstName,
+                lastName: this.state.lastName,
+                email: this.state.email,
+                role: this.state.role,
+                studyGroups: []
             })
-            .then(currentUser => {
-                if (currentUser)
-                    this.props.history.push("/profile")
-            })
+                .catch(e => {
+                    this.props.history.push("/signup")
+                })
+                .then(currentUser => {
+                    if (currentUser)
+                        this.props.history.push("/profile")
+                })
+
     }
 
 
@@ -105,6 +107,19 @@ class SignUpComponent extends React.Component {
                                             <FontAwesomeIcon icon={faKey} />
                                         </span>
                                     </div>
+                                    <input type="text"
+                                           className="form-control"
+                                           placeholder="Username"
+                                           onChange={(event) =>
+                                               this.setState({ username: event.target.value })} />
+                                </div>
+
+                                <div className="input-group form-group">
+                                    <div className="input-group-prepend">
+                                        <span className="input-group-text">
+                                            <FontAwesomeIcon icon={faKey} />
+                                        </span>
+                                    </div>
                                     <input type="password"
                                         className="form-control"
                                         placeholder="Password"
@@ -120,16 +135,30 @@ class SignUpComponent extends React.Component {
                                     </div>
                                     <input type="password" 
                                             className="form-control" 
-                                            placeholder="Confirm Password"/>
+                                            placeholder="Confirm Password"
+                                           onChange={(event) =>
+                                               this.setState({ confirmPassword: event.target.value })}/>
                                 </div>
 
                                 <div className="form-group">
-                                    <Link to={"/profile"}>
-                                        <button className="btn float-right login_btn"
-                                            onClick={this.signup}>
-                                            Sign Up
-                                        </button>
-                                    </Link>
+                                    {
+                                        (this.state.firstName !== '' && this.state.lastName !== '' && this.state.email !== ''
+                                        && this.state.username !== '' && this.state.password !== '' && this.state.confirmPassword !== ''
+                                        && this.state.role !== '') &&
+                                            <Link to={"/profile"}>
+                                                <button className="btn float-right login_btn"
+                                                        onClick={this.signup}>
+                                                    Sign Up
+                                                </button>
+                                            </Link>
+                                    }
+                                    {
+                                        (this.state.password !== this.state.confirmPassword) &&
+                                            <button className="btn float-right login_btn"
+                                                    onClick={() => alert("The two passwords do not match. Please type the same password twice.")}>
+                                                Sign Up
+                                            </button>
+                                    }
                                 </div>
                             </form>
                         </div>
