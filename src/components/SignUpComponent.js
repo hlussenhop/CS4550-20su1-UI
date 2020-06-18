@@ -13,29 +13,32 @@ class SignUpComponent extends React.Component {
         username: '',
         password: '',
         confirmPassword: '',
-        role: 'STUDENT'
+        role: '',
+        error: null
     }
 
 
     signup = () => {
-            UserService.signup({
-                id: 1,
-                username: this.state.username,
-                password: this.state.password,
-                firstName: this.state.firstName,
-                lastName: this.state.lastName,
-                email: this.state.email,
-                role: this.state.role,
-                studyGroups: []
+        UserService.signup({
+            id: 1,
+            username: this.state.username,
+            password: this.state.password,
+            firstName: this.state.firstName,
+            lastName: this.state.lastName,
+            email: this.state.email,
+            role: this.state.role,
+            studyGroups: []
+        })
+            .catch(e => {
+                this.setState({
+                    error: 'Unable to register'
+                })
             })
-                .catch(e => {
-                    this.props.history.push("/signup")
-                })
-                .then(currentUser => {
-                    if (currentUser)
-                        this.props.history.push("/profile")
-
-                })
+            .then(currentUser => {
+                if (currentUser) {
+                    this.props.history.push("/profile")
+                }
+            })
     }
 
 
@@ -48,6 +51,12 @@ class SignUpComponent extends React.Component {
                     <div className="card login_card">
                         <div className="card-header">
                             <h3>Sign Up</h3>
+                            {
+                                this.state.error &&
+                                <div className="alert alert-danger">
+                                    {this.state.error}
+                                </div>
+                            }
                         </div>
                         <div className="card-body">
                             <form>
@@ -111,10 +120,10 @@ class SignUpComponent extends React.Component {
                                         </span>
                                     </div>
                                     <input type="text"
-                                           className="form-control"
-                                           placeholder="Username"
-                                           onChange={(event) =>
-                                               this.setState({ username: event.target.value })} />
+                                        className="form-control"
+                                        placeholder="Username"
+                                        onChange={(event) =>
+                                            this.setState({ username: event.target.value })} />
                                 </div>
 
                                 <div className="input-group form-group">
@@ -136,11 +145,11 @@ class SignUpComponent extends React.Component {
                                             <FontAwesomeIcon icon={faKey} />
                                         </span>
                                     </div>
-                                    <input type="password" 
-                                            className="form-control" 
-                                            placeholder="Confirm Password"
-                                           onChange={(event) =>
-                                               this.setState({ confirmPassword: event.target.value })}/>
+                                    <input type="password"
+                                        className="form-control"
+                                        placeholder="Confirm Password"
+                                        onChange={(event) =>
+                                            this.setState({ confirmPassword: event.target.value })} />
                                 </div>
 
                                 <div className="form-group">
@@ -154,7 +163,7 @@ class SignUpComponent extends React.Component {
                                                         onClick={this.signup}>
                                                     Sign Up
                                                 </button>
-                                            </Link>
+                                        </Link>
                                     }
                                     {
                                         ((this.state.firstName !== '' && this.state.lastName !== '' && this.state.email !== ''

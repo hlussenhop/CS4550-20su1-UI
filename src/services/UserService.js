@@ -1,6 +1,6 @@
 
 const login = (username, password) => {
-    return fetch("http://neustudyserver.herokuapp.com/api/login", {
+    return fetch("https://neustudyserver.herokuapp.com/api/login", {
         body: JSON.stringify({
             username: username,
             password: password
@@ -13,8 +13,15 @@ const login = (username, password) => {
     }).then(response => response.json())
 }
 
+const logout = () => {
+    return fetch("https://neustudyserver.herokuapp.com/api/logout", {
+        method: 'POST',
+        credentials: "include"
+    }).then(response => response.json())
+}
+
 const signup = (newUser) => {
-    return fetch("http://neustudyserver.herokuapp.com/api/register", {
+    return fetch("https://neustudyserver.herokuapp.com/api/register", {
         body: JSON.stringify(newUser),
         headers: {
             'content-type': 'application/json'
@@ -24,12 +31,23 @@ const signup = (newUser) => {
     }).then(response => response.json())
 }
 
-const getUserById = (uid) =>
-    fetch(`http://localhost:8080/api/users/${uid}/`)
+const findUserById = (uid) =>
+    fetch(`https://neustudyserver.herokuapp.com/api/users/${uid}/`)
         .then(response => response.json());
+
+const fetchProfile = () =>
+    fetch("https://neustudyserver.herokuapp.com/api/profile", {
+        method: 'GET',
+        credentials: "include"
+    })
+        .then(response => {
+            return response.json()
+        })
 
 export default {
     login,
+    logout,
     signup,
-    getUserById
+    findUserById,
+    fetchProfile
 }

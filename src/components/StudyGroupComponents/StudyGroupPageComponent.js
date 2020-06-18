@@ -12,7 +12,8 @@ export default class StudyGroupPageComponent extends React.Component {
     state = {
         studyGroup: null,
         userGroup: [],
-        loading: true
+        loading: true,
+        currentUser: {}
     };
 
     componentDidMount() {
@@ -22,11 +23,11 @@ export default class StudyGroupPageComponent extends React.Component {
                     studyGroup: studyGroup
                 });
                 this.state.studyGroup.studentsInGroupIds.map(id =>
-                    UserService.getUserById(id)
+                    UserService.findUserById(id)
                         .then(user =>
                             this.state.userGroup.push(user)
                         ));
-                UserService.getUserById(this.state.studyGroup.currentUserId)
+                UserService.findUserById(this.state.studyGroup.currentUserId)
                     .then(user =>
                         this.setState({
                             currentUser: user
@@ -37,15 +38,14 @@ export default class StudyGroupPageComponent extends React.Component {
     }
 
 
-
     render() {
-        if(this.state.studyGroup !== null && this.state.loading === true) {
+        if (this.state.studyGroup !== null && this.state.loading === true) {
             this.setState({loading: false})
         }
-        if(this.state.loading === true) {
-            return(<p>Loading...</p>)
+        if (this.state.loading === true) {
+            return (<p>Loading...</p>)
         } else {
-             return (
+            return (
                 <div className="container">
                     <NavBarComponent/>
                     <h1>Study Group 1</h1>
@@ -61,18 +61,25 @@ export default class StudyGroupPageComponent extends React.Component {
                             {
                                 this.state.userGroup.map(user =>
                                     <tr>
-
-                                        <td >
-                                            <p>{user.firstName}</p>
+                                        <td>
+                                            {this.state.currentUser.role === "student" &&
+                                            <span>
+                                                <p>{user.firstName}</p>
+                                            </span>
+                                            }
+                                            {this.state.currentUser.role === "admin" &&
+                                            <span>
+                                                <p>{user.firstName}</p>
+                                                <button className="btn btn-danger">Delete</button>
+                                            </span>
+                                            }
                                         </td>
-
                                     </tr>
-
                                 )
                             }
                             </tbody>
                         </div>
-                        <div className="col-sm-8">
+                        < div className="col-sm-8">
                             <h2>Group Posts</h2>
                             <div className="row">
                                 {this.state.studyGroup !== {} &&
