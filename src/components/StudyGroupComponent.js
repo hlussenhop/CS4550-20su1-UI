@@ -12,6 +12,7 @@ import StudyGroupPageComponent from "./StudyGroupComponents/StudyGroupPageCompon
 import AdminStudyGroupComponent from "./AdminStudyGroupComponent";
 import EditProfileComponent from "./ProfileComponents/EditProfileComponent";
 import ProfileComponent from "./ProfileComponents/ProfileComponent";
+import HomeComponent from "./HomeComponent";
 
 class StudyGroupComponent extends React.Component {
 
@@ -20,6 +21,10 @@ class StudyGroupComponent extends React.Component {
             <BrowserRouter>
                 <div>
                     <NavBarComponent/>
+                    <Route
+                        path="/"
+                        exact={true}
+                        component={HomeComponent}/>
                     <Route
                         path="/search"
                         exact={true}
