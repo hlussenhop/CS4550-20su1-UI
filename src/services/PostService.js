@@ -6,9 +6,13 @@ const findPostById = (pid) =>
     fetch(`http://neustudyserver.herokuapp.com/api/posts/${pid}`);
 
 const updatePost = (pid, post) =>
-    fetch(`https://tranquil-castle-29276.herokuapp.com/` + `http://localhost:8080/api/posts/${pid}`, {
-
+    fetch(`http://neustudyserver.herokuapp.com/api/posts/${pid}`, {
+        method: 'PUT', body: JSON.stringify(post),
+        headers: {
+            'content-type': 'application/json'
+        }
     })
+        .then(response => response.json())
 
 const createPost = (gid, post) =>
     fetch(`http://neustudyserver.herokuapp.com/api/studygroups/${gid}/posts`,{
@@ -23,5 +27,6 @@ const createPost = (gid, post) =>
 export default {
     findPostsByStudyGroup,
     findPostById,
-    createPost
+    createPost,
+    updatePost
 }
