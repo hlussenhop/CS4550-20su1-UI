@@ -1,7 +1,8 @@
 import React from "react";
-import {faUser, faKey} from "@fortawesome/free-solid-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {Link} from "react-router-dom";
+import { faUser, faKey } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link } from "react-router-dom";
+import UserService from "../services/UserService"
 
 class SignUpComponent extends React.Component {
 
@@ -9,9 +10,31 @@ class SignUpComponent extends React.Component {
         firstName: '',
         lastName: '',
         email: '',
+        username: '',
         password: '',
         role: ''
     }
+
+    signup = () => {
+        UserService.signup({
+            id: 1,
+            username: this.state.username, 
+            password: this.state.password,
+            firstName: this.state.firstName,
+            lastName: this.state.lastName,
+            email: this.state.email,
+            role: this.state.role,
+            studyGroups: []
+        })
+            .catch(e => {
+                this.props.history.push("/signup")
+            })
+            .then(currentUser => {
+                if (currentUser)
+                    this.props.history.push("/profile")
+            })
+    }
+
 
     render() {
         return (
@@ -25,52 +48,52 @@ class SignUpComponent extends React.Component {
                             <form>
                                 <div className="input-group form-group">
                                     <div className="input-group-prepend">
-                                <span className="input-group-text">
-                                    <FontAwesomeIcon icon={faUser}/>
-                                </span>
+                                        <span className="input-group-text">
+                                            <FontAwesomeIcon icon={faUser} />
+                                        </span>
                                     </div>
                                     <input type="text"
-                                           className="form-control"
-                                           placeholder="First Name"
-                                           onChange={(event) =>
-                                               this.setState({firstName: event.target.value})}/>
+                                        className="form-control"
+                                        placeholder="First Name"
+                                        onChange={(event) =>
+                                            this.setState({ firstName: event.target.value })} />
                                 </div>
 
                                 <div className="input-group form-group">
                                     <div className="input-group-prepend">
-                                <span className="input-group-text">
-                                    <FontAwesomeIcon icon={faUser}/>
-                                </span>
+                                        <span className="input-group-text">
+                                            <FontAwesomeIcon icon={faUser} />
+                                        </span>
                                     </div>
                                     <input type="text"
-                                           className="form-control"
-                                           placeholder="Last Name"
-                                           onChange={(event) =>
-                                               this.setState({lastName: event.target.value})}/>
+                                        className="form-control"
+                                        placeholder="Last Name"
+                                        onChange={(event) =>
+                                            this.setState({ lastName: event.target.value })} />
                                 </div>
 
                                 <div className="input-group form-group">
                                     <div className="input-group-prepend">
-                                <span className="input-group-text">
-                                    <FontAwesomeIcon icon={faUser}/>
-                                </span>
+                                        <span className="input-group-text">
+                                            <FontAwesomeIcon icon={faUser} />
+                                        </span>
                                     </div>
                                     <input type="text"
-                                           className="form-control"
-                                           placeholder="Email"
-                                           onChange={(event) =>
-                                               this.setState({email: event.target.value})}/>
+                                        className="form-control"
+                                        placeholder="Email"
+                                        onChange={(event) =>
+                                            this.setState({ email: event.target.value })} />
                                 </div>
 
                                 <div className="input-group form-group">
                                     <div className="input-group-prepend">
-                                <span className="input-group-text">
-                                    <FontAwesomeIcon icon={faUser}/>
-                                </span>
+                                        <span className="input-group-text">
+                                            <FontAwesomeIcon icon={faUser} />
+                                        </span>
                                     </div>
                                     <select className="form-control"
-                                            onChange={(event) =>
-                                                this.setState({role: event.target.value})}>
+                                        onChange={(event) =>
+                                            this.setState({ role: event.target.value })}>
                                         <option value="STUDENT">Student</option>
                                         <option value="ADMIN">Admin</option>
                                     </select>
@@ -78,31 +101,32 @@ class SignUpComponent extends React.Component {
 
                                 <div className="input-group form-group">
                                     <div className="input-group-prepend">
-                                <span className="input-group-text">
-                                    <FontAwesomeIcon icon={faKey}/>
-                                </span>
+                                        <span className="input-group-text">
+                                            <FontAwesomeIcon icon={faKey} />
+                                        </span>
                                     </div>
                                     <input type="password"
-                                           className="form-control"
-                                           placeholder="Password"
-                                           onChange={(event) =>
-                                               this.setState({firstName: event.target.value})}/>
+                                        className="form-control"
+                                        placeholder="Password"
+                                        onChange={(event) =>
+                                            this.setState({ password: event.target.value })} />
                                 </div>
 
                                 <div className="input-group form-group">
                                     <div className="input-group-prepend">
-                                <span className="input-group-text">
-                                    <FontAwesomeIcon icon={faKey}/>
-                                </span>
+                                        <span className="input-group-text">
+                                            <FontAwesomeIcon icon={faKey} />
+                                        </span>
                                     </div>
-                                    <input type="password" className="form-control" placeholder="Confirm Password"/>
+                                    <input type="password" 
+                                            className="form-control" 
+                                            placeholder="Confirm Password"/>
                                 </div>
 
                                 <div className="form-group">
-                                    <Link to={"/search"}>
+                                    <Link to={"/profile"}>
                                         <button className="btn float-right login_btn"
-                                        // onClick={() => this.props.createUser(this.state)}
-                                        >
+                                            onClick={this.signup}>
                                             Sign Up
                                         </button>
                                     </Link>

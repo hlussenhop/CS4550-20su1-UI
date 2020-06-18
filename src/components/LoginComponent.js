@@ -12,7 +12,7 @@ export default class LoginComponent extends React.Component {
     }
 
     login = () => {
-        UserService.login()
+        UserService.login(this.state.username, this.state.password)
             .catch(e => {
                 this.props.history.push("/login")
             })
@@ -59,12 +59,11 @@ export default class LoginComponent extends React.Component {
                                 </div>
 
                                 <div className="form-group">
-                                    <button to={"/search"}>
-                                        <button className="btn float-right login_btn"
-                                            onClick={this.login}>
-                                            Sign Up
-                                        </button>
-                                    </button>
+                                    <Link className="btn float-right login_btn"
+                                        to={"/profile"}
+                                        onClick={this.login}>
+                                        Sign Up
+                                    </Link>
                                 </div>
                             </form>
                         </div>
