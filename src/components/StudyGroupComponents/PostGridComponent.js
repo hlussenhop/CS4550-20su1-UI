@@ -14,42 +14,41 @@ export default class PostGridComponent extends React.Component {
     };
 
     componentDidMount() {
-        PostService.findPostsByStudyGroup(123)
+        PostService.findPostsByStudyGroup(this.props.groupId)
             .then(posts => {
-                {
-                    console.log(this.props.groupId)
-                }
-                this.setState({posts: posts}
-                )
+                this.setState({posts: posts})
             })
+
     }
     componentDidUpdate(prevProps, prevState, snapshot) {
 
     }
 
-    changeIsMakingNewPost = (bool) => {
-        this.setState({isMakingNewPost: bool})
-    };
-
     makeNewPost = (post, bool) => {
         PostService.createPost(this.props.groupId, post)
         this.setState({isMakingNewPost: bool})
-    }
+        PostService.findPostsByStudyGroup(this.props.groupId)
+            .then(posts => {
+                this.setState({posts: posts})
+            })
+
+    };
+
+    renderPosts = () =>
+        PostService.findPostsByStudyGroup(this.props.groupId)
+            .then(posts => {
+                this.setState({posts: posts})
+            })
+
+
 
 
     render() {
         return (
             <div className="container">
                 {this.state.posts.map(post =>
-                    <div className="container card group-post group-card-body">
-                        <h5>{post.title}</h5>
-                        <p>{post.text}</p>
-                        <h5>Comments</h5>
-                        {
-                            <CommentListComponent currentCommenter={this.props.currentUser}
-                                                  postId={post.id}/>
-                        }
-                    </div>
+                    <GroupPostComponent renderPosts={this.renderPosts}
+                        currentUser={this.props.currentUser} post={post}/>
                 )}
                 {this.state.isMakingNewPost === false &&
                 <button className="btn btn-success"
