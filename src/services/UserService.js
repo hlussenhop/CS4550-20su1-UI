@@ -1,8 +1,8 @@
-const login = () => {
+const login = (username, password) => {
     return fetch("http://neustudyserver.herokuapp.com/api/login", {
         body: JSON.stringify({
-            username: this.state.username,
-            password: this.state.password
+            username: username,
+            password: password
         }),
         headers: {
             'content-type': 'application/json'
@@ -12,6 +12,18 @@ const login = () => {
     }).then(response => response.json())
 }
 
+const signup = (newUser) => {
+    return fetch("http://neustudyserver.herokuapp.com/api/register", {
+        body: JSON.stringify(newUser),
+        headers: {
+            'content-type': 'application/json'
+        },
+        method: 'POST',
+        credentials: "include"
+    }).then(response => response.json())
+}
+
 export default {
-    login
+    login,
+    signup
 }
