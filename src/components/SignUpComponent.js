@@ -17,6 +17,7 @@ class SignUpComponent extends React.Component {
         error: null
     }
 
+
     signup = () => {
         UserService.signup({
             id: 1,
@@ -38,8 +39,9 @@ class SignUpComponent extends React.Component {
                     this.props.history.push("/profile")
                 }
             })
-
     }
+
+
 
 
     render() {
@@ -152,23 +154,29 @@ class SignUpComponent extends React.Component {
 
                                 <div className="form-group">
                                     {
-                                        (this.state.firstName !== '' || this.state.lastName !== '' || this.state.email !== ''
-                                            || this.state.username !== '' || this.state.password !== '' || this.state.confirmPassword !== ''
-                                            || this.state.role !== '') &&
-                                        <Link to={"/profile"}>
-                                            <button className="btn d-flex justify-content-center login_btn"
-                                                onClick={this.signup}>
-                                                Sign Up
+                                        ((this.state.firstName !== '' && this.state.lastName !== '' && this.state.email !== ''
+                                        && this.state.username !== '' && this.state.password !== '' && this.state.confirmPassword !== ''
+                                        && this.state.role !== '') &&
+                                        (this.state.password === this.state.confirmPassword)) &&
+                                            <Link to={"/profile"}>
+                                                <button className="btn float-right login_btn"
+                                                        onClick={this.signup}>
+                                                    Sign Up
                                                 </button>
                                         </Link>
                                     }
                                     {
-                                        (this.state.password !== this.state.confirmPassword) &&
-                                        <button className="btn d-flex justify-content-center login_btn"
-                                            onClick={() => alert("The two passwords do not match. Please type the same password twice.")}>
+                                        ((this.state.firstName !== '' && this.state.lastName !== '' && this.state.email !== ''
+                                            && this.state.username !== '' && this.state.password !== '' && this.state.confirmPassword !== ''
+                                            && this.state.role !== '') &&
+                                        (this.state.password !== this.state.confirmPassword)) &&
+                                        <button className="btn float-right login_btn"
+                                                onClick={() =>
+                                                    alert("Make sure the two passwords are the same")}>
                                             Sign Up
-                                            </button>
+                                        </button>
                                     }
+
                                 </div>
                             </form>
                         </div>
