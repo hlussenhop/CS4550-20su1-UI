@@ -62,7 +62,7 @@ export default class LoginComponent extends React.Component {
                                     <Link className="btn float-right login_btn"
                                         to={"/profile"}
                                         onClick={this.login}>
-                                        Sign Up
+                                        Sign In
                                     </Link>
                                 </div>
                             </form>
