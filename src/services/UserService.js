@@ -13,6 +13,13 @@ const login = (username, password) => {
     }).then(response => response.json())
 }
 
+const logout = () => {
+    return fetch("https://neustudyserver.herokuapp.com/api/logout", {
+        method: 'POST',
+        credentials: "include"
+    }).then(response => response.json())
+}
+
 const signup = (newUser) => {
     return fetch("https://neustudyserver.herokuapp.com/api/register", {
         body: JSON.stringify(newUser),
@@ -30,7 +37,7 @@ const findUserById = (uid) =>
 
 const fetchProfile = () =>
     fetch("https://neustudyserver.herokuapp.com/api/profile", {
-        method: 'POST',
+        method: 'GET',
         credentials: "include"
     })
         .then(response => {
@@ -39,6 +46,7 @@ const fetchProfile = () =>
 
 export default {
     login,
+    logout,
     signup,
     findUserById,
     fetchProfile
