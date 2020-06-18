@@ -1,7 +1,8 @@
 import React from "react";
 import NavBarComponent from "./NavBarComponent";
-import GroupPostComponent from "./GroupPostComponent";
-import NewPostComponent from "./NewPostComponent";
+import GroupPostComponent from "./StudyGroupComponents/GroupPostComponent";
+import NewPostComponent from "./StudyGroupComponents/NewPostComponent";
+import {Link} from "react-router-dom";
 
 export default class AdminStudyGroupComponent extends React.Component {
     state = {
@@ -66,7 +67,7 @@ export default class AdminStudyGroupComponent extends React.Component {
                             <span>
                                 <tr>
                                     <td>
-                                        <p>{student.name}</p>
+                                        <Link to={'/profile'}>{student.name}</Link>
                                     </td>
                                 </tr>
                             </span>
