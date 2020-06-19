@@ -22,15 +22,7 @@ class ProfileComponent extends React.Component {
 
     state = {
         visiting: this.props.match.params.userId,
-        currentUser: {
-            id: 0,
-            username: "",
-            password: "",
-            firstName: "",
-            lastName: "",
-            email: "",
-            role: "",
-        },
+        currentUser: {},
         studyGroups: [this.studyGroup, this.studyGroup],
         recentPosts: [this.post, this.post, this.post, this.post],
     }
@@ -83,8 +75,6 @@ class ProfileComponent extends React.Component {
                     </h2>
                     <p className="d-flex justify-content-center">{this.state.currentUser.location}</p>
                     <h5 className="d-flex justify-content-center">{this.state.currentUser.bio}</h5>
-                    <h3>Welcome {this.state.currentUser.username}</h3>
-
                 </div>
                 {
                     (this.state.currentUser.role === "STUDENT") &&
@@ -97,7 +87,7 @@ class ProfileComponent extends React.Component {
                     this.state.currentUser.role === "ADMIN" &&
                     <AdminProfileComponent currentUser={this.state.currentUser}
                         visiting={this.state.visiting}
-                        studyGroups={this.state.studyGroups}
+                        studyGroups={this.state.currentUser.studyGroups}
                         recentPosts={this.state.recentPosts} />
                 }
             </div>

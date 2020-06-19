@@ -48,7 +48,10 @@ export default class SectionCardComponent extends React.Component {
     putInStudyGroup(group) {
         if (!group.studentsInGroupIds.includes(this.state.user.id)) {
             group.studentsInGroupIds.push(this.state.user.id)
+            console.log(this.state.user.studyGroups)
+            this.state.user.studyGroups.push(group.id)
             GroupService.updateGroup(group.id, group)
+            UserService.update(this.state.user.id, this.state.user)
         }
     }
 

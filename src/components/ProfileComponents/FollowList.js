@@ -19,7 +19,7 @@ class FollowList extends React.Component {
                                 className="list-group-item list-group-item-action">
                                 <span>
                                     <Link className="mod-link">
-                                        {element.name}
+                                        {element}
                                     </Link>
                                 </span>
                             </button>
