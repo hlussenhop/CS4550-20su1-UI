@@ -73,12 +73,12 @@ class StudentProfileComponent extends React.Component{
 
                     {/*</div>*/}
                     <div>
-                        <h5 className="profile-heading">Study Groups</h5>
+                        <h5 className="profile-heading">Study Groups:</h5>
                         <FollowList list={this.state.currentUser.studyGroups}/>
                     </div>
                     <br/>
                     <div>
-                        <h5 className="profile-heading">Recent Posts</h5>
+                        <h5 className="profile-heading">Recent Posts:</h5>
                         <RecentPostListComponent list={this.state.recentPosts}/>
                     </div>
                 </div>

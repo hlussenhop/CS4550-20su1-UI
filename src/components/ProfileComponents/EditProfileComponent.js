@@ -9,17 +9,30 @@ import {
    faGlobe
 } from "@fortawesome/free-solid-svg-icons";
 import {Link} from "react-router-dom";
+import UserService from "../../services/UserService";
 
 class EditProfileComponent extends React.Component {
 
     state = {
+        username: '',
         email: '',
         password: '',
-        phoneNumber: '',
-        dob: '',
+        // phoneNumber: '',
+        // dob: '',
         bio: '',
         location: ''
 
+    }
+
+    componentDidMount() {
+        UserService.findUserById(this.props.match.params.userId)
+            .then(currentUser => {
+                this.setState({
+                    username: currentUser.username,
+                    email: currentUser.email,
+                    password: currentUser.password
+                })
+            })
     }
 
     render() {
@@ -41,11 +54,29 @@ class EditProfileComponent extends React.Component {
                                     <input className="form-control"
                                            id="emailFld"
                                            type="email"
-                                           placeholder="email@gmail.com"
+                                           placeholder={"Email"}
+                                           value={this.state.email}
                                            onChange={(event) =>
                                                this.setState({email: event.target.value})}
                                     />
                                 </div>
+
+                                <div className="input-group form-group">
+                                    <div className="input-group-prepend">
+                                <span className="input-group-text">
+                                    <FontAwesomeIcon icon={faUser}/>
+                                </span>
+                                    </div>
+                                    <input className="form-control"
+                                           id="usernameFld"
+                                           type="text"
+                                           placeholder={"Username"}
+                                           value={this.state.username}
+                                           onChange={(event) =>
+                                               this.setState({username: event.target.value})}
+                                    />
+                                </div>
+
                                 <div className="input-group form-group">
                                     <div className="input-group-prepend">
                                 <span className="input-group-text">
@@ -56,6 +87,7 @@ class EditProfileComponent extends React.Component {
                                            id="passwordFld"
                                            type="password"
                                            placeholder="Password"
+                                            value={this.state.password}
                                            onChange={(event) =>
                                                this.setState({password: event.target.value})}
                                     />
@@ -77,22 +109,22 @@ class EditProfileComponent extends React.Component {
                                     />
                                 </div>
 
-                                <div className="input-group form-group">
-                                    <div className="input-group-prepend">
-                                <span className="input-group-text">
-                                    <FontAwesomeIcon icon={faPhone}/>
-                                </span>
-                                    </div>
-                                    <input
-                                        className="form-control"
-                                        id="phoneFld"
-                                        type="tel"
-                                        pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-                                        placeholder="(123) 456-7890"
-                                        onChange={(event) =>
-                                            this.setState({phoneNumber: event.target.value})}
-                                    />
-                                </div>
+                                {/*<div className="input-group form-group">*/}
+                                {/*    <div className="input-group-prepend">*/}
+                                {/*<span className="input-group-text">*/}
+                                {/*    <FontAwesomeIcon icon={faPhone}/>*/}
+                                {/*</span>*/}
+                                {/*    </div>*/}
+                                {/*    <input*/}
+                                {/*        className="form-control"*/}
+                                {/*        id="phoneFld"*/}
+                                {/*        type="tel"*/}
+                                {/*        pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"*/}
+                                {/*        placeholder="(123) 456-7890"*/}
+                                {/*        onChange={(event) =>*/}
+                                {/*            this.setState({phoneNumber: event.target.value})}*/}
+                                {/*    />*/}
+                                {/*</div>*/}
 
                                 <div className="input-group form-group">
                                     <div className="input-group-prepend">
@@ -109,20 +141,20 @@ class EditProfileComponent extends React.Component {
                                     />
                                 </div>
 
-                                <div className="input-group form-group">
-                                    <div className="input-group-prepend">
-                                <span className="input-group-text">
-                                    <FontAwesomeIcon icon={faCalendarDay}/>
-                                </span>
-                                    </div>
-                                    <input className="form-control"
-                                           id="dobFld"
-                                           type="date"
-                                           placeholder="YYYY-MM-DD"
-                                           onChange={(event) =>
-                                               this.setState({dob: event.target.value})}
-                                    />
-                                </div>
+                                {/*<div className="input-group form-group">*/}
+                                {/*    <div className="input-group-prepend">*/}
+                                {/*<span className="input-group-text">*/}
+                                {/*    <FontAwesomeIcon icon={faCalendarDay}/>*/}
+                                {/*</span>*/}
+                                {/*    </div>*/}
+                                {/*    <input className="form-control"*/}
+                                {/*           id="dobFld"*/}
+                                {/*           type="date"*/}
+                                {/*           placeholder="YYYY-MM-DD"*/}
+                                {/*           onChange={(event) =>*/}
+                                {/*               this.setState({dob: event.target.value})}*/}
+                                {/*    />*/}
+                                {/*</div>*/}
 
                                 <div className="form-group">
                                     <Link to={"/profile"}>

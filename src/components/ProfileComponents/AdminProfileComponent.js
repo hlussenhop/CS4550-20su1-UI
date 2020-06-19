@@ -7,22 +7,10 @@ import PendingRequestsComponent from "./PendingRequestsComponent";
 
 class AdminProfileComponent extends React.Component{
 
-    studyGroup = {
-        name: 'CS4910',
-        professor: 'Jose',
-        count: 10
-    }
-
     pendingRequest = {
-        user: 'scrennan',
+        // user: 'calbee',
+        id: 992199446,
         date: 'June 18, 2020'
-    }
-
-    post = {
-        course: 'CS4910',
-        title: 'Hello',
-        text: "Join my study group! :)",
-        date: 'June 17, 2020'
     }
 
     state = {
@@ -31,25 +19,16 @@ class AdminProfileComponent extends React.Component{
         followers: [this.user, this.user],
         following: [this.user, this.user, this.user],
         courseList: [this.course, this.course],
-        recentPosts: [this.post, this.post, this.post, this.post],
         pendingRequests: [this.pendingRequest, this.pendingRequest, this.pendingRequest],
+        recentPosts: this.props.recentPosts,
+        studyGroups: this.props.studyGroups,
         currentUser: this.props.currentUser
     }
-
-    // componentDidMount() {
-    //     UserService.fetchProfile()
-    //         .catch(e => { })
-    //         .then(currentUser => {
-    //             if (currentUser) {
-    //                 this.setState({ currentUser: currentUser })
-    //             }
-    //         })
-    // }
 
     render() {
         return (
             <div>
-                <Link to={"/editProfile"}>
+                <Link to={`/${this.state.currentUser.id}/editProfile`}>
                     <button className="btn login_btn">
                         Edit
                     </button>
@@ -85,13 +64,17 @@ class AdminProfileComponent extends React.Component{
                     {/*    </div>*/}
 
                     {/*</div>*/}
+                    {/*<div>*/}
+                    {/*    <h5 className="profile-heading">Pending Requests to Study Group: {this.studyGroup.name}</h5>*/}
+                    {/*    <PendingRequestsComponent list={this.state.pendingRequests}/>*/}
+                    {/*</div>*/}
                     <div>
-                        <h5 className="profile-heading">Pending Requests to Study Group: {this.studyGroup.name}</h5>
-                        <PendingRequestsComponent list={this.state.pendingRequests}/>
+                        <h5 className="profile-heading">Study Groups:</h5>
+                        <FollowList list={this.state.studyGroups}/>
                     </div>
                     <br/>
                     <div>
-                        <h5 className="profile-heading">Recent Posts</h5>
+                        <h5 className="profile-heading">Recent Posts:</h5>
                         <RecentPostListComponent list={this.state.recentPosts}/>
                     </div>
 
