@@ -15,11 +15,12 @@ const login = (username, password) => {
 
 const update = (uid, updatedUser) => {
     return fetch(`https://neustudyserver.herokuapp.com/api/users/${uid}`, {
-        body: JSON.stringify({updatedUser}),
+        body: JSON.stringify({ updatedUser }),
         headers: {
             'content-type': 'application/json'
         },
-        method: 'PUT'
+        method: 'PUT',
+        credentials: "include"
     }).then(response => response.json())
 }
 
@@ -54,11 +55,12 @@ const fetchProfile = () =>
             return response.json()
         })
 
+
 export default {
     login,
     logout,
     signup,
     findUserById,
-    fetchProfile, 
+    fetchProfile,
     update
 }

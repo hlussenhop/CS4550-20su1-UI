@@ -27,6 +27,8 @@ class SignUpComponent extends React.Component {
             lastName: this.state.lastName,
             email: this.state.email,
             role: this.state.role,
+            bio: '',
+            location: '',
             studyGroups: []
         })
             .catch(e => {
