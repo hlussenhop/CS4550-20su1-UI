@@ -50,6 +50,34 @@ class EditProfileComponent extends React.Component {
                         </div>
                         <div className="card-body">
                             <form>
+                                <div className="input-group form-group">
+                                    <div className="input-group-prepend">
+                                        <span className="input-group-text">
+                                            <FontAwesomeIcon icon={faUser} />
+                                        </span>
+                                    </div>
+
+                                    <input readOnly
+                                        className="form-control"
+                                        id="firstFld"
+                                        type="text"
+                                        placeholder={"Username"}
+                                        value={this.state.currentUser.firstName} />
+                                </div>
+                                <div className="input-group form-group">
+                                    <div className="input-group-prepend">
+                                        <span className="input-group-text">
+                                            <FontAwesomeIcon icon={faUser} />
+                                        </span>
+                                    </div>
+
+                                    <input readOnly
+                                        className="form-control"
+                                        id="lastFld"
+                                        type="text"
+                                        placeholder={"Username"}
+                                        value={this.state.currentUser.lastName} />
+                                </div>
 
                                 <div className="input-group form-group">
                                     <div className="input-group-prepend">
@@ -63,7 +91,6 @@ class EditProfileComponent extends React.Component {
                                         id="usernameFld"
                                         type="text"
                                         placeholder={"Username"}
-                                        title="Username cannot be changed"
                                         value={this.state.currentUser.username} />
                                 </div>
 
@@ -78,31 +105,11 @@ class EditProfileComponent extends React.Component {
                                         type="email"
                                         placeholder={"Email"}
                                         value={this.state.currentUser.email}
-                                        onChange={(event) => {
-                                            this.setState({
-                                                currentUser: {
-                                                    ...this.state.currentUser,
-                                                    email: event.target.value
-                                                }
-                                            })
-                                        }} />
-                                </div>
-                                <div className="input-group form-group">
-                                    <div className="input-group-prepend">
-                                        <span className="input-group-text">
-                                            <FontAwesomeIcon icon={faUser} />
-                                        </span>
-                                    </div>
-                                    <input className="form-control"
-                                        id="usernameFld"
-                                        type="text"
-                                        placeholder={"Username"}
-                                        value={this.state.currentUser.username}
                                         onChange={(event) =>
                                             this.setState({
                                                 currentUser: {
                                                     ...this.state.currentUser,
-                                                    username: event.target.value
+                                                    email: event.target.value
                                                 }
                                             })} />
                                 </div>
@@ -133,14 +140,15 @@ class EditProfileComponent extends React.Component {
                                     </div>
                                     <input
                                         className="form-control"
-                                        id="bio"
+                                        id="bioFld"
                                         type="text"
                                         placeholder="Description"
                                         value={this.state.currentUser.bio}
                                         onChange={(event) =>
                                             this.setState({
                                                 currentUser: {
-                                                    ...this.state.currentUser, bio: event.target.value
+                                                    ...this.state.currentUser,
+                                                    bio: event.target.value
                                                 }
                                             })} />
                                 </div>

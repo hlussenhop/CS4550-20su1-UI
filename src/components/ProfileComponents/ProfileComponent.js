@@ -1,7 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import FollowList from "./FollowList";
-import RecentPostListComponent from "./RecentPostListComponent";
 import UserService from "../../services/UserService"
 import StudentProfileComponent from "./StudentProfileComponent";
 import AdminProfileComponent from "./AdminProfileComponent";
@@ -70,6 +68,24 @@ class ProfileComponent extends React.Component {
     render() {
         return (
             <div>
+                {
+                    !this.props.visiting &&
+                    <Link to={`/${this.state.currentUser.id}/editProfile`}>
+                        <button className="btn login_btn">
+                            Edit
+                        </button>
+                    </Link>
+                }
+
+                <div>
+                    <h2 className="d-flex justify-content-center">
+                        {this.state.currentUser.firstName} {this.state.currentUser.lastName}
+                    </h2>
+                    <p className="d-flex justify-content-center">{this.state.currentUser.location}</p>
+                    <h5 className="d-flex justify-content-center">{this.state.currentUser.bio}</h5>
+                    <h3>Welcome {this.state.currentUser.username}</h3>
+
+                </div>
                 {
                     (this.state.currentUser.role === "STUDENT") &&
                     <StudentProfileComponent currentUser={this.state.currentUser}

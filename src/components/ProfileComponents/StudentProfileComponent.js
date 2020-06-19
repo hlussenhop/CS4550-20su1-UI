@@ -14,8 +14,6 @@ class StudentProfileComponent extends React.Component{
     }
 
     state = {
-        bio: 'Hello! I want to join study groups.',
-        location: 'San Diego',
         followers: [this.user, this.user],
         following: [this.user, this.user, this.user],
         courseList: [this.course, this.course],
@@ -36,25 +34,6 @@ class StudentProfileComponent extends React.Component{
     render() {
         return (
             <div>
-                {
-                    !this.props.visiting &&
-                    <Link to={`/${this.state.currentUser.id}/editProfile`}>
-                        <button className="btn login_btn">
-                            Edit
-                        </button>
-                    </Link>
-                }
-
-                <div>
-                    <h2 className="d-flex justify-content-center">
-                        {this.state.currentUser.firstName} {this.state.currentUser.lastName}
-                    </h2>
-                    <p className="d-flex justify-content-center">{this.state.location}</p>
-                    <h5 className="d-flex justify-content-center">{this.state.bio}</h5>
-                    <h3>Welcome {this.state.currentUser.username}</h3>
-
-                </div>
-
 
                 <div className="profile">
 
