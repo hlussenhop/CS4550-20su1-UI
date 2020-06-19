@@ -13,33 +13,48 @@ export default class StudyGroupPageComponent extends React.Component {
         studyGroup: null,
         userGroup: [],
         loading: true,
-        currentUser: {}
+        currentUser: {},
+        UserStatus: ""
     };
 
     componentDidMount() {
-        GroupService.findGroupById(123)
+        GroupService.findGroupById(this.props.match.params.groupId)
             .then(studyGroup => {
                 this.setState({
                     studyGroup: studyGroup
                 });
                 this.state.studyGroup.studentsInGroupIds.map(id =>
                     UserService.findUserById(id)
-                        .then(user =>
+                        .then(user => {
                             this.state.userGroup.push(user)
-                        ));
-                UserService.findUserById(this.state.studyGroup.currentUserId)
-                    .then(user =>
-                        this.setState({
-                            currentUser: user
-                        }));
+                            this.setState({i: 1})
+                        })
+                );
+                UserService.fetchProfile().then(user => {
+                    this.setState({currentUser: user})
+                    this.loggedInUserIsCurrentUser()
+                })
             });
-
-
     }
 
+    loggedInUserIsCurrentUser = () => {
+        this.state.userGroup.map(user => {
+            if (user.id === this.state.currentUser.id) {
+                if (this.state.currentUser.role === "STUDENT") {
+                    this.setState({UserStatus: "STUDENT"})
+                } else if (this.state.currentUser.role === "ADMIN") {
+                    this.setState({UserStatus: "STUDENT"})
+                }
+            }
+        });
+        if (this.state.currentUser === {}) {
+            this.setState({UserStatus: "ANON"})
+        }
+
+    };
 
     render() {
-        if (this.state.studyGroup !== null && this.state.loading === true) {
+        if (this.state.studyGroup !== null && this.state.userGroup !== [] && this.state.UserStatus !== "" && this.state.loading === true) {
             this.setState({loading: false})
         }
         if (this.state.loading === true) {
@@ -51,8 +66,9 @@ export default class StudyGroupPageComponent extends React.Component {
                     <h1>Study Group 1</h1>
                     <div className="row">
                         <div className="col-sm-4">
-                            <thead>
+
                             <table className="table table-hover table-light"/>
+                            <thead>
                             <tr className="table-secondary">
                                 <th>Group Members</th>
                             </tr>
@@ -61,16 +77,28 @@ export default class StudyGroupPageComponent extends React.Component {
                             {
                                 this.state.userGroup.map(user =>
                                     <tr>
+                                        {//TODO: link to users specific profile
+                                        }
                                         <td>
-                                            {this.state.currentUser.role === "student" &&
+                                            <Link to="/profile">{user.firstName}</Link>
+                                            {this.state.currentUser.role === "ADMIN" &&
                                             <span>
-                                                <p>{user.firstName}</p>
-                                            </span>
-                                            }
-                                            {this.state.currentUser.role === "admin" &&
-                                            <span>
-                                                <p>{user.firstName}</p>
-                                                <button className="btn btn-danger">Delete</button>
+                                                {console.log(this.state)}
+                                                <button className="btn btn-danger"
+                                                        onClick={() => GroupService.updateGroup(this.state.studyGroup.id, {
+                                                                id: this.state.studyGroup.id,
+                                                                courseId: this.state.studyGroup.courseId,
+                                                                currentUserId: this.state.studyGroup.currentUserId,
+                                                                studentsInGroupIds: this.state.studyGroup.studentsInGroupIds.filter(id => id !== user.id),
+                                                                postIds: this.state.studyGroup.postIds
+                                                            }.then(GroupService.findGroupById(this.props.match.params.groupId)
+                                                                .then(studyGroup => {
+                                                                    this.setState({
+                                                                        studyGroup: studyGroup
+                                                                    });
+                                                                })
+                                                            )
+                                                        )}>Delete</button>
                                             </span>
                                             }
                                         </td>
@@ -83,7 +111,8 @@ export default class StudyGroupPageComponent extends React.Component {
                             <h2>Group Posts</h2>
                             <div className="row">
                                 {this.state.studyGroup !== {} &&
-                                <PostGridComponent currentUser={this.state.currentUser}
+                                <PostGridComponent userStatus={this.state.UserStatus}
+                                                   currentUser={this.state.currentUser}
                                                    groupId={this.state.studyGroup.id}/>
                                 }
                             </div>

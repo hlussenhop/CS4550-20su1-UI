@@ -17,7 +17,7 @@ export default class GroupPostComponent extends React.Component {
         PostService.updatePost(this.props.post.id,
             {
                 studyGroupId: 123,
-                posterId: 1,
+                posterId: this.props.currentUser.id,
                 title: this.state.editingTitle,
                 text: this.state.editingBody
             })
@@ -28,24 +28,27 @@ export default class GroupPostComponent extends React.Component {
     render() {
         return (
             <div className="container card group-post group-card-body">
-                {this.state.isBeingEdited === false &&
-                <div>
-                    <h5>{this.props.post.title}</h5>
-                    <p>{this.props.post.text}</p>
-                    <button className="btn btn-primary"
-                            onClick={() => this.setState({isBeingEdited: true})}>Edit Post
-                    </button>
+                <h5>{this.props.post.title}</h5>
+                <p>{this.props.post.text}</p>
+                {this.state.isBeingEdited === false && this.props.userstatus !== "ANON"  &&
+
+                    <div>
+                        {this.props.post.posterId === this.props.currentUser.id &&
+                            <button className="btn btn-primary"
+                                    onClick={() => this.setState({isBeingEdited: true})}>Edit Post
+                            </button>
+                        }
+
                     <h5>Comments</h5>
                     {
                         <CommentListComponent currentCommenter={this.props.currentUser}
                                               postId={this.props.post.id}/>
                     }
-                </div>
+                    </div>
+
                 }
                 {this.state.isBeingEdited === true &&
                 <div>
-                    <h5>{this.props.post.title}</h5>
-                    <p>{this.props.post.text}</p>
                     <input type="text"
                            className="form-control"
                            placeholder="New Title"
@@ -65,7 +68,7 @@ export default class GroupPostComponent extends React.Component {
                                 }}>Save
                         </button>
                         <button className="btn btn-danger"
-                                onClick={() => PostService.deletePost(this.props.post.id).then(this.props.renderPosts)}>Delete Post</button>
+                                onClick={() => PostService.deletePost(this.props.post.id).then(this.props.renderPosts())}>Delete Post</button>
                     </div>
                     {
                         <CommentListComponent currentCommenter={this.props.currentUser}

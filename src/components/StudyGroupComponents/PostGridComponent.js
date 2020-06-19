@@ -46,11 +46,13 @@ export default class PostGridComponent extends React.Component {
     render() {
         return (
             <div className="container">
+                {console.log(this.props.currentUser)}
                 {this.state.posts.map(post =>
-                    <GroupPostComponent renderPosts={this.renderPosts}
+                    <GroupPostComponent userstatus={this.props.userStatus}
+                        renderPosts={this.renderPosts}
                         currentUser={this.props.currentUser} post={post}/>
                 )}
-                {this.state.isMakingNewPost === false &&
+                {this.state.isMakingNewPost === false && this.props.userStatus !== "ANON" &&
                 <button className="btn btn-success"
                         onClick={() => this.setState({isMakingNewPost: true})}>
                     newPost
