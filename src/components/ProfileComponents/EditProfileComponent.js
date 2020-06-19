@@ -18,8 +18,6 @@ class EditProfileComponent extends React.Component {
             firstName: '',
             lastName: '',
             email: '',
-            // phoneNumber: '',
-            // dob: '',
             role: '',
             bio: '',
             location: '',
@@ -65,9 +63,7 @@ class EditProfileComponent extends React.Component {
                                            id="usernameFld"
                                            type="text"
                                            placeholder={"Username"}
-                                           value={this.state.currentUser.username}
-                                           onChange={(event) =>
-                                               this.setState({ username: event.target.value })} />
+                                           value={this.state.currentUser.username}/>
                                 </div>
 
                                 <div className="input-group form-group">
