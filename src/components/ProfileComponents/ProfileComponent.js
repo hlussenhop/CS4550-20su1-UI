@@ -38,7 +38,6 @@ class ProfileComponent extends React.Component {
     }
 
     componentDidMount() {
-        {console.log(this.state.visiting)}
         if(this.state.visiting) {
             this.setState({
                 currentUser:
@@ -66,12 +65,14 @@ class ProfileComponent extends React.Component {
                 {
                     (this.state.currentUser.role === "STUDENT") &&
                     <StudentProfileComponent currentUser={this.state.currentUser}
+                                             visiting={this.state.visiting}
                     studyGroups={this.state.studyGroups}
                     recentPosts={this.state.recentPosts}/>
                 }
                 {
                     this.state.currentUser.role === "ADMIN" &&
                     <AdminProfileComponent currentUser={this.state.currentUser}
+                                           visiting={this.state.visiting}
                                            studyGroups={this.state.studyGroups}
                                            recentPosts={this.state.recentPosts}/>
                 }

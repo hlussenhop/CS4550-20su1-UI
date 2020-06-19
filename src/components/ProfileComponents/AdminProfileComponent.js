@@ -28,11 +28,15 @@ class AdminProfileComponent extends React.Component{
     render() {
         return (
             <div>
-                <Link to={`/${this.state.currentUser.id}/editProfile`}>
-                    <button className="btn login_btn">
-                        Edit
-                    </button>
-                </Link>
+                {
+                    !this.props.visiting &&
+                    <Link to={`/${this.state.currentUser.id}/editProfile`}>
+                        <button className="btn login_btn">
+                            Edit
+                        </button>
+                    </Link>
+                }
+
                 <div>
                     <h2 className="d-flex justify-content-center">
                         {this.state.currentUser.firstName} {this.state.currentUser.lastName}
