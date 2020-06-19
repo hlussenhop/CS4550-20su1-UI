@@ -13,8 +13,8 @@ class FollowList extends React.Component {
             <div>
                 <div className="list-group">
                     {
-
                         this.state.list.map(element =>
+                            {GroupService.findGroupById(element)}
                             <button type="button"
                                 className="list-group-item list-group-item-action">
                                 <span>

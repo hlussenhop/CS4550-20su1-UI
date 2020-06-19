@@ -8,7 +8,7 @@ export default class GroupCommentComponent extends React.Component {
     };
 
     componentDidMount() {
-        UserService.findUserById(this.props.comment.commenter)
+        UserService.findUserById(this.props.comment.commenterId)
             .then(user => this.setState({user: user}))
     }
 
