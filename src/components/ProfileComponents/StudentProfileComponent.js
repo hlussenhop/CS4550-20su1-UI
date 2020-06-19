@@ -3,19 +3,13 @@ import {Link} from "react-router-dom";
 import FollowList from "./FollowList";
 import RecentPostListComponent from "./RecentPostListComponent";
 import UserService from "../../services/UserService"
-import PendingRequestsComponent from "./PendingRequestsComponent";
 
-class AdminProfileComponent extends React.Component{
+class StudentProfileComponent extends React.Component{
 
     studyGroup = {
         name: 'CS4910',
         professor: 'Jose',
         count: 10
-    }
-
-    pendingRequest = {
-        user: 'scrennan',
-        date: 'June 18, 2020'
     }
 
     post = {
@@ -32,7 +26,6 @@ class AdminProfileComponent extends React.Component{
         following: [this.user, this.user, this.user],
         courseList: [this.course, this.course],
         recentPosts: [this.post, this.post, this.post, this.post],
-        pendingRequests: [this.pendingRequest, this.pendingRequest, this.pendingRequest],
         currentUser: this.props.currentUser
     }
 
@@ -86,23 +79,19 @@ class AdminProfileComponent extends React.Component{
 
                     {/*</div>*/}
                     <div>
-                        <h5 className="profile-heading">Pending Requests to Study Group: {this.studyGroup.name}</h5>
-                        <PendingRequestsComponent list={this.state.pendingRequests}/>
+                        <h5 className="profile-heading">Study Groups</h5>
+                        <FollowList list={this.state.currentUser.studyGroups}/>
                     </div>
                     <br/>
                     <div>
                         <h5 className="profile-heading">Recent Posts</h5>
                         <RecentPostListComponent list={this.state.recentPosts}/>
                     </div>
-
-
                 </div>
             </div>
-
-
         )
     }
 
 }
 
-export default AdminProfileComponent
+export default StudentProfileComponent

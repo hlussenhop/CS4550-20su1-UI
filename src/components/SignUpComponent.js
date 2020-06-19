@@ -13,7 +13,7 @@ class SignUpComponent extends React.Component {
         username: '',
         password: '',
         confirmPassword: '',
-        role: 'STUDENT',
+        role: '',
         error: null
     }
 
@@ -97,6 +97,22 @@ class SignUpComponent extends React.Component {
                                         placeholder="Email"
                                         onChange={(event) =>
                                             this.setState({ email: event.target.value })} />
+                                </div>
+
+                                <div className="input-group form-group">
+                                    <div className="input-group-prepend">
+                                        <span className="input-group-text">
+                                            <FontAwesomeIcon icon={faUser} />
+                                        </span>
+                                    </div>
+                                    <select className="form-control"
+                                            id="heading-type"
+                                            onChange={(event) => this.setState(
+                                                {role : event.target.value}
+                                            )}>
+                                        <option selected value="STUDENT">Student</option>
+                                        <option value="ADMIN">Admin</option>
+                                    </select>
                                 </div>
 
                                 <div className="input-group form-group">
