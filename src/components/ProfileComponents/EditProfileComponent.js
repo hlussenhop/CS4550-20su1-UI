@@ -28,6 +28,7 @@ class EditProfileComponent extends React.Component {
             })
             .then(currentUser => {
                 if (currentUser)
+                    console.log(currentUser.username)
                     this.props.history.push("/profile")
             })
     }
@@ -71,6 +72,15 @@ class EditProfileComponent extends React.Component {
                                            value={this.state.username}
                                            onChange={(event) =>
                                                this.setState({username: event.target.value})} />
+                                </div>
+
+
+                                <div className="input-group form-group">
+                                    <div className="input-group-prepend">
+                                        <span className="input-group-text">
+                                            <FontAwesomeIcon icon={faUser} />
+                                        </span>
+                                    </div>
 
                                     <input className="form-control"
                                         id="emailFld"
@@ -79,22 +89,6 @@ class EditProfileComponent extends React.Component {
                                         value={this.state.email}
                                         onChange={(event) =>
                                             this.setState({ email: event.target.value })}
-                                    />
-                                </div>
-
-                                <div className="input-group form-group">
-                                    <div className="input-group-prepend">
-                                        <span className="input-group-text">
-                                            <FontAwesomeIcon icon={faUser} />
-                                        </span>
-                                    </div>
-                                    <input className="form-control"
-                                        id="usernameFld"
-                                        type="text"
-                                        placeholder={"Username"}
-                                        value={this.state.username}
-                                        onChange={(event) =>
-                                            this.setState({ username: event.target.value })}
                                     />
                                 </div>
 
