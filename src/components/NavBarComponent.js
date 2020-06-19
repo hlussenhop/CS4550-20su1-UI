@@ -4,9 +4,7 @@ import UserService from "../services/UserService";
 
 export default class NavBarComponent extends React.Component {
     state = {
-        currentUser: {
-            username: ''
-        }
+        username: ''
     }
 
     componentDidMount() {
@@ -14,18 +12,18 @@ export default class NavBarComponent extends React.Component {
             .catch(e => { })
             .then(currentUser => {
                 if (currentUser) {
-                    this.setState({ currentUser: currentUser })
+                    this.setState({ username: currentUser.username })
                 }
             })
     }
 
     componentDidUpdate(prevPros, prevState, snapshot) {
-        if ((prevState.currentUser.username !== this.state.currentUser.username)) {
+        if ((prevState.username !== this.state.username)) {
             UserService.fetchProfile()
                 .catch(e => { })
                 .then(currentUser => {
                     if (currentUser) {
-                        this.setState({ currentUser: currentUser })
+                        this.setState({ username: currentUser.username })
                     }
                 })
         }
@@ -36,7 +34,7 @@ export default class NavBarComponent extends React.Component {
             .catch(e => { })
             .then(currentUser => {
                 if (currentUser) {
-                    this.setState({ currentUser: { username: '' } })
+                    this.setState({ username: '' })
                 }
             })
     }
@@ -55,7 +53,7 @@ export default class NavBarComponent extends React.Component {
                             <Link className="nav-link" to="/search">Search Courses</Link>
                         </li>
                         {
-                            this.state.currentUser.username &&
+                            this.state.username &&
                             <li className="nav-item">
                                 <a className="nav-link" href="/profile">Profile</a>
                             </li>

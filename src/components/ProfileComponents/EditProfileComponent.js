@@ -14,34 +14,36 @@ import UserService from "../../services/UserService";
 class EditProfileComponent extends React.Component {
 
     state = {
-        username: '',
-        email: '',
-        password: '',
-        // phoneNumber: '',
-        // dob: '',
-        bio: '',
-        location: ''
+        currentUser: {
+            username: '',
+            password: '',
+            firstName: '',
+            lastName: '',
+            email: '',
+            // phoneNumber: '',
+            // dob: '',
+            role: '',
+            bio: '',
+            location: '',
+            studyGroups: []
+        }
+    }
+
+    componentDidMount() {
+        UserService.findUserById(this.props.match.params.userId)
+            .then(currentUser => {
+                this.setState({ currentUser: currentUser })
+            })
     }
 
     update = () => {
-        UserService.update()
+        UserService.update(this.props.match.params.userId, this.state.currentUser)
             .catch(e => {
                 this.props.history.push("/editProfile")
             })
             .then(currentUser => {
                 if (currentUser)
                     this.props.history.push("/profile")
-            })
-    }
-
-    componentDidMount() {
-        UserService.findUserById(this.props.match.params.userId)
-            .then(currentUser => {
-                this.setState({
-                    username: currentUser.username,
-                    email: currentUser.email,
-                    password: currentUser.password
-                })
             })
     }
 
@@ -65,10 +67,12 @@ class EditProfileComponent extends React.Component {
                                         id="emailFld"
                                         type="email"
                                         placeholder={"Email"}
-                                        value={this.state.email}
+                                        value={this.state.currentUser.email}
                                         onChange={(event) =>
-                                            this.setState({ email: event.target.value })}
-                                    />
+                                            this.setState(prevState => ({
+                                                ...prevState,
+                                                email: event.target.value
+                                            }))} />
                                 </div>
 
                                 <div className="input-group form-group">
@@ -81,10 +85,12 @@ class EditProfileComponent extends React.Component {
                                         id="usernameFld"
                                         type="text"
                                         placeholder={"Username"}
-                                        value={this.state.username}
+                                        value={this.state.currentUser.username}
                                         onChange={(event) =>
-                                            this.setState({ username: event.target.value })}
-                                    />
+                                            this.setState(prevState => ({
+                                                ...prevState,
+                                                username: event.target.value
+                                            }))} />
                                 </div>
 
                                 <div className="input-group form-group">
@@ -97,10 +103,12 @@ class EditProfileComponent extends React.Component {
                                         id="passwordFld"
                                         type="password"
                                         placeholder="Password"
-                                        value={this.state.password}
+                                        value={this.state.currentUser.password}
                                         onChange={(event) =>
-                                            this.setState({ password: event.target.value })}
-                                    />
+                                            this.setState(prevState => ({
+                                                ...prevState,
+                                                password: event.target.value
+                                            }))} />
                                 </div>
 
                                 <div className="input-group form-group">
@@ -114,9 +122,11 @@ class EditProfileComponent extends React.Component {
                                         id="bio"
                                         type="text"
                                         placeholder="Description"
+                                        value={this.state.currentUser.bio}
                                         onChange={(event) =>
-                                            this.setState({ bio: event.target.value })}
-                                    />
+                                            this.setState(prevState => ({
+                                                ...prevState, bio: event.target.value
+                                            }))} />
                                 </div>
 
                                 {/*<div className="input-group form-group">*/}
@@ -146,9 +156,12 @@ class EditProfileComponent extends React.Component {
                                         id="locationFld"
                                         type="text"
                                         placeholder="Location"
+                                        value={this.state.currentUser.location}
                                         onChange={(event) =>
-                                            this.setState({ location: event.target.value })}
-                                    />
+                                            this.setState(prevState => ({
+                                                ...prevState,
+                                                location: event.target.value
+                                            }))} />
                                 </div>
 
                                 {/*<div className="input-group form-group">*/}
