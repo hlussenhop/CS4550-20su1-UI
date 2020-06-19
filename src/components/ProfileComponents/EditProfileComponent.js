@@ -10,42 +10,38 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import UserService from "../../services/UserService";
-
 class EditProfileComponent extends React.Component {
-
     state = {
-        username: '',
-        email: '',
-        password: '',
-        bio: '',
-        location: ''
+        currentUser: {
+            username: '',
+            password: '',
+            firstName: '',
+            lastName: '',
+            email: '',
+            // phoneNumber: '',
+            // dob: '',
+            role: '',
+            bio: '',
+            location: '',
+            studyGroups: []
+        }
     }
-
+    componentDidMount() {
+        UserService.findUserById(this.props.match.params.userId)
+            .then(currentUser => {
+                this.setState({ currentUser: currentUser })
+            })
+    }
     update = () => {
-        UserService.update()
+        UserService.update(this.props.match.params.userId, this.state.currentUser)
             .catch(e => {
                 this.props.history.push("/editProfile")
             })
             .then(currentUser => {
                 if (currentUser)
-                    console.log(currentUser.username)
                     this.props.history.push("/profile")
             })
     }
-
-    componentDidMount() {
-        UserService.findUserById(this.props.match.params.userId)
-            .then(currentUser => {
-                this.setState({
-                    username: currentUser.username,
-                    email: currentUser.email,
-                    password: currentUser.password,
-                    bio: currentUser.bio,
-                    location: currentUser.location
-                })
-            })
-    }
-
     render() {
         return (
             <div className="editProfile">
@@ -69,11 +65,10 @@ class EditProfileComponent extends React.Component {
                                            id="usernameFld"
                                            type="text"
                                            placeholder={"Username"}
-                                           value={this.state.username}
+                                           value={this.state.currentUser.username}
                                            onChange={(event) =>
-                                               this.setState({username: event.target.value})} />
+                                               this.setState({ username: event.target.value })} />
                                 </div>
-
 
                                 <div className="input-group form-group">
                                     <div className="input-group-prepend">
@@ -81,17 +76,34 @@ class EditProfileComponent extends React.Component {
                                             <FontAwesomeIcon icon={faUser} />
                                         </span>
                                     </div>
-
                                     <input className="form-control"
-                                        id="emailFld"
-                                        type="email"
-                                        placeholder={"Email"}
-                                        value={this.state.email}
-                                        onChange={(event) =>
-                                            this.setState({ email: event.target.value })}
-                                    />
+                                           id="emailFld"
+                                           type="email"
+                                           placeholder={"Email"}
+                                           value={this.state.currentUser.email}
+                                           onChange={(event) =>
+                                               this.setState(prevState => ({
+                                                   ...prevState,
+                                                   email: event.target.value
+                                               }))} />
                                 </div>
-
+                                <div className="input-group form-group">
+                                    <div className="input-group-prepend">
+                                        <span className="input-group-text">
+                                            <FontAwesomeIcon icon={faUser} />
+                                        </span>
+                                    </div>
+                                    <input className="form-control"
+                                           id="usernameFld"
+                                           type="text"
+                                           placeholder={"Username"}
+                                           value={this.state.currentUser.username}
+                                           onChange={(event) =>
+                                               this.setState(prevState => ({
+                                                   ...prevState,
+                                                   username: event.target.value
+                                               }))} />
+                                </div>
                                 <div className="input-group form-group">
                                     <div className="input-group-prepend">
                                         <span className="input-group-text">
@@ -99,15 +111,16 @@ class EditProfileComponent extends React.Component {
                                         </span>
                                     </div>
                                     <input className="form-control"
-                                        id="passwordFld"
-                                        type="password"
-                                        placeholder="Password"
-                                        value={this.state.password}
-                                        onChange={(event) =>
-                                            this.setState({ password: event.target.value })}
-                                    />
+                                           id="passwordFld"
+                                           type="password"
+                                           placeholder="Password"
+                                           value={this.state.currentUser.password}
+                                           onChange={(event) =>
+                                               this.setState(prevState => ({
+                                                   ...prevState,
+                                                   password: event.target.value
+                                               }))} />
                                 </div>
-
                                 <div className="input-group form-group">
                                     <div className="input-group-prepend">
                                         <span className="input-group-text">
@@ -119,10 +132,11 @@ class EditProfileComponent extends React.Component {
                                         id="bio"
                                         type="text"
                                         placeholder="Description"
-                                        value={this.state.bio}
+                                        value={this.state.currentUser.bio}
                                         onChange={(event) =>
-                                            this.setState({ bio: event.target.value })}
-                                    />
+                                            this.setState(prevState => ({
+                                                ...prevState, bio: event.target.value
+                                            }))} />
                                 </div>
 
                                 <div className="input-group form-group">
@@ -135,21 +149,22 @@ class EditProfileComponent extends React.Component {
                                            id="locationFld"
                                            type="text"
                                            placeholder="Location"
-                                           value={this.state.location}
+                                           value={this.state.currentUser.location}
                                            onChange={(event) =>
-                                               this.setState({location: event.target.value})}
-                                    />
+                                               this.setState(prevState => ({
+                                                   ...prevState,
+                                                   location: event.target.value
+                                               }))} />
                                 </div>
-                                
+
                                 <div className="form-group">
                                     <Link to={"/profile"}>
                                         <button className="btn float-right login_btn"
-                                            id="updateBtn"
-                                            onClick={() => this.update()}>
+                                                id="updateBtn"
+                                                onClick={() => this.update()}>
                                             Update
                                         </button>
                                     </Link>
-
                                 </div>
                             </form>
                         </div>
@@ -159,5 +174,4 @@ class EditProfileComponent extends React.Component {
         )
     }
 }
-
 export default EditProfileComponent

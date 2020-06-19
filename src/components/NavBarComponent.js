@@ -4,27 +4,27 @@ import UserService from "../services/UserService";
 
 export default class NavBarComponent extends React.Component {
     state = {
-        currentUser: {
-            username: ''
-        }
+        username: ''
     }
 
     componentDidMount() {
         UserService.fetchProfile()
             .catch(e => { })
             .then(currentUser => {
-               if (currentUser) {
-                    this.setState({ currentUser: currentUser })
-               }
+                if (currentUser) {
+                    this.setState({ username: currentUser.username })
+                }
             })
     }
 
     componentDidUpdate(prevPros, prevState, snapshot) {
-        if ((prevState.currentUser.username !== this.state.currentUser.username)) {
+        if ((prevState.username !== this.state.username)) {
             UserService.fetchProfile()
                 .catch(e => { })
                 .then(currentUser => {
-                        this.setState({ currentUser: currentUser })
+                    if (currentUser) {
+                        this.setState({ username: currentUser.username })
+                    }
                 })
         }
     }
@@ -34,7 +34,7 @@ export default class NavBarComponent extends React.Component {
             .catch(e => { })
             .then(currentUser => {
                 if (currentUser) {
-                    this.setState({ currentUser: { username: '' } })
+                    this.setState({ username: '' })
                 }
             })
     }
@@ -53,7 +53,7 @@ export default class NavBarComponent extends React.Component {
                             <Link className="nav-link" to="/search">Search Courses</Link>
                         </li>
                         {
-                            this.state.currentUser.username &&
+                            this.state.username &&
                             <li className="nav-item">
                                 <a className="nav-link" href="/profile">Profile</a>
                             </li>
@@ -61,31 +61,31 @@ export default class NavBarComponent extends React.Component {
                     </ul>
                 </div>
                 <ul className="navbar-nav">
-                        {
-                            !this.state.currentUser.username &&
+                    {
+                        !this.state.username &&
+                        <li className="nav-item">
                             <li className="nav-item">
-                                <li className="nav-item">
-                                    <a className="nav-link" href="/login">Sign In</a>
-                                </li>
+                                <a className="nav-link" href="/login">Sign In</a>
                             </li>
-                        }
-                        {
-                            this.state.currentUser.username &&
+                        </li>
+                    }
+                    {
+                        this.state.username &&
+                        <li className="nav-item">
                             <li className="nav-item">
-                                <li className="nav-item">
-                                    <a className="nav-link" href="/"
-                                       onClick={this.logout}>Log Out</a>
-                                </li>
+                                <a className="nav-link" href="/"
+                                    onClick={this.logout}>Log Out</a>
                             </li>
-                        }
-                        {
-                            !this.state.currentUser.username &&
+                        </li>
+                    }
+                    {
+                        !this.state.username &&
+                        <li className="nav-item">
                             <li className="nav-item">
-                                <li className="nav-item">
-                                    <a className="nav-link" href="/signup">Sign Up</a>
-                                </li>
+                                <a className="nav-link" href="/signup">Sign Up</a>
                             </li>
-                        }
+                        </li>
+                    }
                 </ul>
             </nav>
         )

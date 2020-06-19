@@ -1,5 +1,5 @@
 import React from "react";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import FollowList from "./FollowList";
 import RecentPostListComponent from "./RecentPostListComponent";
 import UserService from "../../services/UserService"
@@ -38,54 +38,51 @@ class ProfileComponent extends React.Component {
     }
 
     componentDidMount() {
-        if(this.state.visiting) {
+        if (this.state.visiting) {
             this.setState({
                 currentUser:
                     UserService.findUserById(this.state.visiting)
                         .then(currentUser => {
                             if (currentUser) {
-                                this.setState({currentUser: currentUser})
+                                this.setState({ currentUser: currentUser })
                             }
-                        }) })
+                        })
+            })
         } else {
             UserService.fetchProfile()
                 .catch(e => {
                 })
                 .then(currentUser => {
                     if (currentUser) {
-                        this.setState({currentUser: currentUser})
+                        this.setState({ currentUser: currentUser })
                     }
                 })
         }
-}
-
-    findUser = () => {
-        UserService.findUserById(this.state.currentUser.id)
-        .then(currentUser => {
-            return currentUser
-        })
     }
-
+    /*
+        findUser = () => {
+            UserService.findUserById(this.state.currentUser.id)
+            .then(currentUser => {
+                return currentUser
+            })
+        }
+    */
     render() {
         return (
             <div>
-                <button
-                    onClick={this.findUser}>
-                    click me
-                </button>
                 {
                     (this.state.currentUser.role === "STUDENT") &&
                     <StudentProfileComponent currentUser={this.state.currentUser}
-                                             visiting={this.state.visiting}
-                    studyGroups={this.state.studyGroups}
-                    recentPosts={this.state.recentPosts}/>
+                        visiting={this.state.visiting}
+                        studyGroups={this.state.studyGroups}
+                        recentPosts={this.state.recentPosts} />
                 }
                 {
                     this.state.currentUser.role === "ADMIN" &&
                     <AdminProfileComponent currentUser={this.state.currentUser}
-                                           visiting={this.state.visiting}
-                                           studyGroups={this.state.studyGroups}
-                                           recentPosts={this.state.recentPosts}/>
+                        visiting={this.state.visiting}
+                        studyGroups={this.state.studyGroups}
+                        recentPosts={this.state.recentPosts} />
                 }
             </div>
 
