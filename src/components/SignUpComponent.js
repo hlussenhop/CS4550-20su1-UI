@@ -118,7 +118,7 @@ class SignUpComponent extends React.Component {
                                 <div className="input-group form-group">
                                     <div className="input-group-prepend">
                                         <span className="input-group-text">
-                                            <FontAwesomeIcon icon={faKey} />
+                                            <FontAwesomeIcon icon={faUser} />
                                         </span>
                                     </div>
                                     <input type="text"
