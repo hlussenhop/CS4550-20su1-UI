@@ -69,7 +69,12 @@ class StudyGroupComponent extends React.Component {
                         component={AdminProfileComponent}/>
 
                     <Route
-                        path="/group/"
+                    path="/group/"
+                    exact={true}
+                    component={StudyGroupPageComponent}/>
+
+                    <Route
+                        path="/group/:groupId"
                         exact={true}
                         component={StudyGroupPageComponent}/>
 

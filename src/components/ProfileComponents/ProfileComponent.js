@@ -59,9 +59,20 @@ class ProfileComponent extends React.Component {
         }
 }
 
+    findUser = () => {
+        UserService.findUserById(this.state.currentUser.id)
+        .then(currentUser => {
+            return currentUser
+        })
+    }
+
     render() {
         return (
             <div>
+                <button
+                    onClick={this.findUser}>
+                    click me
+                </button>
                 {
                     (this.state.currentUser.role === "STUDENT") &&
                     <StudentProfileComponent currentUser={this.state.currentUser}

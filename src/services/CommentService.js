@@ -1,13 +1,13 @@
 const findCommentsForPost = (pid) =>
-    fetch(`http://localhost:8080/api/posts/${pid}/comments`)
+    fetch(`https://neustudyserver.herokuapp.com/api/posts/${pid}/comments`)
         .then(response => response.json());
 
 const findCommentById = (cid) =>
-    fetch(`http://localhost:8080/api/comments/${cid}`)
+    fetch(`https://neustudyserver.herokuapp.com/api/comments/${cid}`)
         .then(response => response.json());
 
 const createComment = (pid, comment) =>
-    fetch(`http://localhost:8080/api/posts/${pid}/comments`, {
+    fetch(`https://neustudyserver.herokuapp.com/api/posts/${pid}/comments`, {
         method: 'POST',
         body: JSON.stringify(comment),
         headers: {
