@@ -9,7 +9,21 @@ import AdminProfileComponent from "./AdminProfileComponent";
 class ProfileComponent extends React.Component {
 
 
+    studyGroup = {
+        name: 'CS4910',
+        professor: 'Jose',
+        count: 10
+    }
+
+    post = {
+        course: 'CS4910',
+        title: 'Hello',
+        text: "Join my study group! :)",
+        date: 'June 17, 2020'
+    }
+
     state = {
+        visiting: this.props.match.params.userId,
         currentUser: {
             id: 0,
             username: "",
@@ -18,20 +32,32 @@ class ProfileComponent extends React.Component {
             lastName: "",
             email: "",
             role: "",
-            studyGroups: [this.studyGroup, this.studyGroup]
-        }
+        },
+        studyGroups: [this.studyGroup, this.studyGroup],
+        recentPosts: [this.post, this.post, this.post, this.post],
     }
 
     componentDidMount() {
-        UserService.fetchProfile()
-            .catch(e => {
-            })
-            .then(currentUser => {
-                if (currentUser) {
-                    this.setState({currentUser: currentUser})
-                }
-            })
-    }
+        if(this.state.visiting) {
+            this.setState({
+                currentUser:
+                    UserService.findUserById(this.state.visiting)
+                        .then(currentUser => {
+                            if (currentUser) {
+                                this.setState({currentUser: currentUser})
+                            }
+                        }) })
+        } else {
+            UserService.fetchProfile()
+                .catch(e => {
+                })
+                .then(currentUser => {
+                    if (currentUser) {
+                        this.setState({currentUser: currentUser})
+                    }
+                })
+        }
+}
 
     findUser = () => {
         UserService.findUserById(this.state.currentUser.id)
@@ -48,12 +74,18 @@ class ProfileComponent extends React.Component {
                     click me
                 </button>
                 {
-                    this.state.currentUser.role === "STUDENT" &&
-                    <StudentProfileComponent currentUser={this.state.currentUser}/>
+                    (this.state.currentUser.role === "STUDENT") &&
+                    <StudentProfileComponent currentUser={this.state.currentUser}
+                                             visiting={this.state.visiting}
+                    studyGroups={this.state.studyGroups}
+                    recentPosts={this.state.recentPosts}/>
                 }
                 {
                     this.state.currentUser.role === "ADMIN" &&
-                    <AdminProfileComponent currentUser={this.state.currentUser}/>
+                    <AdminProfileComponent currentUser={this.state.currentUser}
+                                           visiting={this.state.visiting}
+                                           studyGroups={this.state.studyGroups}
+                                           recentPosts={this.state.recentPosts}/>
                 }
             </div>
 

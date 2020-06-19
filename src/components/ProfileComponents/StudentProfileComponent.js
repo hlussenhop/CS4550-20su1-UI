@@ -6,12 +6,6 @@ import UserService from "../../services/UserService"
 
 class StudentProfileComponent extends React.Component{
 
-    studyGroup = {
-        name: 'CS4910',
-        professor: 'Jose',
-        count: 10
-    }
-
     post = {
         course: 'CS4910',
         title: 'Hello',
@@ -42,11 +36,15 @@ class StudentProfileComponent extends React.Component{
     render() {
         return (
             <div>
-                <Link to={"/editProfile"}>
-                    <button className="btn login_btn">
-                        Edit
-                    </button>
-                </Link>
+                {
+                    !this.props.visiting &&
+                    <Link to={"/editProfile"}>
+                        <button className="btn login_btn">
+                            Edit
+                        </button>
+                    </Link>
+                }
+
                 <div>
                     <h2 className="d-flex justify-content-center">
                         {this.state.currentUser.firstName} {this.state.currentUser.lastName}
@@ -79,12 +77,12 @@ class StudentProfileComponent extends React.Component{
 
                     {/*</div>*/}
                     <div>
-                        <h5 className="profile-heading">Study Groups</h5>
+                        <h5 className="profile-heading">Study Groups:</h5>
                         <FollowList list={this.state.currentUser.studyGroups}/>
                     </div>
                     <br/>
                     <div>
-                        <h5 className="profile-heading">Recent Posts</h5>
+                        <h5 className="profile-heading">Recent Posts:</h5>
                         <RecentPostListComponent list={this.state.recentPosts}/>
                     </div>
                 </div>
