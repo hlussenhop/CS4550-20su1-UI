@@ -1,11 +1,78 @@
 import React from "react";
+import UserService from "../services/UserService";
+import PostService from "../services/PostService";
+import CommentListComponent from "./StudyGroupComponents/CommentListComponent";
 
 class HomeComponent extends React.Component {
+    state = {
+        currentUser: {},
+        posts: []
+    }
+
+    componentDidMount() {
+        UserService.fetchProfile().then(user => {
+            this.setState({currentUser: user})
+            PostService.findAllPosts().then(posts => {
+                this.setState({posts: posts});
+                this.filterPosts()
+            })
+        })
+    }
+
+    filterPosts = () => {
+        this.setState({posts: this.state.posts.filter(post => post.posterId === this.state.currentUser.id)})
+    }
+
 
     render() {
+        {
+            console.log(this.state)
+        }
         return (
-            <div>
-                <h2>Study Group</h2>
+
+            <div className="container">
+
+                <h2>Study Group Web Application</h2>
+                <p>Welcome To Group 11's final project. This is a webapp that
+                    allows users to join and participate in study groups for their section of a Notheastern
+                    University course.</p>
+
+                <p>After signing in you can enroll in a section and join it's study group by navigating to the courses
+                    search page by clicking the link on the navbar above, querying your course, clicking the details
+                    button, and then clicking the enroll button of the course.
+                    You can access the group through your home page</p>
+
+                <p>Within a group you can write and edit your own posts, and also comment onn other people's posts</p>
+
+                <p>you may choose to sign up with the role of an admin, and admin has the power to edit any post,
+                    and also remove students from study groups</p>
+                {this.state.currentUser !== {} && this.state.posts !== [] &&
+                <table className="container">
+                    <thead>
+                    <tr>
+                        <th>
+                            Your Previous Posts
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    {this.state.posts.map(post =>
+                        <tr>
+                            <div className="container card group-post group-card-body">
+                                <h5>{post.title}</h5>
+                                <p>{post.text}</p>
+                                <h5>Comments</h5>
+                                {
+                                    <CommentListComponent currentCommenter={this.state.currentUser}
+                                                          postId={post.id}/>
+                                }
+                            </div>
+                        </tr>)}
+
+                    </tbody>
+                </table>
+                }
             </div>
         )
     }

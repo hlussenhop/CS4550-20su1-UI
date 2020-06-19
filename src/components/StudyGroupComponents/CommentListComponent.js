@@ -14,7 +14,6 @@ export default class CommentListComponent extends React.Component {
     }
 
     updateComments() {
-        console.log("work")
         CommentService.findCommentsForPost(this.props.postId)
             .then(comments => this.setState({comments: comments}))
     }
@@ -22,6 +21,7 @@ export default class CommentListComponent extends React.Component {
     render() {
         return (
             <div className="col">
+                {console.log(this.props.currentCommenter.id)}
                 {
                     this.state.comments.map(comment =>
                         <div className="row">

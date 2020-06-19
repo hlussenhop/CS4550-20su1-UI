@@ -61,16 +61,31 @@ export default class NavBarComponent extends React.Component {
                     </ul>
                 </div>
                 <ul className="navbar-nav">
-                    <li className="nav-item">
-                        <a className="nav-link" href="/login">Sign In</a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link" href="/"
-                            onClick={this.logout}>Log Out</a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link" href="/signup">Sign Up</a>
-                    </li>
+                        {
+                            !this.state.currentUser.username &&
+                            <li className="nav-item">
+                                <li className="nav-item">
+                                    <a className="nav-link" href="/login">Sign In</a>
+                                </li>
+                            </li>
+                        }
+                        {
+                            this.state.currentUser.username &&
+                            <li className="nav-item">
+                                <li className="nav-item">
+                                    <a className="nav-link" href="/"
+                                       onClick={this.logout}>Log Out</a>
+                                </li>
+                            </li>
+                        }
+                        {
+                            !this.state.currentUser.username &&
+                            <li className="nav-item">
+                                <li className="nav-item">
+                                    <a className="nav-link" href="/signup">Sign Up</a>
+                                </li>
+                            </li>
+                        }
                 </ul>
             </nav>
         )
