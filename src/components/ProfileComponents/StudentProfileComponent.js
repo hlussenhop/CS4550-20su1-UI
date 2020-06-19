@@ -6,12 +6,6 @@ import UserService from "../../services/UserService"
 
 class StudentProfileComponent extends React.Component{
 
-    studyGroup = {
-        name: 'CS4910',
-        professor: 'Jose',
-        count: 10
-    }
-
     post = {
         course: 'CS4910',
         title: 'Hello',

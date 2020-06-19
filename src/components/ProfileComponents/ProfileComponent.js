@@ -9,6 +9,12 @@ import AdminProfileComponent from "./AdminProfileComponent";
 class ProfileComponent extends React.Component {
 
 
+    studyGroup = {
+        name: 'CS4910',
+        professor: 'Jose',
+        count: 10
+    }
+
     state = {
         currentUser: {
             id: 0,
@@ -37,7 +43,7 @@ class ProfileComponent extends React.Component {
         return (
             <div>
                 {
-                    this.state.currentUser.role === "STUDENT" &&
+                    (this.state.currentUser.role === "STUDENT") &&
                     <StudentProfileComponent currentUser={this.state.currentUser}/>
                 }
                 {
