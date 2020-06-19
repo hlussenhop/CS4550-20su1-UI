@@ -13,7 +13,7 @@ class SignUpComponent extends React.Component {
         username: '',
         password: '',
         confirmPassword: '',
-        role: '',
+        role: 'STUDENT',
         error: null
     }
 
@@ -106,14 +106,9 @@ class SignUpComponent extends React.Component {
                                         </span>
                                     </div>
                                     <select className="form-control"
-                                        id="heading-type"
-                                        onChange={(event) => {
-                                            console.log(event.target.value)
-                                            this.setState(
-                                                { role: event.target.value }
-                                            )
-                                        }}>
-                                        <option selected value="STUDENT">Student</option>
+                                            onChange={(event) =>
+                                                this.setState({ role: event.target.value })}>
+                                        <option value="STUDENT">Student</option>
                                         <option value="ADMIN">Admin</option>
                                     </select>
                                 </div>
