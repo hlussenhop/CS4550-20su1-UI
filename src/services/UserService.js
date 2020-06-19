@@ -13,6 +13,16 @@ const login = (username, password) => {
     }).then(response => response.json())
 }
 
+const update = (uid, updatedUser) => {
+    return fetch(`https://neustudyserver.herokuapp.com/api/users/${uid}`, {
+        body: JSON.stringify({updatedUser}),
+        headers: {
+            'content-type': 'application/json'
+        },
+        method: 'PUT'
+    }).then(response => response.json())
+}
+
 const logout = () => {
     return fetch("https://neustudyserver.herokuapp.com/api/logout", {
         method: 'POST',
@@ -49,5 +59,6 @@ export default {
     logout,
     signup,
     findUserById,
-    fetchProfile
+    fetchProfile, 
+    update
 }

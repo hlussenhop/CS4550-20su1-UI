@@ -56,7 +56,11 @@ class StudyGroupComponent extends React.Component {
                         exact={true}
                         component={ProfileComponent}/>
                     <Route
-                        path="/editProfile"
+                        path="/profile/:userId"
+                        exact={true}
+                        component={ProfileComponent}/>
+                    <Route
+                        path="/:userId/editProfile"
                         exact={true}
                         component={EditProfileComponent}/>
                     <Route
