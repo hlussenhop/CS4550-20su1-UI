@@ -20,7 +20,7 @@ class SignUpComponent extends React.Component {
 
     signup = () => {
         UserService.signup({
-            id: 1,
+            id: new Date().getTime(),
             username: this.state.username,
             password: this.state.password,
             firstName: this.state.firstName,
