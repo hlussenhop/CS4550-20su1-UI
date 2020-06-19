@@ -3,7 +3,7 @@ import CourseContainer from '../containers/CourseContainer'
 import CourseDetailsComponent from "./CourseDetailsComponent";
 import CourseSearchComponent from "./CourseSearchComponent";
 import NavBarComponent from "./NavBarComponent";
-import {BrowserRouter, Link, Route} from "react-router-dom";
+import { BrowserRouter, Link, Route } from "react-router-dom";
 import CourseTableComponent from "./CourseTableComponent";
 import CourseRowComponent from "./CourseRowComponent";
 import LoginComponent from "./LoginComponent";
@@ -21,67 +21,67 @@ class StudyGroupComponent extends React.Component {
         return (
             <BrowserRouter>
                 <div>
-                    <NavBarComponent/>
+                    <NavBarComponent />
                     <Route
                         path="/"
                         exact={true}
-                        component={HomeComponent}/>
+                        component={HomeComponent} />
                     <Route
                         path="/search"
                         exact={true}
-                        component={CourseContainer}/>
+                        component={CourseContainer} />
 
                     <Route
                         path='/search/:term/:subject'
                         exact={true}
-                        component={CourseContainer}/>
+                        component={CourseContainer} />
 
                     <Route path='/details/:id'
-                           exact={true}
-                           render={(props) => <CourseRowComponent {...props} someProp={100}/>}
-                           component={CourseDetailsComponent}/>
+                        exact={true}
+                        render={(props) => <CourseRowComponent {...props} someProp={100} />}
+                        component={CourseDetailsComponent} />
 
                     <Route
                         path="/login"
                         exact={true}
-                        component={LoginComponent}/>
+                        component={LoginComponent} />
 
                     <Route
                         path="/signup"
                         exact={true}
-                        component={SignUpComponent}/>
+                        component={SignUpComponent} />
 
                     <Route
                         path="/profile"
                         exact={true}
-                        component={ProfileComponent}/>
+                        component={ProfileComponent} />
                     <Route
                         path="/profile/:userId"
                         exact={true}
-                        component={ProfileComponent}/>
+                        component={ProfileComponent} />
                     <Route
                         path="/:userId/editProfile"
                         exact={true}
-                        component={EditProfileComponent}/>
+                        component={EditProfileComponent} />
                     <Route
                         path="/admin/Profile"
                         exact={true}
-                        component={AdminProfileComponent}/>
+                        component={AdminProfileComponent} />
 
                     <Route
-                    path="/group/"
-                    exact={true}
-                    component={StudyGroupPageComponent}/>
+                        path="/group/"
+                        exact={true}
+                        component={StudyGroupPageComponent} />
 
                     <Route
                         path="/group/:groupId"
                         exact={true}
-                        component={StudyGroupPageComponent}/>
+                        component={StudyGroupPageComponent} />
 
                     <Route
                         path="/admin/group"
                         exact={true}
-                        component={AdminStudyGroupComponent}/>
+                        component={AdminStudyGroupComponent} />
                 </div>
             </BrowserRouter>
         )

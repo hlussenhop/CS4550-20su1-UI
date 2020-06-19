@@ -15,7 +15,7 @@ const login = (username, password) => {
 
 const update = (uid, updatedUser) => {
     return fetch(`https://neustudyserver.herokuapp.com/api/users/${uid}`, {
-        body: JSON.stringify({ updatedUser }),
+        body: JSON.stringify(updatedUser),
         headers: {
             'content-type': 'application/json'
         },

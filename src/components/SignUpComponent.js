@@ -14,6 +14,8 @@ class SignUpComponent extends React.Component {
         password: '',
         confirmPassword: '',
         role: 'STUDENT',
+        bio: '',
+        location: '',
         error: null
     }
 
@@ -27,8 +29,8 @@ class SignUpComponent extends React.Component {
             lastName: this.state.lastName,
             email: this.state.email,
             role: this.state.role,
-            bio: '',
-            location: '',
+            bio: this.state.bio,
+            location: this.state.location,
             studyGroups: []
         })
             .catch(e => {
@@ -37,6 +39,7 @@ class SignUpComponent extends React.Component {
                 })
             })
             .then(currentUser => {
+                console.log(currentUser)
                 if (currentUser) {
                     this.props.history.push("/profile")
                 }
