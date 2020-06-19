@@ -13,6 +13,7 @@ import AdminStudyGroupComponent from "./AdminStudyGroupComponent";
 import EditProfileComponent from "./ProfileComponents/EditProfileComponent";
 import ProfileComponent from "./ProfileComponents/ProfileComponent";
 import HomeComponent from "./HomeComponent";
+import AdminProfileComponent from "./ProfileComponents/AdminProfileComponent";
 
 class StudyGroupComponent extends React.Component {
 
@@ -58,6 +59,10 @@ class StudyGroupComponent extends React.Component {
                         path="/editProfile"
                         exact={true}
                         component={EditProfileComponent}/>
+                    <Route
+                        path="/admin/Profile"
+                        exact={true}
+                        component={AdminProfileComponent}/>
 
                     <Route
                         path="/group/"

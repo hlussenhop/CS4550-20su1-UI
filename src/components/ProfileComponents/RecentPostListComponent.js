@@ -23,7 +23,7 @@ class RecentPostListComponent extends React.Component {
                                     </div>
                                     <p className="mb-1">{element.text}</p>
                                     <small>
-                                        <Link to={'/student/group'}>
+                                        <Link to={'/group'}>
                                             Go to Post
                                         </Link>
                                     </small>

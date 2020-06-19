@@ -13,7 +13,7 @@ class SignUpComponent extends React.Component {
         username: '',
         password: '',
         confirmPassword: '',
-        role: '',
+        role: 'STUDENT',
         error: null
     }
 
@@ -102,20 +102,6 @@ class SignUpComponent extends React.Component {
                                 <div className="input-group form-group">
                                     <div className="input-group-prepend">
                                         <span className="input-group-text">
-                                            <FontAwesomeIcon icon={faUser} />
-                                        </span>
-                                    </div>
-                                    <select className="form-control"
-                                        onChange={(event) =>
-                                            this.setState({ role: event.target.value })}>
-                                        <option selected value="STUDENT">Student</option>
-                                        <option value="ADMIN">Admin</option>
-                                    </select>
-                                </div>
-
-                                <div className="input-group form-group">
-                                    <div className="input-group-prepend">
-                                        <span className="input-group-text">
                                             <FontAwesomeIcon icon={faKey} />
                                         </span>
                                     </div>
@@ -155,8 +141,8 @@ class SignUpComponent extends React.Component {
                                 <div className="form-group">
                                     {
                                         ((this.state.firstName !== '' && this.state.lastName !== '' && this.state.email !== ''
-                                            && this.state.username !== '' && this.state.password !== '' && this.state.confirmPassword !== ''
-                                            && this.state.role !== '') &&
+                                            && this.state.username !== '' && this.state.password !== ''
+                                                && this.state.confirmPassword !== '') &&
                                             (this.state.password === this.state.confirmPassword)) &&
                                         <Link to={"/profile"}>
                                             <button className="btn float-right login_btn"
@@ -167,8 +153,8 @@ class SignUpComponent extends React.Component {
                                     }
                                     {
                                         ((this.state.firstName !== '' && this.state.lastName !== '' && this.state.email !== ''
-                                            && this.state.username !== '' && this.state.password !== '' && this.state.confirmPassword !== ''
-                                            && this.state.role !== '') &&
+                                            && this.state.username !== '' && this.state.password !== ''
+                                            && this.state.confirmPassword !== '') &&
                                             (this.state.password !== this.state.confirmPassword)) &&
                                         <button className="btn float-right login_btn"
                                                 onClick={() =>
