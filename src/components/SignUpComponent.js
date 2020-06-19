@@ -20,7 +20,7 @@ class SignUpComponent extends React.Component {
 
     signup = () => {
         UserService.signup({
-            id: new Date().getTime(),
+            //id: parseInt(new Date().getTime()),
             username: this.state.username,
             password: this.state.password,
             firstName: this.state.firstName,
@@ -106,10 +106,13 @@ class SignUpComponent extends React.Component {
                                         </span>
                                     </div>
                                     <select className="form-control"
-                                            id="heading-type"
-                                            onChange={(event) => this.setState(
-                                                {role : event.target.value}
-                                            )}>
+                                        id="heading-type"
+                                        onChange={(event) => {
+                                            console.log(event.target.value)
+                                            this.setState(
+                                                { role: event.target.value }
+                                            )
+                                        }}>
                                         <option selected value="STUDENT">Student</option>
                                         <option value="ADMIN">Admin</option>
                                     </select>
@@ -158,11 +161,11 @@ class SignUpComponent extends React.Component {
                                     {
                                         ((this.state.firstName !== '' && this.state.lastName !== '' && this.state.email !== ''
                                             && this.state.username !== '' && this.state.password !== ''
-                                                && this.state.confirmPassword !== '') &&
+                                            && this.state.confirmPassword !== '') &&
                                             (this.state.password === this.state.confirmPassword)) &&
                                         <Link to={"/profile"}>
                                             <button className="btn float-right login_btn"
-                                                    onClick={this.signup}>
+                                                onClick={this.signup}>
                                                 Sign Up
                                             </button>
                                         </Link>
@@ -173,8 +176,8 @@ class SignUpComponent extends React.Component {
                                             && this.state.confirmPassword !== '') &&
                                             (this.state.password !== this.state.confirmPassword)) &&
                                         <button className="btn float-right login_btn"
-                                                onClick={() =>
-                                                    alert("Make sure the two passwords are the same")}>
+                                            onClick={() =>
+                                                alert("Make sure the two passwords are the same")}>
                                             Sign Up
                                         </button>
                                     }
