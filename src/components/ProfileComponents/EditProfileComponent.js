@@ -59,7 +59,7 @@ class EditProfileComponent extends React.Component {
 
                                     <input readOnly
                                            className="form-control"
-                                           id="usernameFld"
+                                           id="firstFld"
                                            type="text"
                                            placeholder={"Username"}
                                            value={this.state.currentUser.firstName}/>
@@ -73,7 +73,7 @@ class EditProfileComponent extends React.Component {
 
                                     <input readOnly
                                            className="form-control"
-                                           id="usernameFld"
+                                           id="lastFld"
                                            type="text"
                                            placeholder={"Username"}
                                            value={this.state.currentUser.lastName}/>
@@ -140,7 +140,7 @@ class EditProfileComponent extends React.Component {
                                     </div>
                                     <input
                                         className="form-control"
-                                        id="bio"
+                                        id="bioFld"
                                         type="text"
                                         placeholder="Description"
                                         value={this.state.currentUser.bio}
