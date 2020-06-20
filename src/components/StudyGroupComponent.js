@@ -1,11 +1,11 @@
 import React from 'react';
 import CourseContainer from '../containers/CourseContainer'
-import CourseDetailsComponent from "./CourseDetailsComponent";
-import CourseSearchComponent from "./CourseSearchComponent";
+import CourseDetailsComponent from "./CourseSearchComponents/CourseDetailsComponent";
+import CourseSearchComponent from "./CourseSearchComponents/CourseSearchComponent";
 import NavBarComponent from "./NavBarComponent";
 import { BrowserRouter, Link, Route } from "react-router-dom";
-import CourseTableComponent from "./CourseTableComponent";
-import CourseRowComponent from "./CourseRowComponent";
+import CourseTableComponent from "./CourseSearchComponents/CourseTableComponent";
+import CourseRowComponent from "./CourseSearchComponents/CourseRowComponent";
 import LoginComponent from "./LoginComponent";
 import SignUpComponent from "./SignUpComponent";
 import StudyGroupPageComponent from "./StudyGroupComponents/StudyGroupPageComponent";

@@ -1,6 +1,6 @@
 import React from "react";
-import CourseTableComponent from "../components/CourseTableComponent";
-import CourseSearchComponent from "../components/CourseSearchComponent";
+import CourseTableComponent from "../components/CourseSearchComponents/CourseTableComponent";
+import CourseSearchComponent from "../components/CourseSearchComponents/CourseSearchComponent";
 import SearchService from "../services/SearchService"
 
 export default class CourseContainer extends React.Component {

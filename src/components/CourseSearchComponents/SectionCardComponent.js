@@ -1,6 +1,6 @@
 import React from "react";
-import UserService from "../services/UserService";
-import GroupService from "../services/GroupService";
+import UserService from "../../services/UserService";
+import GroupService from "../../services/GroupService";
 
 export default class SectionCardComponent extends React.Component {
     groups = [];
@@ -27,6 +27,7 @@ export default class SectionCardComponent extends React.Component {
                 groups.map(group => {
                     if (group.courseId === crn) {
                         this.putInStudyGroup(group)
+                        alert("You have already enrolled in this group!")
                         wasPut = true
                     }
                 })
@@ -42,6 +43,7 @@ export default class SectionCardComponent extends React.Component {
                         group => {
                                 this.state.user.studyGroups.push(group.id)
                                 UserService.update(this.state.user.id, this.state.user)
+                            alert("You are enrolled! Check your profile to access the group.")
                         }
                     )
                 }
@@ -80,7 +82,7 @@ export default class SectionCardComponent extends React.Component {
                                     <button href="#" className="btn btn-success float-right card-link"
                                         onClick={() => {
                                             this.addToStudyGroup(parseInt(this.props.section.crn))
-                                            alert("You are enrolled! Check your profile to access the group.")
+
                                         }}>
                                         Enroll
                                 </button>
