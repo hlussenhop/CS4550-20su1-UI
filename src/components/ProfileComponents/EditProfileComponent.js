@@ -128,7 +128,7 @@ class EditProfileComponent extends React.Component {
                                             <FontAwesomeIcon icon={faFileAlt} />
                                         </span>
                                     </div>
-                                    <input
+                                    <textarea
                                         className="form-control"
                                         id="bioFld"
                                         type="text"

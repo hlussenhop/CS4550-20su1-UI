@@ -16,14 +16,14 @@ class HomeComponent extends React.Component {
                 this.setState({ currentUser: user })
             })
         PostService.findAllPosts().then(posts => {
-            this.setState({ posts: posts });
-            this.filterPosts()
+            this.setState({ posts: this.filterPosts(posts) });
+
         })
     }
 
-    filterPosts = () => {
-        this.setState({ posts: this.state.posts.filter(post => post.posterId === this.state.currentUser.id) })
-    }
+    filterPosts = (posts) =>
+        posts.filter(post => post.posterId === this.state.currentUser.id)
+
 
 
     render() {
@@ -48,7 +48,7 @@ class HomeComponent extends React.Component {
 
                 <p>you may choose to sign up with the role of an admin, and admin has the power to edit any post,
                     and also remove students from study groups</p>
-                {this.state.currentUser !== {} && this.state.posts !== [] &&
+                {this.state.currentUser !== {} && this.state.posts.length !== 0 &&
                     <table className="container">
                         <thead>
                             <tr>

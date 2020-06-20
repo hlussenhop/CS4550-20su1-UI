@@ -33,7 +33,7 @@ export default class SectionCardComponent extends React.Component {
                     if (wasPut === false) {
                         GroupService.createGroup({
                             courseId: parseInt(this.props.section.crn),
-                            currentUserId: 1,
+                            currentUserId: this.state.user.id,
                             studentsInGroupIds: [
                                 this.state.user.id
                             ],
