@@ -15,6 +15,7 @@ export default class LoginComponent extends React.Component {
         UserService.login(this.state.username, this.state.password)
             .catch(e => {
                 this.props.history.push("/login")
+                alert("Invalid username or password. Please check your username and password. If you have not signed up for an account, please follow the link.")
             })
             .then(currentUser => {
                 if (currentUser)

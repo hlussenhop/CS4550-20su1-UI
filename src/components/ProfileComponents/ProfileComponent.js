@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import UserService from "../../services/UserService"
 import StudentProfileComponent from "./StudentProfileComponent";
 import AdminProfileComponent from "./AdminProfileComponent";
-import PostService from "../../services/PostService";
 
 class ProfileComponent extends React.Component {
 

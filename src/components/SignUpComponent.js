@@ -15,8 +15,7 @@ class SignUpComponent extends React.Component {
         confirmPassword: '',
         role: 'STUDENT',
         bio: '',
-        location: '',
-        error: null
+        location: ''
     }
 
 
@@ -34,14 +33,12 @@ class SignUpComponent extends React.Component {
             studyGroups: []
         })
             .catch(e => {
-                this.setState({
-                    error: 'Unable to register'
-                })
+                alert("Unable to register")
             })
             .then(currentUser => {
                 UserService.login(this.state.username, this.state.password)
                     .catch(e => {
-                        this.props.history.push("/login")
+                        this.props.history.push("/signup")
                     })
                     .then(currentUser => {
                         if (currentUser)
@@ -49,9 +46,6 @@ class SignUpComponent extends React.Component {
                     })
             })
     }
-
-
-
 
     render() {
         return (
