@@ -18,7 +18,6 @@ class AdminProfileComponent extends React.Component{
         following: [this.user, this.user, this.user],
         courseList: [this.course, this.course],
         pendingRequests: [this.pendingRequest, this.pendingRequest, this.pendingRequest],
-        recentPosts: this.props.recentPosts,
         studyGroups: this.props.studyGroups,
         currentUser: this.props.currentUser
     }
@@ -58,8 +57,8 @@ class AdminProfileComponent extends React.Component{
                     </div>
                     <br/>
                     <div>
-                        <h5 className="profile-heading">Recent Posts:</h5>
-                        <RecentPostListComponent list={this.state.recentPosts}/>
+                        <h5 className="profile-heading">Your Recent Posts:</h5>
+                        <RecentPostListComponent user={this.props.currentUser}/>
                     </div>
 
 
