@@ -43,7 +43,6 @@ export default class SectionCardComponent extends React.Component {
                                 GroupService.findAllGroups()
                                     .then(groups => {
                                         groups.map(group => {
-
                                                 if (group.courseId === crn) {
                                                     this.state.user.studyGroups.push(group.id)
                                                     console.log(group.id)

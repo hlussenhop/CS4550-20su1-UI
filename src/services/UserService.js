@@ -15,11 +15,18 @@ const login = (username, password) => {
 
 const update = (uid, updatedUser) => {
     return fetch(`https://neustudyserver.herokuapp.com/api/users/${uid}`, {
-        body: JSON.stringify( updatedUser ),
+        body: JSON.stringify(updatedUser),
         headers: {
             'content-type': 'application/json'
         },
         method: 'PUT',
+        credentials: "include"
+    }).then(response => response.json())
+}
+
+const deleteUser = (uid) => {
+    return fetch(`https://neustudyserver.herokuapp.com/api/users/${uid}`, {
+        method: 'DELETE',
         credentials: "include"
     }).then(response => response.json())
 }
@@ -62,5 +69,6 @@ export default {
     signup,
     findUserById,
     fetchProfile,
-    update
+    update,
+    deleteUser
 }
