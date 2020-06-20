@@ -15,10 +15,12 @@ class HomeComponent extends React.Component {
             .then(user => {
                 this.setState({ currentUser: user })
             })
-        PostService.findAllPosts().then(posts => {
-            this.setState({ posts: this.filterPosts(posts) });
+        if (this.state.currentUser !== undefined) {
+            PostService.findAllPosts().then(posts => {
+                this.setState({ posts: this.filterPosts(posts) });
 
-        })
+            })
+        }
     }
 
     filterPosts = (posts) =>

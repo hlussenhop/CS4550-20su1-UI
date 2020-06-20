@@ -11,11 +11,11 @@ export default class NewPostComponent extends React.Component {
     };
 
     changeTitle = (title) => {
-        this.setState({title: title})
+        this.setState({ title: title })
     };
 
     changeText = (text) => {
-        this.setState({text: text})
+        this.setState({ text: text })
     };
 
     render() {
@@ -23,16 +23,16 @@ export default class NewPostComponent extends React.Component {
             <div className="container card group-card-body">
                 <span>New Post</span>
                 <input type="text" className="form-control" placeholder="Title"
-                onChange={(e) => this.changeTitle(e.target.value)}/>
-                <br/>
+                    onChange={(e) => this.changeTitle(e.target.value)} />
+                <br />
                 <textarea className="form-control" placeholder="Body"
-                          onChange={(e) => this.changeText(e.target.value)}/>
-                <br/>
+                    onChange={(e) => this.changeText(e.target.value)} />
+                <br />
                 <button className="btn btn-success"
-                        onClick={() => {this.props.makeNewPost(this.state, false)}}>
+                    onClick={() => { this.props.makeNewPost(this.state, false) }}>
                     Post
                 </button>
-                <br/>
+                <br />
 
             </div>
         )

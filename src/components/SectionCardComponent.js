@@ -4,6 +4,7 @@ import GroupService from "../services/GroupService";
 
 export default class SectionCardComponent extends React.Component {
     groups = [];
+    enrolled = false
     state = {
         user: null
     };
@@ -12,57 +13,45 @@ export default class SectionCardComponent extends React.Component {
     componentDidMount() {
         try {
             UserService.fetchProfile()
-                .then(user => this.setState({user: user}))
+                .then(user => this.setState({ user: user }))
         } catch (err) {
-            this.setState({user: null})
+            this.setState({ user: null })
         }
     }
 
     addToStudyGroup(crn) {
         GroupService.findAllGroups()
             .then(groups => {
-                    this.setState({groups: groups})
-                    let wasPut = false
-                    groups.map(group => {
-                            if (group.courseId === crn) {
-                                this.putInStudyGroup(group)
-                                wasPut = true
-                            }
+                this.setState({ groups: groups })
+                let wasPut = false
+                groups.map(group => {
+                    if (group.courseId === crn) {
+                        this.putInStudyGroup(group)
+                        wasPut = true
+                    }
+                })
+                if (wasPut === false) {
+                    GroupService.createGroup({
+                        courseId: parseInt(this.props.section.crn),
+                        courseName: this.props.section.className,
+                        studentsInGroupIds: [
+                            this.state.user.id
+                        ],
+                        postIds: []
+                    }).then(
+                        group => {
+                                this.state.user.studyGroups.push(group.id)
+                                UserService.update(this.state.user.id, this.state.user)
                         }
                     )
-                    if (wasPut === false) {
-                        GroupService.createGroup({
-                            courseId: parseInt(this.props.section.crn),
-                            currentUserId: this.state.user.id,
-                            studentsInGroupIds: [
-                                this.state.user.id
-                            ],
-                            postIds: []
-                        }).then(
-                            group => {
-                                GroupService.findAllGroups()
-                                    .then(groups => {
-                                        groups.map(group => {
-                                                if (group.courseId === crn) {
-                                                    this.state.user.studyGroups.push(group.id)
-                                                    console.log(group.id)
-                                                    UserService.update(this.state.user.id, this.state.user)
-                                                }
-                                            }
-                                        )
-                                    })
-                            }
-                        )
-
-                    }
                 }
-            )
+            })
     }
+
 
     putInStudyGroup(group) {
         if (!group.studentsInGroupIds.includes(this.state.user.id)) {
             group.studentsInGroupIds.push(this.state.user.id)
-            console.log(this.state.user.studyGroups)
             this.state.user.studyGroups.push(group.id)
             GroupService.updateGroup(group.id, group)
             UserService.update(this.state.user.id, this.state.user)
@@ -87,26 +76,26 @@ export default class SectionCardComponent extends React.Component {
                                 <h6 className="card-text course-enrollment text-muted">{this.props.section.seatsCapacity - this.props.section.seatsRemaining
                                 }</h6>
                                 {this.state.user !== null &&
-                                !this.enrolled &&
-                                <button href="#" className="btn btn-success float-right card-link"
+                                    !this.enrolled &&
+                                    <button href="#" className="btn btn-success float-right card-link"
                                         onClick={() => {
                                             this.addToStudyGroup(parseInt(this.props.section.crn))
                                             alert("You are enrolled! Check your profile to access the group.")
                                         }}>
-                                    Enroll
+                                        Enroll
                                 </button>
                                 }
                                 {this.state.user !== null &&
-                                this.enrolled &&
-                                <button href="#" className="btn btn-basic float-right card-link"
+                                    this.enrolled &&
+                                    <button href="#" className="btn btn-basic float-right card-link"
                                         onClick={() => {
                                             alert("You are already enrolled. Check your profile to access the group.")
                                         }}>
-                                    Enrolled
+                                        Enrolled
                                 </button>
                                 }
                                 {this.state.user === null &&
-                                <button href="#" className="btn btn-success float-right card-link"
+                                    <button href="#" className="btn btn-success float-right card-link"
                                         onClick={() => alert("Sign in to enroll in a study group.")}>Enroll</button>
                                 }
                             </div>
