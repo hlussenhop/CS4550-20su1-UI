@@ -43,7 +43,6 @@ export default class CommentListComponent extends React.Component {
                     <button className="btn btn-primary btn-sm" type="button"
                         onClick={() => {
                             const newId = Math.random * 1000;
-
                             CommentService.createComment(this.props.postId,
                                 {
                                     id: newId, postId: this.props.postId,

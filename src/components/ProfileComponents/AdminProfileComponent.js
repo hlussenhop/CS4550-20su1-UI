@@ -1,11 +1,9 @@
 import React from "react";
-import {Link} from "react-router-dom";
 import StudyGroupList from "./StudyGroupList";
 import RecentPostListComponent from "./RecentPostListComponent";
-import UserService from "../../services/UserService"
-import PendingRequestsComponent from "./PendingRequestsComponent";
 
-class AdminProfileComponent extends React.Component{
+
+class AdminProfileComponent extends React.Component {
 
     pendingRequest = {
         // user: 'calbee',
@@ -53,13 +51,17 @@ class AdminProfileComponent extends React.Component{
                     {/*</div>*/}
                     <div>
                         <h5 className="profile-heading">Study Groups:</h5>
-                        <StudyGroupList list={this.state.studyGroups}/>
+                        <StudyGroupList list={this.state.studyGroups}
+                                        visiting={this.props.visiting}/>
                     </div>
                     <br/>
-                    <div>
-                        <h5 className="profile-heading">Your Recent Posts:</h5>
-                        <RecentPostListComponent user={this.props.currentUser}/>
-                    </div>
+                    {
+                        !this.props.visiting &&
+                        <div>
+                            <h5 className="profile-heading">Your Recent Posts:</h5>
+                            <RecentPostListComponent user={this.props.currentUser}/>
+                        </div>
+                    }
 
 
                 </div>

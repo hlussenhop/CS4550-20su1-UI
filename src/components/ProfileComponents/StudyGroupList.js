@@ -30,10 +30,21 @@ class StudyGroupList extends React.Component {
                             <button type="button"
                                 className="list-group-item list-group-item-action">
                                 <span>
-                                    <Link to={`/group/${group}`}
-                                        className="mod-link">
-                                        {group}
-                                    </Link>
+                                    {
+                                        this.props.visiting &&
+                                            <span>
+                                                 {group}
+                                            </span>
+
+                                    }
+                                    {
+                                        !this.props.visiting &&
+                                        <Link to={`/group/${group}`}
+                                              className="mod-link">
+                                            {group}
+                                        </Link>
+                                    }
+
                                 </span>
                             </button>
                             </div>

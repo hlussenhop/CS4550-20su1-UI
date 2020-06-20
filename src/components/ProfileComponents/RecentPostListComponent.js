@@ -35,7 +35,7 @@ class RecentPostListComponent extends React.Component {
                                         </Link>
                                     </small>
                                 </button>
-                        )
+                        ).slice(0, 5)
                     }
                 </div>
             </div>
