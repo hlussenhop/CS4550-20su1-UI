@@ -38,9 +38,8 @@ class ProfileComponent extends React.Component {
     render() {
         return (
             <div>
-
                 {
-                    !this.state.visiting &&
+                    (!this.state.visiting) &&
                     <Link to={`/${this.state.currentUser.id}/editProfile`}>
                         <button className="btn login_btn">
                             Edit

@@ -1,10 +1,8 @@
 import React from "react";
-import {Link} from "react-router-dom";
 import StudyGroupList from "./StudyGroupList";
 import RecentPostListComponent from "./RecentPostListComponent";
-import UserService from "../../services/UserService"
 
-class StudentProfileComponent extends React.Component{
+class StudentProfileComponent extends React.Component {
 
     state = {
         followers: [this.user, this.user],
@@ -39,13 +37,18 @@ class StudentProfileComponent extends React.Component{
                     {/*</div>*/}
                     <div>
                         <h5 className="profile-heading">Study Groups:</h5>
-                        <StudyGroupList list={this.state.currentUser.studyGroups}/>
+                        <StudyGroupList list={this.state.currentUser.studyGroups}
+                        visiting={this.props.visiting}/>
                     </div>
                     <br/>
-                    <div>
-                        <h5 className="profile-heading">Your Recent Posts:</h5>
-                        <RecentPostListComponent user={this.state.currentUser}/>
-                    </div>
+                    {
+                        !this.props.visiting &&
+                        <div>
+                            <h5 className="profile-heading">Your Recent Posts:</h5>
+                            <RecentPostListComponent user={this.state.currentUser}/>
+                        </div>
+                    }
+
                 </div>
             </div>
         )
