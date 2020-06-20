@@ -39,10 +39,14 @@ class SignUpComponent extends React.Component {
                 })
             })
             .then(currentUser => {
-                console.log(currentUser)
-                if (currentUser) {
-                    this.props.history.push("/profile")
-                }
+                UserService.login(this.state.username, this.state.password)
+                    .catch(e => {
+                        this.props.history.push("/login")
+                    })
+                    .then(currentUser => {
+                        if (currentUser)
+                            this.props.history.push("/profile")
+                    })
             })
     }
 
