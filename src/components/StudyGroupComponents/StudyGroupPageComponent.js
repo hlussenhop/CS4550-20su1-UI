@@ -54,8 +54,8 @@ export default class StudyGroupPageComponent extends React.Component {
     };
 
     render() {
-        console.log(this.props.match.params.groupId)
-        if (this.state.studyGroup !== null && this.state.userGroup !== [] && this.state.UserStatus !== "" && this.state.loading === true) {
+        if (this.state.studyGroup !== null && this.state.userGroup !== [] &&
+            this.state.UserStatus !== "" && this.state.loading === true) {
             this.setState({loading: false})
         }
         if (this.state.loading === true) {
@@ -78,10 +78,10 @@ export default class StudyGroupPageComponent extends React.Component {
                             {
                                 this.state.userGroup.map(user =>
                                     <tr>
-                                        {//TODO: link to users specific profile
-                                        }
                                         <td>
-                                            <Link to="/profile">{user.firstName}</Link>
+                                            <Link to={this.state.currentUser.id === user.id ? '/profile' : `/profile/${user.id}`}>
+                                                {user.firstName} {user.lastName}
+                                            </Link>
                                             {this.state.currentUser.role === "ADMIN" &&
                                             <span>
                                                 {console.log(this.state)}
