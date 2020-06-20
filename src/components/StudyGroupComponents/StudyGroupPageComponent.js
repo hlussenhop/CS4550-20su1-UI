@@ -66,7 +66,7 @@ export default class StudyGroupPageComponent extends React.Component {
             return (
                 <div className="container">
                     <NavBarComponent/>
-                    <h1>Study Group 1</h1>
+                    <h1>Study Group ID: {this.state.studyGroup.id}</h1>
                     <div className="row">
                         <div className="col-sm-3">
                             <div>
@@ -123,7 +123,7 @@ export default class StudyGroupPageComponent extends React.Component {
                             </div>
                         </div>
                         < div className="col-sm-9">
-                            <h2>Group Posts</h2>
+                            <h4>Group Posts</h4>
                             <div className="row">
                                 {this.state.studyGroup !== {} &&
                                 <PostGridComponent userStatus={this.state.UserStatus}

@@ -29,7 +29,9 @@ export default class CommentListComponent extends React.Component {
                     )
                 }
                 <div className="input-group mb-3 post-input">
-                    <input type="text" className="form-control" placeholder="Comment"
+                    <input type="text" className="form-control"
+                           placeholder="Comment"
+                           value={this.state.commentInput}
                            onChange={(e) => {
                                this.setState({
                                    commentInput: e.target.value
@@ -37,7 +39,7 @@ export default class CommentListComponent extends React.Component {
                            }}
                     />
                 </div>
-                <div className="input-group-append">
+                <div className="input-group-append float-right">
                     <button className="btn btn-primary btn-sm" type="button"
                             onClick={() => {
                                 const newId = Math.random * 1000;
@@ -46,6 +48,8 @@ export default class CommentListComponent extends React.Component {
                                     {id: newId, postId: this.props.postId,
                                         commenterId: this.props.currentCommenter.id, text: this.state.commentInput}
                                 ).then(() => this.updateComments())
+
+                                this.setState({commentInput: ''})
                                 }}>
                         Post
                     </button>

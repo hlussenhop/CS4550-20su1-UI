@@ -1,6 +1,6 @@
 import React from "react";
 import {Link} from "react-router-dom";
-import FollowList from "./FollowList";
+import StudyGroupList from "./StudyGroupList";
 import RecentPostListComponent from "./RecentPostListComponent";
 import UserService from "../../services/UserService"
 
@@ -41,23 +41,23 @@ class StudentProfileComponent extends React.Component{
                     {/*<div className="row">*/}
                     {/*    <div className="col-4">*/}
                     {/*        <h5 className="profile-heading">Following</h5>*/}
-                    {/*        <FollowList list={this.state.followers}/>*/}
+                    {/*        <StudyGroupList list={this.state.followers}/>*/}
                     {/*    </div>*/}
 
                     {/*    <div className="col-4">*/}
                     {/*        <h5 className="profile-heading">Followers</h5>*/}
-                    {/*        <FollowList list={this.state.following}/>*/}
+                    {/*        <StudyGroupList list={this.state.following}/>*/}
                     {/*    </div>*/}
 
                     {/*    <div className="col-4">*/}
                     {/*        <h5 className="profile-heading">Courses</h5>*/}
-                    {/*        <FollowList list={this.state.courseList}/>*/}
+                    {/*        <StudyGroupList list={this.state.courseList}/>*/}
                     {/*    </div>*/}
 
                     {/*</div>*/}
                     <div>
                         <h5 className="profile-heading">Study Groups:</h5>
-                        <FollowList list={this.state.currentUser.studyGroups}/>
+                        <StudyGroupList list={this.state.currentUser.studyGroups}/>
                     </div>
                     <br/>
                     <div>
