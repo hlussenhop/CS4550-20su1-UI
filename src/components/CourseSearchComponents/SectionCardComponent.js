@@ -106,6 +106,7 @@ export default class SectionCardComponent extends React.Component {
                                         onClick={() => {
                                             this.addToStudyGroup(parseInt(this.props.section.crn))
                                             alert("You are enrolled! Check your profile or click the Go to group button to access the group.")
+                                            this.setState({enrolled: true})
                                         }}>
                                     Enroll
                                 </button>
