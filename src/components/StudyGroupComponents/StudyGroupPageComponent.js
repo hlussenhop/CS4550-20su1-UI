@@ -54,6 +54,7 @@ export default class StudyGroupPageComponent extends React.Component {
     };
 
     render() {
+        console.log(this.props.match.params.groupId)
         if (this.state.studyGroup !== null && this.state.userGroup !== [] && this.state.UserStatus !== "" && this.state.loading === true) {
             this.setState({loading: false})
         }
