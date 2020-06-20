@@ -54,7 +54,8 @@ export default class StudyGroupPageComponent extends React.Component {
     };
 
     render() {
-        if (this.state.studyGroup !== null && this.state.userGroup !== [] && this.state.UserStatus !== "" && this.state.loading === true) {
+        if (this.state.studyGroup !== null && this.state.userGroup !== [] &&
+            this.state.UserStatus !== "" && this.state.loading === true) {
             this.setState({loading: false})
         }
         if (this.state.loading === true) {
@@ -67,49 +68,61 @@ export default class StudyGroupPageComponent extends React.Component {
                     <NavBarComponent/>
                     <h1>Study Group 1</h1>
                     <div className="row">
-                        <div className="col-sm-4">
+                        <div className="col-sm-3">
+                            <div>
+                                <div className="list-group">
+                                    <br/> <br/>
 
-                            <table className="table table-hover table-light"/>
-                            <thead>
-                            <tr className="table-secondary">
-                                <th>Group Members</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {
-                                this.state.userGroup.map(user =>
-                                    <tr>
-                                        {//TODO: link to users specific profile
-                                        }
-                                        <td>
-                                            <Link to="/profile">{user.firstName}</Link>
-                                            {this.state.currentUser.role === "ADMIN" &&
-                                            <span>
+                                    <button type="button"
+                                            className="list-group-item list-group-item-action list-group-item-secondary">
+                                                        <span>Group Members</span>
+                                    </button>
+                                    {
+                                        this.state.userGroup.map(user =>
+                                                <button type="button"
+                                                        className="list-group-item list-group-item-action">
+                                                        <span>
+                                                             <Link to={this.state.currentUser.id === user.id ?
+                                                                 '/profile' : `/profile/${user.id}`}>
+                                                                {user.firstName} {user.lastName}
+                                                            </Link>
+                                                            {(this.state.currentUser.role === "ADMIN" ||
+                                                                this.state.currentUser.id  === user.id) &&
+                                                            <span>
                                                 {console.log(this.state)}
-                                                <button className="btn btn-danger"
-                                                        onClick={() => GroupService.updateGroup(this.state.studyGroup.id, {
-                                                                id: this.state.studyGroup.id,
-                                                                courseId: this.state.studyGroup.courseId,
-                                                                currentUserId: this.state.studyGroup.currentUserId,
-                                                                studentsInGroupIds: this.state.studyGroup.studentsInGroupIds.filter(id => id !== user.id),
-                                                                postIds: this.state.studyGroup.postIds
-                                                            }.then(GroupService.findGroupById(this.props.match.params.groupId)
-                                                                .then(studyGroup => {
-                                                                    this.setState({
-                                                                        studyGroup: studyGroup
-                                                                    });
-                                                                })
-                                                            )
-                                                        )}>Delete</button>
+                                                                <button className="btn btn-danger float-right"
+                                                                        onClick={() => GroupService.updateGroup(this.state.studyGroup.id, {
+                                                                            ...this.state.studyGroup,
+                                                                            studentsInGroupIds: this.state.studyGroup.studentsInGroupIds.filter(id => id !== user.id)
+                                                                        })
+                                                                            .then(GroupService.findGroupById(this.props.match.params.groupId)
+                                                                                .then(studyGroup => {
+                                                                                    this.setState({
+                                                                                        studyGroup: studyGroup
+                                                                                    });
+                                                                                })
+                                                                            )
+                                                                        }>
+                                                                    {
+                                                                        (this.state.currentUser.role === "ADMIN" &&
+                                                                            this.state.currentUser.id  !== user.id) &&
+                                                                            <span>REMOVE</span>
+                                                                    }
+                                                                    {
+                                                                        this.state.currentUser.id  === user.id &&
+                                                                        <span>LEAVE</span>
+                                                                    }
+                                                                </button>
                                             </span>
-                                            }
-                                        </td>
-                                    </tr>
-                                )
-                            }
-                            </tbody>
+                                                            }
+                                                        </span>
+                                                </button>
+                                        )
+                                    }
+                                </div>
+                            </div>
                         </div>
-                        < div className="col-sm-8">
+                        < div className="col-sm-9">
                             <h2>Group Posts</h2>
                             <div className="row">
                                 {this.state.studyGroup !== {} &&
