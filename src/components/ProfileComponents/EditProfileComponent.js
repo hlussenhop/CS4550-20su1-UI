@@ -51,7 +51,7 @@ class EditProfileComponent extends React.Component {
                                         className="form-control"
                                         id="firstFld"
                                         type="text"
-                                        placeholder={"Username"}
+                                        placeholder={"First Name"}
                                         value={this.state.currentUser.firstName} />
                                 </div>
                                 <div className="input-group form-group">
@@ -65,7 +65,7 @@ class EditProfileComponent extends React.Component {
                                         className="form-control"
                                         id="lastFld"
                                         type="text"
-                                        placeholder={"Username"}
+                                        placeholder={"Last Name"}
                                         value={this.state.currentUser.lastName} />
                                 </div>
 
@@ -81,6 +81,7 @@ class EditProfileComponent extends React.Component {
                                         id="usernameFld"
                                         type="text"
                                         placeholder={"Username"}
+                                        title={"You cannot change your username"}
                                         value={this.state.currentUser.username} />
                                 </div>
 

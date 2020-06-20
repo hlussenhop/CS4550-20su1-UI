@@ -15,8 +15,7 @@ class SignUpComponent extends React.Component {
         confirmPassword: '',
         role: 'STUDENT',
         bio: '',
-        location: '',
-        error: null
+        location: ''
     }
 
 
@@ -41,7 +40,7 @@ class SignUpComponent extends React.Component {
             .then(currentUser => {
                 UserService.login(this.state.username, this.state.password)
                     .catch(e => {
-                        this.props.history.push("/login")
+                        this.props.history.push("/signup")
                     })
                     .then(currentUser => {
                         if (currentUser)
@@ -115,8 +114,8 @@ class SignUpComponent extends React.Component {
                                         </span>
                                     </div>
                                     <select className="form-control"
-                                            onChange={(event) =>
-                                                this.setState({ role: event.target.value })}>
+                                        onChange={(event) =>
+                                            this.setState({ role: event.target.value })}>
                                         <option value="STUDENT">Student</option>
                                         <option value="ADMIN">Admin</option>
                                     </select>

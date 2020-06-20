@@ -1,6 +1,7 @@
 import React from "react";
 import PostCommentComponent from "./PostCommentComponent";
 import PostService from "../../services/PostService";
+import UserService from "../../services/UserService";
 import CommentListComponent from "./CommentListComponent";
 
 export default class GroupPostComponent extends React.Component {
@@ -8,12 +9,16 @@ export default class GroupPostComponent extends React.Component {
         commentInputText: "",
         isBeingEdited: false,
         editingTitle: this.props.post.title,
-        editingBody: this.props.post.body
-
+        editingBody: this.props.post.text,
+        user: {}
     };
 
+    componentDidMount() {
+        UserService.findUserById(this.props.post.posterId)
+            .then(user => this.setState({user: user}))
+    }
+
     changePost = () => {
-        console.log(this.state.editingBody);
         PostService.updatePost(this.props.post.id,
             {
                 studyGroupId: this.props.groupId,
@@ -21,17 +26,16 @@ export default class GroupPostComponent extends React.Component {
                 title: this.state.editingTitle,
                 text: this.state.editingBody
             })
-
     }
-
 
     render() {
         return (
             <div className="container card group-post group-card-body">
                 {!this.state.isBeingEdited && this.props.userstatus !== "ANON" &&
                     <div>
-                        <h5>{this.props.post.title}</h5>
-                        <p>{this.props.post.text}</p>
+                        <h5>{this.state.editingTitle}</h5>
+                        <span>{this.state.user.firstName}</span>
+                        <p>{this.state.editingBody}</p>
                         {this.props.post.posterId === this.props.currentUser.id &&
                             <button className="btn btn-primary"
                                 onClick={() => this.setState({ isBeingEdited: true })}>
@@ -41,7 +45,9 @@ export default class GroupPostComponent extends React.Component {
 
                         <h5>Comments</h5>
                         {
-                            <CommentListComponent currentCommenter={this.props.currentUser}
+                            <CommentListComponent 
+                                userStatus={this.props.userstatus}
+                                currentCommenter={this.props.currentUser}
                                 postId={this.props.post.id} />
                         }
                     </div>
@@ -73,7 +79,10 @@ export default class GroupPostComponent extends React.Component {
                         </button>
 
                             <button className="btn btn-danger"
-                                onClick={() => PostService.deletePost(this.props.post.id).then(this.props.renderPosts())}>Delete Post</button>
+                                onClick={() => {
+                                    PostService.deletePost(this.props.post.id)
+                                    .then(this.props.renderPosts())}}>
+                                        Delete Post</button>
                         </div>
 
                         {

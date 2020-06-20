@@ -53,14 +53,13 @@ const findUserById = (uid) =>
     fetch(`https://neustudyserver.herokuapp.com/api/users/${uid}/`)
         .then(response => response.json());
 
-const fetchProfile = () =>
-    fetch("https://neustudyserver.herokuapp.com/api/profile", {
+const fetchProfile = () => {
+    return fetch("https://neustudyserver.herokuapp.com/api/profile", {
         method: 'GET',
         credentials: "include"
     })
-        .then(response => {
-            return response.json()
-        })
+        .then(response => response.json())
+}
 
 
 export default {

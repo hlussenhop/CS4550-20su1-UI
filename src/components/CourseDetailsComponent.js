@@ -25,7 +25,8 @@ export default class CourseDetailsComponent extends React.Component {
                         this.props.location.state.course.sections.map(section =>
                             <span>
                                 <SectionCardComponent
-                                    section={section}/>
+                                    section={section}
+                                    course={this.props.location.state.course}/>
                             </span>
                         )
 

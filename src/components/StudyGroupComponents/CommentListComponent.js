@@ -18,13 +18,24 @@ export default class CommentListComponent extends React.Component {
             .then(comments => this.setState({ comments: comments }))
     }
 
+    renderComments = () => {
+        CommentService.findCommentsForPost(this.props.postId)
+            .then(comments => {
+                this.setState({ comments: comments })
+            })
+    }
+
     render() {
         return (
             <div className="col">
                 {
                     this.state.comments.map(comment =>
                         <div className="row">
-                            <PostCommentComponent comment={comment} />
+                            <PostCommentComponent
+                                userStatus={this.props.userStatus}
+                                currentCommenter={this.props.currentCommenter}
+                                comment={comment}
+                                postId={this.props.postId} />
                         </div>
                     )
                 }
@@ -38,22 +49,22 @@ export default class CommentListComponent extends React.Component {
                             })
                         }}
                     />
-                </div>
-                <div className="input-group-append float-right">
-                    <button className="btn btn-primary btn-sm" type="button"
-                        onClick={() => {
-                            const newId = Math.random * 1000;
-                            CommentService.createComment(this.props.postId,
-                                {
-                                    id: newId, postId: this.props.postId,
-                                    commenterId: this.props.currentCommenter.id, text: this.state.commentInput
-                                }
-                            ).then(() => this.updateComments())
+                    <div className="input-group-append float-right">
+                        <button className="btn btn-primary btn-sm" type="button"
+                            onClick={() => {
+                                const newId = Math.random * 1000;
+                                CommentService.createComment(this.props.postId,
+                                    {
+                                        id: newId, postId: this.props.postId,
+                                        commenterId: this.props.currentCommenter.id, text: this.state.commentInput
+                                    }
+                                ).then(() => this.updateComments())
 
-                            this.setState({ commentInput: '' })
-                        }}>
-                        Post
+                                this.setState({ commentInput: '' })
+                            }}>
+                            Post
                     </button>
+                    </div>
                 </div>
             </div>
         )

@@ -10,6 +10,11 @@ class StudyGroupList extends React.Component {
         currCourse: ''
     }
 
+    getStudyGroupName = (groupId) => {
+        GroupService.findGroupById(groupId)
+        .then(group => this.setState({currCourse: group.courseName}))
+    }
+
     render() {
         return (
             <div>
@@ -18,35 +23,36 @@ class StudyGroupList extends React.Component {
                         this.state.list.map(group =>
                             <div>
 
-                            {/*GroupService.findGroupById(group)*/}
-                            {/*        .then(studyGroup => {*/}
+                                {/*GroupService.findGroupById(group)*/}
+                                {/*        .then(studyGroup => {*/}
 
-                            {/*            this.setState({*/}
-                            {/*                currGroup: studyGroup*/}
-                            {/*            });*/}
-                            {/*        })*/}
+                                {/*            this.setState({*/}
+                                {/*                currGroup: studyGroup*/}
+                                {/*            });*/}
+                                {/*        })*/}
 
 
-                            <button type="button"
-                                className="list-group-item list-group-item-action">
-                                <span>
-                                    {
-                                        this.props.visiting &&
+                                <button type="button"
+                                    className="list-group-item list-group-item-action">
+                                    {this.getStudyGroupName(group)}
+                                    <span>
+                                        {
+                                            this.props.visiting &&
                                             <span>
-                                                 {group}
+                                                {this.state.currCourse}
                                             </span>
 
-                                    }
-                                    {
-                                        !this.props.visiting &&
-                                        <Link to={`/group/${group}`}
-                                              className="mod-link">
-                                            {group}
-                                        </Link>
-                                    }
+                                        }
+                                        {
+                                            !this.props.visiting &&
+                                            <Link to={`/group/${group}`}
+                                                className="mod-link">
+                                                {this.state.currCourse}
+                                            </Link>
+                                        }
 
-                                </span>
-                            </button>
+                                    </span>
+                                </button>
                             </div>
                         )
                     }
