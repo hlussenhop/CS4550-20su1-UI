@@ -21,7 +21,6 @@ export default class CommentListComponent extends React.Component {
     render() {
         return (
             <div className="col">
-                {console.log(this.props.currentCommenter.id)}
                 {
                     this.state.comments.map(comment =>
                         <div className="row">
