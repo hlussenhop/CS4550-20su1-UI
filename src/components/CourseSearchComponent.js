@@ -4,40 +4,12 @@ export default class CourseSearchComponent extends React.Component {
 
     render() {
         return (
-            //Implement in future possibly
-            // <div className="p-1 bg-light rounded rounded-pill shadow-sm mb-4">
-            //     <div className="input-group">
-            //         <input type="search" placeholder="Search Courses"
-            //             onChange={(event) =>
-            //                 this.props.setKeyword(event.target.value)}
-            //             aria-describedby="button-addon1"
-            //             className="form-control border-0 bg-light" />
-            //         <div className="input-group-append">
-            //             <button id="button-addon1"
-            //                 type="submit" className="btn btn-link text-primary"
-            //                 onClick={() => this.findTerm(this.props.keyword)}>
-            //                 <i className="fa fa-search"></i>
-            //             </button>
-            //         </div>
-            //     </div>
-            // </div>
-
-            // <div className="dropdown">
-            //     <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-            //             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            //         Select Course
-            //     </button>
-            //     <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            //         <a className="dropdown-item" href="#">Action</a>
-            //         <a className="dropdown-item" href="#">Another action</a>
-            //         <a className="dropdown-item" href="#">Something else here</a>
-            //     </div>
-            // </div>
-            <div className=" form-group row container">
-                <div className="col-5">
+            <div className="container">
+                <div className=" form-group row">
+                <div className="col-lg-3 col-md-6">
                     <div className="form-inline row">
                         <div className="col-6">
-                            <label htmlFor="subjectFld" className="col-form-label float-left">Select Subject: </label>
+                            <label htmlFor="subjectFld" className="col-form-label float-right">Select Subject: </label>
                         </div>
                         <div className="col-5">
                             <select
@@ -69,10 +41,10 @@ export default class CourseSearchComponent extends React.Component {
                         </div>
                     </div>
                 </div>
-                <div className="col-5">
+                <div className="col-lg-3 col-md-6">
                     <div className="form-inline">
                         <div className="col-6">
-                            <label htmlFor="termFld" className="col-form-label float-left">Select Term: </label>
+                            <label htmlFor="termFld" className="col-form-label float-right">Select Term: </label>
                         </div>
                         <div className="col-6">
                             <select 
@@ -86,15 +58,22 @@ export default class CourseSearchComponent extends React.Component {
                         </div>
                     </div>
                 </div>
-                <div className="col-5">
-                    <label>
-                        Course Number (optional)
-                        <input className="form-control"
-                           type="number"
-                            onChange={(e) => this.props.setCourseNumber(e.target.value.toString())}/>
-                    </label>
+                <div className="col-lg-6 col-md-6">
+                    <div className="form-inline">
+                        <div className="col-6">
+                            <label className="col-form-label float-right">Course Number:<br/>(optional)</label>
+                        </div>
+                        <div className="col-6">
+                            <input className="form-control"
+                                   type="number"
+                                   placeholder="4550"
+                                   onChange={(e) => this.props.setCourseNumber(e.target.value.toString())}/>
+                        </div>
+                    </div>
                 </div>
-                <div className="col-2">
+            </div>
+            <div className=" form-group row container">
+                <div className="col-lg-12">
                     <button className="btn btn-success float-right"
                         onClick={() => {
                             if (this.props.term !== "" && this.props.subject !== "") {
@@ -105,6 +84,7 @@ export default class CourseSearchComponent extends React.Component {
                         SUBMIT
                     </button>
                 </div>
+            </div>
             </div>
         )
     }
