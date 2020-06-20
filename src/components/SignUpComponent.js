@@ -33,9 +33,7 @@ class SignUpComponent extends React.Component {
             studyGroups: []
         })
             .catch(e => {
-                this.setState({
-                    error: 'Unable to register'
-                })
+                alert("Unable to register")
             })
             .then(currentUser => {
                 UserService.login(this.state.username, this.state.password)
@@ -48,9 +46,6 @@ class SignUpComponent extends React.Component {
                     })
             })
     }
-
-
-
 
     render() {
         return (
@@ -114,8 +109,8 @@ class SignUpComponent extends React.Component {
                                         </span>
                                     </div>
                                     <select className="form-control"
-                                        onChange={(event) =>
-                                            this.setState({ role: event.target.value })}>
+                                            onChange={(event) =>
+                                                this.setState({ role: event.target.value })}>
                                         <option value="STUDENT">Student</option>
                                         <option value="ADMIN">Admin</option>
                                     </select>
