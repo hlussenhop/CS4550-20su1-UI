@@ -25,20 +25,24 @@ export default class PostGridComponent extends React.Component {
     }
 
     makeNewPost = (post, bool) => {
-        PostService.createPost(this.props.groupId, post)
-        this.setState({isMakingNewPost: bool})
+        PostService.createPost(this.props.groupId, post).then(() => {
+
+            this.setState({isMakingNewPost: bool})
         PostService.findPostsByStudyGroup(this.props.groupId)
             .then(posts => {
                 this.setState({posts: posts})
-            })
+            })})
+
 
     };
 
-    renderPosts = () =>
+    renderPosts = () => {
+        console.log("work")
         PostService.findPostsByStudyGroup(this.props.groupId)
             .then(posts => {
                 this.setState({posts: posts})
             })
+    }
 
 
 
