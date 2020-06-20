@@ -32,7 +32,7 @@ class StudyGroupList extends React.Component {
                                 <span>
                                     <Link to={`/group/${group}`}
                                         className="mod-link">
-                                        {this.state.currGroup.n}
+                                        {group}
                                     </Link>
                                 </span>
                             </button>
