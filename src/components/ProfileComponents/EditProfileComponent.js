@@ -12,17 +12,7 @@ import { Link } from "react-router-dom";
 import UserService from "../../services/UserService";
 class EditProfileComponent extends React.Component {
     state = {
-        currentUser: {
-            username: '',
-            password: '',
-            firstName: '',
-            lastName: '',
-            email: '',
-            role: '',
-            bio: '',
-            location: '',
-            studyGroups: []
-        }
+        currentUser: {}
     }
     componentDidMount() {
         UserService.findUserById(this.props.match.params.userId)
