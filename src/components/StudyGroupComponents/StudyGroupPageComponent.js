@@ -32,7 +32,7 @@ export default class StudyGroupPageComponent extends React.Component {
                 );
                 UserService.fetchProfile().then(user => {
                     this.setState({currentUser: user})
-                    this.loggedInUserIsCurrentUser()
+
                 })
             });
     }
@@ -58,7 +58,9 @@ export default class StudyGroupPageComponent extends React.Component {
             this.setState({loading: false})
         }
         if (this.state.loading === true) {
+            this.loggedInUserIsCurrentUser()
             return (<p>Loading...</p>)
+
         } else {
             return (
                 <div className="container">
