@@ -1,6 +1,6 @@
 import React from "react";
 import {Link} from "react-router-dom";
-import FollowList from "./FollowList";
+import StudyGroupList from "./StudyGroupList";
 import RecentPostListComponent from "./RecentPostListComponent";
 import UserService from "../../services/UserService"
 import PendingRequestsComponent from "./PendingRequestsComponent";
@@ -18,7 +18,6 @@ class AdminProfileComponent extends React.Component{
         following: [this.user, this.user, this.user],
         courseList: [this.course, this.course],
         pendingRequests: [this.pendingRequest, this.pendingRequest, this.pendingRequest],
-        recentPosts: this.props.recentPosts,
         studyGroups: this.props.studyGroups,
         currentUser: this.props.currentUser
     }
@@ -34,17 +33,17 @@ class AdminProfileComponent extends React.Component{
                     {/*<div className="row">*/}
                     {/*    <div className="col-4">*/}
                     {/*        <h5 className="profile-heading">Following</h5>*/}
-                    {/*        <FollowList list={this.state.followers}/>*/}
+                    {/*        <StudyGroupList list={this.state.followers}/>*/}
                     {/*    </div>*/}
 
                     {/*    <div className="col-4">*/}
                     {/*        <h5 className="profile-heading">Followers</h5>*/}
-                    {/*        <FollowList list={this.state.following}/>*/}
+                    {/*        <StudyGroupList list={this.state.following}/>*/}
                     {/*    </div>*/}
 
                     {/*    <div className="col-4">*/}
                     {/*        <h5 className="profile-heading">Courses</h5>*/}
-                    {/*        <FollowList list={this.state.courseList}/>*/}
+                    {/*        <StudyGroupList list={this.state.courseList}/>*/}
                     {/*    </div>*/}
 
                     {/*</div>*/}
@@ -54,12 +53,12 @@ class AdminProfileComponent extends React.Component{
                     {/*</div>*/}
                     <div>
                         <h5 className="profile-heading">Study Groups:</h5>
-                        <FollowList list={this.state.studyGroups}/>
+                        <StudyGroupList list={this.state.studyGroups}/>
                     </div>
                     <br/>
                     <div>
-                        <h5 className="profile-heading">Recent Posts:</h5>
-                        <RecentPostListComponent list={this.state.recentPosts}/>
+                        <h5 className="profile-heading">Your Recent Posts:</h5>
+                        <RecentPostListComponent user={this.props.currentUser}/>
                     </div>
 
 

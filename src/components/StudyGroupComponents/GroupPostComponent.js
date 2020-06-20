@@ -7,8 +7,8 @@ export default class GroupPostComponent extends React.Component {
     state = {
         commentInputText: "",
         isBeingEdited: false,
-        editingTitle: "",
-        editingBody: ""
+        editingTitle: this.props.post.title,
+        editingBody: this.props.post.body
 
     };
 
@@ -16,7 +16,7 @@ export default class GroupPostComponent extends React.Component {
         console.log("work");
         PostService.updatePost(this.props.post.id,
             {
-                studyGroupId: 123,
+                studyGroupId: this.props.groupId,
                 posterId: this.props.currentUser.id,
                 title: this.state.editingTitle,
                 text: this.state.editingBody
@@ -35,7 +35,8 @@ export default class GroupPostComponent extends React.Component {
                     <div>
                         {this.props.post.posterId === this.props.currentUser.id &&
                             <button className="btn btn-primary"
-                                    onClick={() => this.setState({isBeingEdited: true})}>Edit Post
+                                    onClick={() => this.setState({isBeingEdited: true})}>
+                                Edit Post
                             </button>
                         }
 
@@ -52,24 +53,30 @@ export default class GroupPostComponent extends React.Component {
                     <input type="text"
                            className="form-control"
                            placeholder="New Title"
+                           value={this.state.editingTitle}
                            onChange={(e) =>
                                this.setState({editingTitle: e.target.value})}/>
+
                     <textarea className="form-control"
                               placeholder="New Body"
+                              value={this.state.editingBody}
                               onChange={(e) =>
                                   this.setState({editingBody: e.target.value})}/>
+
                     <div className="btn-group">
                         <button className="btn btn-primary"
                                 onClick={() => {
                                     this.changePost();
-                                    this.setState({editingTitle: "", editingBody: ""});
+                                    // this.setState({editingTitle: "", editingBody: ""});
                                     this.setState({isBeingEdited: false})
                                     this.props.renderPosts()
                                 }}>Save
                         </button>
+
                         <button className="btn btn-danger"
                                 onClick={() => PostService.deletePost(this.props.post.id).then(this.props.renderPosts())}>Delete Post</button>
                     </div>
+
                     {
                         <CommentListComponent currentCommenter={this.props.currentUser}
                                               postId={this.props.post.id}/>

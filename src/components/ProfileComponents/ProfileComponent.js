@@ -3,28 +3,13 @@ import { Link } from "react-router-dom";
 import UserService from "../../services/UserService"
 import StudentProfileComponent from "./StudentProfileComponent";
 import AdminProfileComponent from "./AdminProfileComponent";
+import PostService from "../../services/PostService";
 
 class ProfileComponent extends React.Component {
-
-
-    studyGroup = {
-        name: 'CS4910',
-        professor: 'Jose',
-        count: 10
-    }
-
-    post = {
-        course: 'CS4910',
-        title: 'Hello',
-        text: "Join my study group! :)",
-        date: 'June 17, 2020'
-    }
 
     state = {
         visiting: this.props.match.params.userId,
         currentUser: {},
-        studyGroups: [this.studyGroup, this.studyGroup],
-        recentPosts: [this.post, this.post, this.post, this.post],
     }
 
     componentDidMount() {
@@ -49,17 +34,11 @@ class ProfileComponent extends React.Component {
                 })
         }
     }
-    /*
-        findUser = () => {
-            UserService.findUserById(this.state.currentUser.id)
-            .then(currentUser => {
-                return currentUser
-            })
-        }
-    */
+
     render() {
         return (
             <div>
+
                 {
                     !this.state.visiting &&
                     <Link to={`/${this.state.currentUser.id}/editProfile`}>
@@ -80,15 +59,13 @@ class ProfileComponent extends React.Component {
                     (this.state.currentUser.role === "STUDENT") &&
                     <StudentProfileComponent currentUser={this.state.currentUser}
                         visiting={this.state.visiting}
-                        studyGroups={this.state.studyGroups}
-                        recentPosts={this.state.recentPosts} />
+                        studyGroups={this.state.studyGroups}/>
                 }
                 {
                     this.state.currentUser.role === "ADMIN" &&
                     <AdminProfileComponent currentUser={this.state.currentUser}
                         visiting={this.state.visiting}
-                        studyGroups={this.state.currentUser.studyGroups}
-                        recentPosts={this.state.recentPosts} />
+                        studyGroups={this.state.currentUser.studyGroups}/>
                 }
             </div>
 

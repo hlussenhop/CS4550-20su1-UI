@@ -66,7 +66,7 @@ export default class StudyGroupPageComponent extends React.Component {
             return (
                 <div className="container">
                     <NavBarComponent/>
-                    <h1>Study Group 1</h1>
+                    <h1>Study Group ID: {this.state.studyGroup.id}</h1>
                     <div className="row">
                         <div className="col-sm-3">
                             <div>
@@ -75,23 +75,22 @@ export default class StudyGroupPageComponent extends React.Component {
 
                                     <button type="button"
                                             className="list-group-item list-group-item-action list-group-item-secondary">
-                                                        <span>Group Members</span>
+                                        <span>Group Members</span>
                                     </button>
                                     {
                                         this.state.userGroup.map(user =>
-                                                <button type="button"
-                                                        className="list-group-item list-group-item-action">
+                                            <button type="button"
+                                                    className="list-group-item list-group-item-action">
                                                         <span>
                                                              <Link to={this.state.currentUser.id === user.id ?
                                                                  '/profile' : `/profile/${user.id}`}>
                                                                 {user.firstName} {user.lastName}
                                                             </Link>
-                                                            {(this.state.currentUser.role === "ADMIN" ||
-                                                                this.state.currentUser.id  === user.id) &&
+                                                            {(this.state.currentUser.role === "ADMIN" &&
+                                                                this.state.currentUser.id !== user.id) &&
                                                             <span>
-                                                {console.log(this.state)}
                                                                 <button className="btn btn-danger float-right"
-                                                                        onClick={() => GroupService.updateGroup(this.state.studyGroup.id, {
+                                                                        onClick={() => {GroupService.updateGroup(this.state.studyGroup.id, {
                                                                             ...this.state.studyGroup,
                                                                             studentsInGroupIds: this.state.studyGroup.studentsInGroupIds.filter(id => id !== user.id)
                                                                         })
@@ -102,28 +101,51 @@ export default class StudyGroupPageComponent extends React.Component {
                                                                                     });
                                                                                 })
                                                                             )
+                                                                            UserService.update(user.id, {
+                                                                                ...user,
+                                                                                studyGroups: user.studyGroups.filter(id => id !== this.state.studyGroup.id)
+                                                                            })
+                                                                        }
                                                                         }>
-                                                                    {
-                                                                        (this.state.currentUser.role === "ADMIN" &&
-                                                                            this.state.currentUser.id  !== user.id) &&
-                                                                            <span>REMOVE</span>
-                                                                    }
-                                                                    {
-                                                                        this.state.currentUser.id  === user.id &&
-                                                                        <span>LEAVE</span>
-                                                                    }
+                                                                        REMOVE
                                                                 </button>
                                             </span>
                                                             }
+
+                                                            {
+                                                                this.state.currentUser.id === user.id &&
+                                                                <Link to={`/profile`}>
+                                                                    <button className="btn btn-danger float-right"
+                                                                            onClick={() => {GroupService.updateGroup(this.state.studyGroup.id, {
+                                                                                ...this.state.studyGroup,
+                                                                                studentsInGroupIds: this.state.studyGroup.studentsInGroupIds.filter(id => id !== user.id)
+                                                                            })
+                                                                                .then(GroupService.findGroupById(this.props.match.params.groupId)
+                                                                                    .then(studyGroup => {
+                                                                                        this.setState({
+                                                                                            studyGroup: studyGroup
+                                                                                        });
+                                                                                    })
+                                                                                )
+                                                                                UserService.update(user.id, {
+                                                                                    ...user,
+                                                                                    studyGroups: user.studyGroups.filter(id => id !== this.state.studyGroup.id)
+                                                                                })
+                                                                            }
+                                                                            }>
+                                                                           LEAVE
+                                                                    </button>
+                                                                </Link>
+                                                            }
                                                         </span>
-                                                </button>
+                                            </button>
                                         )
                                     }
                                 </div>
                             </div>
                         </div>
                         < div className="col-sm-9">
-                            <h2>Group Posts</h2>
+                            <h4>Group Posts</h4>
                             <div className="row">
                                 {this.state.studyGroup !== {} &&
                                 <PostGridComponent userStatus={this.state.UserStatus}

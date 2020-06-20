@@ -25,20 +25,24 @@ export default class PostGridComponent extends React.Component {
     }
 
     makeNewPost = (post, bool) => {
-        PostService.createPost(this.props.groupId, post)
-        this.setState({isMakingNewPost: bool})
+        PostService.createPost(this.props.groupId, post).then(() => {
+
+            this.setState({isMakingNewPost: bool})
         PostService.findPostsByStudyGroup(this.props.groupId)
             .then(posts => {
                 this.setState({posts: posts})
-            })
+            })})
+
 
     };
 
-    renderPosts = () =>
+    renderPosts = () => {
+        console.log("work")
         PostService.findPostsByStudyGroup(this.props.groupId)
             .then(posts => {
                 this.setState({posts: posts})
             })
+    }
 
 
 
@@ -50,12 +54,13 @@ export default class PostGridComponent extends React.Component {
                 {this.state.posts.map(post =>
                     <GroupPostComponent userstatus={this.props.userStatus}
                         renderPosts={this.renderPosts}
-                        currentUser={this.props.currentUser} post={post}/>
+                        currentUser={this.props.currentUser} post={post}
+                    groupId={this.props.groupId}/>
                 )}
                 {this.state.isMakingNewPost === false && this.props.userStatus !== "ANON" &&
-                <button className="btn btn-success"
+                <button className="btn btn-success float-right"
                         onClick={() => this.setState({isMakingNewPost: true})}>
-                    newPost
+                    New Post
                 </button>
                 }
                 {this.state.isMakingNewPost === true &&
