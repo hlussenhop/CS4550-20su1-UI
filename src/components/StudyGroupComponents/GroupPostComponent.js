@@ -71,10 +71,10 @@ export default class GroupPostComponent extends React.Component {
                         <div className="btn-group">
                             <button className="btn btn-primary"
                                 onClick={() => {
-                                    this.changePost();
+                                    this.changePost()
                                     // this.setState({editingTitle: "", editingBody: ""});
                                     this.setState({ isBeingEdited: false })
-                                    this.props.renderPosts()
+
                                 }}>Save
                         </button>
 
