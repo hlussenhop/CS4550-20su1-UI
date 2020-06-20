@@ -24,18 +24,24 @@ class HomeComponent extends React.Component {
         }
     }
 
+    /*
     componentDidUpdate(prevProps, prevState, snapshot) {
         UserService.fetchProfile()
-            .catch(e => { })
-            .then(user => {
-                this.setState({ currentUser: user })
+            .catch(e => {
             })
-        if(this.state.currentUser !== undefined) {
+            .then(user => {
+                this.setState({currentUser: user})
+            })
+        if (this.state.currentUser !== undefined) {
             PostService.findAllPosts().then(posts => {
-                this.setState({ posts: this.filterPosts(posts) });
+                this.setState({posts: this.filterPosts(posts)});
             })
         }
     }
+
+     */
+
+
 
     filterPosts = (posts) =>
         posts.filter(post => post)
@@ -44,13 +50,8 @@ class HomeComponent extends React.Component {
 
 
     render() {
-        {
-            console.log(this.state)
-        }
         return (
-
             <div className="container">
-
                 <h2>Study Group Web Application</h2>
                 <p>Welcome To Group 11's final project. This is a webapp that
                 allows users to join and participate in study groups for their section of a Notheastern

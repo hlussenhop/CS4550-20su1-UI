@@ -26,10 +26,10 @@ export default class PostGridComponent extends React.Component {
 
     makeNewPost = (post, bool) => {
         PostService.createPost(this.props.groupId, post).then(() => {
-
             this.setState({isMakingNewPost: bool})
         PostService.findPostsByStudyGroup(this.props.groupId)
             .then(posts => {
+                console.log(posts)
                 this.setState({posts: posts})
             })})
 
@@ -37,9 +37,10 @@ export default class PostGridComponent extends React.Component {
     };
 
     renderPosts = () => {
-        console.log("work")
+
         PostService.findPostsByStudyGroup(this.props.groupId)
             .then(posts => {
+                console.log(this.props.groupId)
                 this.setState({posts: posts})
             })
     }
@@ -50,7 +51,6 @@ export default class PostGridComponent extends React.Component {
     render() {
         return (
             <div className="container">
-                {console.log(this.props.currentUser)}
                 {this.state.posts.map(post =>
                     <GroupPostComponent userstatus={this.props.userStatus}
                         renderPosts={this.renderPosts}

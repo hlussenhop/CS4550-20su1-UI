@@ -20,7 +20,7 @@ export default class GroupPostComponent extends React.Component {
                 posterId: this.props.currentUser.id,
                 title: this.state.editingTitle,
                 text: this.state.editingBody
-            })
+            }).then(() => this.props.renderPosts())
 
     }
 
@@ -65,15 +65,15 @@ export default class GroupPostComponent extends React.Component {
                         <div className="btn-group">
                             <button className="btn btn-primary"
                                 onClick={() => {
-                                    this.changePost();
+                                    this.changePost()
                                     // this.setState({editingTitle: "", editingBody: ""});
                                     this.setState({ isBeingEdited: false })
-                                    this.props.renderPosts()
+
                                 }}>Save
                         </button>
 
                             <button className="btn btn-danger"
-                                onClick={() => PostService.deletePost(this.props.post.id).then(this.props.renderPosts())}>Delete Post</button>
+                                onClick={() => PostService.deletePost(this.props.post.id).then(() => this.props.renderPosts())}>Delete Post</button>
                         </div>
 
                         {
