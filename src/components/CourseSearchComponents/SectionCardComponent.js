@@ -9,7 +9,7 @@ export default class SectionCardComponent extends React.Component {
     state = {
         user: {},
         enrolled: false,
-        groupId: {}
+        groupId: 0
     };
 
 
@@ -61,11 +61,13 @@ export default class SectionCardComponent extends React.Component {
                                 groups.map(group => {
                                     if (group.courseId === crn) {
                                         this.state.user.studyGroups.push(group.id)
+                                        this.setState({groupId: group.id})
                                         console.log(group.id)
                                         UserService.update(this.state.user.id, this.state.user)
                                     }
                                 })
                             })
+
                     })
 
                 }
