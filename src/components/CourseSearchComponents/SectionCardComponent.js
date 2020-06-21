@@ -9,7 +9,7 @@ export default class SectionCardComponent extends React.Component {
     state = {
         user: {},
         enrolled: false,
-        groupId: {}
+        groupId: 0
     };
 
 
@@ -61,11 +61,13 @@ export default class SectionCardComponent extends React.Component {
                                 groups.map(group => {
                                     if (group.courseId === crn) {
                                         this.state.user.studyGroups.push(group.id)
+                                        this.setState({groupId: group.id})
                                         console.log(group.id)
                                         UserService.update(this.state.user.id, this.state.user)
                                     }
                                 })
                             })
+
                     })
 
                 }
@@ -105,6 +107,7 @@ export default class SectionCardComponent extends React.Component {
                                             this.addToStudyGroup(parseInt(this.props.section.crn))
                                             alert("You are enrolled! Check your profile or click the Go to group button to access the group.")
                                             this.setState({enrolled: true})
+                                            console.log(this.state)
                                         }}>
                                     Enroll
                                 </button>
