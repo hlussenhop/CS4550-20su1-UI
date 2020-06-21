@@ -38,7 +38,8 @@ export default class GroupPostComponent extends React.Component {
                         <h5>{this.state.editingTitle}</h5>
                         <span>{this.state.user.firstName}</span>
                         <p>{this.state.editingBody}</p>
-                        {this.props.post.posterId === this.props.currentUser.id &&
+                        {this.props.post.posterId === this.props.currentUser.id 
+                        || this.props.currentUser.role === "ADMIN" &&
                             <button className="btn btn-primary"
                                 onClick={() => this.setState({ isBeingEdited: true })}>
                                 Edit Post
@@ -82,9 +83,9 @@ export default class GroupPostComponent extends React.Component {
 
                             <button className="btn btn-danger"
                                 onClick={() => {
-                                    console.log(this.props.post.id)
-                                    PostService.deletePost(this.props.post.id)
-                                    .then(posts => this.props.renderPosts())}}>
+                                    this.props.deletePost(this.props.post.id)
+                                    this.setState({isBeingEdited: false})
+                                    }}>
                                         Delete Post</button>
                         </div>
 

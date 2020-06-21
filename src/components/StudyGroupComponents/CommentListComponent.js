@@ -5,7 +5,8 @@ import PostCommentComponent from "./PostCommentComponent";
 export default class CommentListComponent extends React.Component {
     state = {
         comments: [],
-        commentInput: ""
+        commentInput: "",
+        changed: false
     };
 
     componentDidMount() {
@@ -13,23 +14,25 @@ export default class CommentListComponent extends React.Component {
             .then(comments => this.setState({ comments: comments }))
     }
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevState.comments.length !== this.state.comments.length) {
-            CommentService.findCommentsForPost(this.props.postId)
+    deleteComment = (commentId) => {
+        CommentService.deleteComment(commentId)
             .then(comments => {
-                this.setState({ 
-                    comments: comments,
-                    count: comments.length})
+                //this.renderComments()
+                this.setState({
+                    comments: comments
+                })
             })
-        }
     }
 
     renderComments = () => {
         CommentService.findCommentsForPost(this.props.postId)
             .then(comments => {
-                this.setState({ 
-                    comments: comments})
-    })}
+                this.setState({
+                    comments: comments,
+                    changed: true
+                })
+            })
+    }
 
     render() {
         return (
@@ -39,7 +42,7 @@ export default class CommentListComponent extends React.Component {
                         <div className="row">
                             <PostCommentComponent
                                 userStatus={this.props.userStatus}
-                                renderComments={this.renderComments}
+                                deleteComment={this.deleteComment}
                                 currentCommenter={this.props.currentCommenter}
                                 comment={comment}
                                 postId={this.props.postId} />
@@ -59,14 +62,14 @@ export default class CommentListComponent extends React.Component {
                     <div className="input-group-append float-right">
                         <button className="btn btn-primary btn-sm" type="button"
                             onClick={() => {
-                                const newId = Math.random * 1000;
                                 CommentService.createComment(this.props.postId,
                                     {
-                                        id: newId, postId: this.props.postId,
-                                        commenterId: this.props.currentCommenter.id, text: this.state.commentInput
+                                        id: 0,
+                                        postId: this.props.postId,
+                                        commenterId: this.props.currentCommenter.id,
+                                        text: this.state.commentInput
                                     }
-                                ).then(() => this.updateComments())
-
+                                ).then(() => this.renderComments())
                                 this.setState({ commentInput: '' })
                             }}>
                             Post

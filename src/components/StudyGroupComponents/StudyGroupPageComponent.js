@@ -4,6 +4,8 @@ import GroupPostComponent from "./GroupPostComponent";
 import NewPostComponent from "./NewPostComponent";
 import { Link } from "react-router-dom";
 import GroupService from "../../services/GroupService";
+import PostService from "../../services/PostService";
+import CommentService from "../../services/CommentService";
 import UserService from "../../services/UserService";
 import PostGridComponent from "./PostGridComponent";
 
@@ -50,8 +52,74 @@ export default class StudyGroupPageComponent extends React.Component {
         if (this.state.currentUser === {}) {
             this.setState({ UserStatus: "ANON" })
         }
-
     };
+
+    removeUserComments = (userId) => {
+        PostService.findPostsByStudyGroup(this.state.studyGroup.id)
+            .then(posts => posts.map(post => {
+                const newComments = []
+                post.comments.map(comment => {
+                    if (comment.commenterId === userId) {
+                        CommentService.deleteComment(comment.id)
+                    }
+                    else {
+                        newComments.push(comment.id)
+                    }
+                })
+                console.log(newComments)
+                PostService.updatePost(post.id, {
+                    ...this.post,
+                    comments: newComments
+                })
+            }))
+    }
+
+    removeUserPosts = (userId) => {
+        PostService.findPostsByStudyGroup(this.state.studyGroup.id)
+            .then(posts => {
+                const newPosts = []
+                posts.map(post => {
+                    if (post.posterId === userId) {
+                        PostService.deletePost(post.id)
+                    }
+                    else {
+                        newPosts.push(post.id)
+                    }
+                })
+                GroupService.updateGroup(this.state.studyGroup.id, {
+                    ...this.state.studyGroup,
+                    postsIds: newPosts
+                })
+            })
+    }
+
+    removeUser = (userId) => {
+        GroupService.updateGroup(this.state.studyGroup.id, {
+            ...this.state.studyGroup,
+            studentsInGroupIds: this.state.studyGroup.studentsInGroupIds.filter(id => id !== userId)
+        })
+            .then(GroupService.findGroupById(this.props.match.params.groupId)
+                .then(studyGroup => {
+                    this.setState({
+                        studyGroup: studyGroup
+                    });
+                })
+            )
+        UserService.findUserById(userId).then(user => {
+            console.log(user)
+            UserService.update(userId, {
+                ...user,
+                studyGroups: user.studyGroups.filter(id => id !== this.state.studyGroup.id)
+            })
+        })
+    }
+
+    removeFromGroup = (userId) => {
+        this.removeUserPosts(userId)
+        this.removeUserComments(userId)
+        this.removeUser(userId)
+    }
+
 
     render() {
         if (this.state.studyGroup !== null && this.state.userGroup !== [] &&
@@ -90,25 +158,8 @@ export default class StudyGroupPageComponent extends React.Component {
                                                     {(this.state.currentUser.role === "ADMIN" &&
                                                         this.state.currentUser.id !== user.id) &&
                                                         <span>
-                                                            <button className="btn btn-danger float-right"
-                                                                onClick={() => {
-                                                                    GroupService.updateGroup(this.state.studyGroup.id, {
-                                                                        ...this.state.studyGroup,
-                                                                        studentsInGroupIds: this.state.studyGroup.studentsInGroupIds.filter(id => id !== user.id)
-                                                                    })
-                                                                    .then(GroupService.findGroupById(this.props.match.params.groupId)
-                                                                        .then(studyGroup => {
-                                                                            this.setState({
-                                                                                studyGroup: studyGroup
-                                                                            });
-                                                                        })
-                                                                    )
-                                                                    UserService.update(user.id, {
-                                                                        ...user,
-                                                                        studyGroups: user.studyGroups.filter(id => id !== this.state.studyGroup.id)
-                                                                    })
-                                                                }
-                                                                }>
+                                                            <button className="btn btn-danger btn-sm float-right"
+                                                                onClick={this.removeFromGroup}>
                                                                 REMOVE
                                                                 </button>
                                                         </span>
@@ -118,24 +169,7 @@ export default class StudyGroupPageComponent extends React.Component {
                                                         this.state.currentUser.id === user.id &&
                                                         <Link to={`/profile`}>
                                                             <button className="btn btn-danger btn-sm float-right"
-                                                                onClick={() => {
-                                                                    GroupService.updateGroup(this.state.studyGroup.id, {
-                                                                        ...this.state.studyGroup,
-                                                                        studentsInGroupIds: this.state.studyGroup.studentsInGroupIds.filter(id => id !== user.id)
-                                                                    })
-                                                                    .then(GroupService.findGroupById(this.props.match.params.groupId)
-                                                                        .then(studyGroup => {
-                                                                            this.setState({
-                                                                                studyGroup: studyGroup
-                                                                            });
-                                                                        })
-                                                                    )
-                                                                    UserService.update(user.id, {
-                                                                        ...user,
-                                                                        studyGroups: user.studyGroups.filter(id => id !== this.state.studyGroup.id)
-                                                                    })
-                                                                }
-                                                                }>
+                                                                onClick={() => this.removeFromGroup(user.id)}>
                                                                 LEAVE
                                                                     </button>
                                                         </Link>

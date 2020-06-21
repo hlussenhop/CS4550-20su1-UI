@@ -77,7 +77,7 @@ class HomeComponent extends React.Component {
                         </thead>
                         <tbody>
 
-                                            <RecentPostListComponent user={this.state.currentUser}/>
+                        <RecentPostListComponent user={this.state.currentUser}/>
                         </tbody>
                     </table>
                 }

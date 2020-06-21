@@ -9,7 +9,6 @@ class AdminProfileComponent extends React.Component {
     state = {
         followers: [this.user, this.user],
         following: [this.user, this.user, this.user],
-        courseList: [this.course, this.course],
         studyGroups: this.props.studyGroups,
         currentUser: this.props.currentUser
     }
@@ -52,8 +51,9 @@ class AdminProfileComponent extends React.Component {
                     {/*</div>*/}
                     <div>
                         <h5 className="profile-heading">Study Groups:</h5>
-                        <StudyGroupList list={this.state.studyGroups}
-                            visiting={this.props.visiting} />
+                        <StudyGroupList list={this.props.studyGroups}
+                            visiting={this.props.visiting} 
+                        />
                     </div>
                     <br />
                     {

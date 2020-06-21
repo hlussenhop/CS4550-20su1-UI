@@ -16,8 +16,8 @@ const createComment = (cid, comment) =>
     })
         .then(response => response.json());
 
-const updateComment = (cid, comment) =>
-    fetch(`https://neustudyserver.herokuapp.com/api/posts/${cid}`, {
+const updateComment = (cid, comment) => {
+    return fetch(`https://neustudyserver.herokuapp.com/api/comments/${cid}`, {
         method: 'PUT', 
         body: JSON.stringify(comment),
         headers: {
@@ -25,12 +25,14 @@ const updateComment = (cid, comment) =>
         }
     })
         .then(response => response.json())
+}
+
 
 const deleteComment = (cid) => {
     return fetch(`https://neustudyserver.herokuapp.com/api/comments/${cid}`, {
         method: 'DELETE',
     })
-    .then(response => response.json())
+        .then(response => response.json())
 }
 
 export default {

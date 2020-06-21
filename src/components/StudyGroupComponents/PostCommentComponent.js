@@ -11,7 +11,9 @@ export default class GroupCommentComponent extends React.Component {
 
     componentDidMount() {
         UserService.findUserById(this.props.comment.commenterId)
-            .then(user => this.setState({ user: user }))
+            .then(user => this.setState({
+                user: user
+            }))
     }
 
     changeComment = () => {
@@ -20,7 +22,7 @@ export default class GroupCommentComponent extends React.Component {
                 id: this.props.comment.id,
                 postId: this.props.postId,
                 commenterId: this.props.comment.commenterId,
-                text: this.state.editComment,
+                text: this.state.editComment
             })
     }
 
@@ -30,16 +32,13 @@ export default class GroupCommentComponent extends React.Component {
                 {!this.state.editingMode && this.props.userStatus !== "ANON" &&
                     <div>
                         <span className="post-comment-name">
-                            {
-                                this.state.user.firstName
-                            }
+                            {this.state.user.firstName}
                         </span>
                         <p className="post-comment-text mt-1">
-                            {
-                                this.state.editComment
-                            }
+                            {this.state.editComment}
                         </p>
-                        {this.props.comment.commenterId === this.props.currentCommenter.id &&
+                        {this.props.comment.commenterId === this.props.currentCommenter.id 
+                        || this.props.currentCommenter.role === "ADMIN" &&
                             <button className="btn btn-basic mt-2 float-right btn-sm"
                                 onClick={() => this.setState({ editingMode: true })}>
                                 Edit
@@ -50,9 +49,7 @@ export default class GroupCommentComponent extends React.Component {
                 {this.state.editingMode &&
                     <div className="input-group">
                         <span className="post-comment-name">
-                            {
-                                this.state.user.firstName
-                            }
+                            {this.state.user.firstName}
                         </span>
                         <input type="text"
                             className="form-control post-comment-text"
@@ -63,16 +60,17 @@ export default class GroupCommentComponent extends React.Component {
                         <div className="input-group-append">
                             <button className="btn btn-primary btn-sm"
                                 onClick={() => {
-                                    this.changeComment();
+                                    this.changeComment()
                                     this.setState({ editingMode: false })
-                                    this.props.renderComments()
                                 }}>Save
                         </button>
 
                             <button className="btn btn-danger btn-sm"
                                 onClick={() => {
-                                    CommentService.deleteComment(this.props.comment.id)
-                                        .then(posts => this.props.renderComments())
+                                    this.props.deleteComment(this.props.comment.id)
+                                    this.setState({
+                                        editingMode: false
+                                    })
                                 }}>
                                 Delete</button>
                         </div>

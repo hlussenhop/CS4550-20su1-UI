@@ -21,7 +21,6 @@ class RecentPostListComponent extends React.Component {
             <div>
                 <div className="list-group">
                     {
-
                         this.state.recentPosts.map(post =>
                             <button type="button"
                                 className="list-group-item list-group-item-action">

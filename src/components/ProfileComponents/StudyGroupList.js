@@ -6,13 +6,21 @@ import GroupService from "../../services/GroupService";
 
 class StudyGroupList extends React.Component {
     state = {
-        list: this.props.list,
+        list: [],
         currCourse: ''
     }
 
-    getStudyGroupName = (groupId) => {
-        GroupService.findGroupById(groupId)
-        .then(group => this.setState({currCourse: group.courseName}))
+    componentDidMount() {
+        this.getStudyGroups()
+    }
+
+    getStudyGroups = () => {
+        this.props.list.map(group => GroupService.findGroupById(group)
+            .then(group => this.setState({
+                list: [
+                    ...this.state.list,
+                    group]
+            })))
     }
 
     render() {
@@ -34,20 +42,19 @@ class StudyGroupList extends React.Component {
 
                                 <button type="button"
                                     className="list-group-item list-group-item-action">
-                                    {this.getStudyGroupName(group)}
                                     <span>
                                         {
                                             this.props.visiting &&
                                             <span>
-                                                {this.state.currCourse}
+                                                {group.courseName}
                                             </span>
 
                                         }
                                         {
                                             !this.props.visiting &&
-                                            <Link to={`/group/${group}`}
+                                            <Link to={`/group/${group.id}`}
                                                 className="mod-link">
-                                                {this.state.currCourse}
+                                                {group.courseName}
                                             </Link>
                                         }
 

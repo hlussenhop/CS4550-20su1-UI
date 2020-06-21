@@ -2,7 +2,7 @@ import React from "react";
 import NavBarComponent from "./NavBarComponent";
 import GroupPostComponent from "./StudyGroupComponents/GroupPostComponent";
 import NewPostComponent from "./StudyGroupComponents/NewPostComponent";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default class AdminStudyGroupComponent extends React.Component {
     state = {
@@ -11,15 +11,15 @@ export default class AdminStudyGroupComponent extends React.Component {
         },
 
         studentsInGroup: [
-            {name: "Alice"}
+            { name: "Alice" }
         ],
         groupName: "Group 1",
         posts: [
             {
-                id:123,
+                id: 123,
                 title: "Post 2 from admin",
                 text: "example text for a group post",
-                poster: {name: "Admin"},
+                poster: { name: "Admin" },
                 comments: [
                     {
                         commenterName: "Alice",
@@ -41,7 +41,7 @@ export default class AdminStudyGroupComponent extends React.Component {
 
 
     changeIsMakingNewPost = (bool) =>
-        this.setState({makingNewPost: bool});
+        this.setState({ makingNewPost: bool });
 
     makeNewPost = (post) =>
         this.state.posts.push(post)
@@ -50,28 +50,28 @@ export default class AdminStudyGroupComponent extends React.Component {
     render() {
         return (
             <div className="container">
-                <NavBarComponent/>
+                <NavBarComponent />
                 <h1>{this.state.groupName}</h1>
                 <div className="row">
                     <table className="col-sm-4">
                         <thead>
-                        <table className="table table-hover table-light"/>
-                        <tr className="table-secondary">
-                            <th>Group Members
+                            <table className="table table-hover table-light" />
+                            <tr className="table-secondary">
+                                <th>Group Members
 
                             </th>
-                        </tr>
+                            </tr>
                         </thead>
                         <tbody>
-                        {this.state.studentsInGroup.map(student =>
-                            <span>
-                                <tr>
-                                    <td>
-                                        <Link to={'/profile'}>{student.name}</Link>
-                                    </td>
-                                </tr>
-                            </span>
-                        )}
+                            {this.state.studentsInGroup.map(student =>
+                                <span>
+                                    <tr>
+                                        <td>
+                                            <Link to={'/profile'}>{student.name}</Link>
+                                        </td>
+                                    </tr>
+                                </span>
+                            )}
                         </tbody>
 
                     </table>
@@ -79,15 +79,15 @@ export default class AdminStudyGroupComponent extends React.Component {
                         <h2>Group Posts</h2>
                         <div className="row">
                             {this.state.posts.map(post =>
-                                <GroupPostComponent post={post}/>)}
+                                <GroupPostComponent post={post} />)}
                             {this.state.makingNewPost &&
                                 <NewPostComponent poster={this.state.viewingAdmin}
-                                                  makeNewPost={this.makeNewPost}
-                                                  changeIsMakingNewPost={this.changeIsMakingNewPost}/>
+                                    makeNewPost={this.makeNewPost}
+                                    changeIsMakingNewPost={this.changeIsMakingNewPost} />
                             }
                             {!this.state.makingNewPost &&
                                 <button className="btn btn-success"
-                                onClick={() => this.setState({makingNewPost: true})}>
+                                    onClick={() => this.setState({ makingNewPost: true })}>
                                     New Post
                                 </button>
                             }

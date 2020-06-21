@@ -6,7 +6,6 @@ import NewPostComponent from "./NewPostComponent";
 export default class PostGridComponent extends React.Component {
     state = {
         posts: [],
-        count: 0,
         commentInput: "",
         isMakingNewPost: false
     };
@@ -15,19 +14,17 @@ export default class PostGridComponent extends React.Component {
         PostService.findPostsByStudyGroup(this.props.groupId)
             .then(posts => {
                 this.setState({ 
-                    posts: posts,
-                    count: posts.length
+                    posts: posts
                 })
             })
 
     }
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevState.count !== this.state.count) {
+        if (prevState.posts.length !== this.state.posts.length) {
             PostService.findPostsByStudyGroup(this.props.groupId)
             .then(posts => {
                 this.setState({ 
-                    posts: posts,
-                    count: posts.length})
+                    posts: posts})
             })
         }
     }
@@ -38,18 +35,27 @@ export default class PostGridComponent extends React.Component {
             PostService.findPostsByStudyGroup(this.props.groupId)
                 .then(posts => {
                     this.setState({ 
-                        posts: posts,
-                        count: posts.length})
+                        posts: posts})
                 })
         })
     };
+
+    // does delete return a list?
+    deletePost = (postId) => {
+        PostService.deletePost(postId)
+        .then(posts => {
+            this.setState({
+                posts: posts
+            })
+        })
+        this.renderPosts()
+    }
 
     renderPosts = () => {
         PostService.findPostsByStudyGroup(this.props.groupId)
             .then(posts => {
                 this.setState({ 
-                    posts: posts,
-                    count: posts.length})
+                    posts: posts})
             })
     }
 
@@ -57,8 +63,9 @@ export default class PostGridComponent extends React.Component {
         return (
             <div className="container mt-2">
                 {this.state.posts.map(post =>
-                    <GroupPostComponent userstatus={this.props.userStatus}
-                        renderPosts={this.renderPosts}
+                    <GroupPostComponent 
+                        userstatus={this.props.userStatus}
+                        deletePost={this.deletePost}
                         currentUser={this.props.currentUser} 
                         post={post}
                         groupId={this.props.groupId} />
