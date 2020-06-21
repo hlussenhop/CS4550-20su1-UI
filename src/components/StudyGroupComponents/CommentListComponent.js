@@ -5,8 +5,7 @@ import PostCommentComponent from "./PostCommentComponent";
 export default class CommentListComponent extends React.Component {
     state = {
         comments: [],
-        commentInput: "",
-        changed: false
+        commentInput: ""
     };
 
     componentDidMount() {
@@ -17,7 +16,7 @@ export default class CommentListComponent extends React.Component {
     deleteComment = (commentId) => {
         CommentService.deleteComment(commentId)
             .then(comments => {
-                //this.renderComments()
+                this.renderComments()
                 this.setState({
                     comments: comments
                 })
@@ -28,8 +27,7 @@ export default class CommentListComponent extends React.Component {
         CommentService.findCommentsForPost(this.props.postId)
             .then(comments => {
                 this.setState({
-                    comments: comments,
-                    changed: true
+                    comments: comments
                 })
             })
     }

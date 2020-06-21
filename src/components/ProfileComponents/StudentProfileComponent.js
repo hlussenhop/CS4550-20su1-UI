@@ -2,6 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import StudyGroupList from "./StudyGroupList";
 import RecentPostListComponent from "./RecentPostListComponent";
+import PostService from "../../services/PostService"
+import GroupService from "../../services/GroupService"
+import UserService from "../../services/UserService"
+import CommentService from "../../services/CommentService"
 
 class StudentProfileComponent extends React.Component {
 
@@ -12,16 +16,99 @@ class StudentProfileComponent extends React.Component {
         currentUser: this.props.currentUser
     }
 
+    removeUserComments = (userId) => {
+        PostService.findAllPosts()
+            .then(posts => posts.map(post => {
+                const newComments = []
+                post.comments.map(comment => {
+                    if (comment.commenterId === userId) {
+                        CommentService.deleteComment(comment.id)
+                    }
+                    else {
+                        newComments.push(comment.id)
+                    }
+                })
+                if (post.posterId !== userId) {
+                    PostService.updatePost(post.id, {
+                        ...this.post,
+                        comments: newComments
+                    })
+                }
+            }))
+    }
+
+    removeUserPosts = (userId) => {
+        this.state.currentUser.studyGroups.map(groupId => {
+            PostService.findPostsByStudyGroup(groupId)
+                .then(posts => {
+                    const newPosts = []
+                    posts.map(post => {
+                        if (post.posterId === userId) {
+                            PostService.deletePost(post.id)
+                        }
+                        else {
+                            newPosts.push(post.id)
+                        }
+                    })
+                    GroupService.findGroupById(groupId)
+                        .then(group =>
+                            GroupService.updateGroup(groupId, {
+                                ...group,
+                                postsIds: newPosts
+                            }).then(group => group))
+                })
+        }
+        )
+    }
+
+    removeUser = (userId) => {
+        this.state.currentUser.studyGroups.map(groupId => {
+            GroupService.findGroupById(groupId)
+                .then(group =>
+                    GroupService.updateGroup(groupId, {
+                        ...group,
+                        studentsInGroupIds: group.studentsInGroupIds.filter(id => id !== userId)
+                    })
+                        .then(group => group))
+        })
+        UserService.deleteUser(userId).then(users => users)
+        UserService.logout()
+        .catch(e => {})
+        .then(currentUser => {
+            if (currentUser) {
+                this.setState({
+                    currentUser: {}
+                })
+            }
+        })
+    }
+
+    deleteUser = (userId) => {
+        this.removeUserPosts(userId)
+        this.removeUserComments(userId)
+        this.removeUser(userId)
+    }
+
     render() {
         return (
             <div>
-                {
-                    (!this.state.visiting) &&
-                    <Link to={`/${this.state.currentUser.id}/editProfile`}>
-                        <button className="btn login_btn">
-                            Edit
+                {(!this.state.visiting) &&
+                    <span>
+                        <Link to={`/${this.state.currentUser.id}/editProfile`}>
+                            <button className="btn login_btn">
+                                Edit
                         </button>
-                    </Link>
+                        </Link>
+                        <Link to={`/`}>
+                            <button
+                                onClick={() => {
+                                    this.deleteUser(this.state.currentUser.id)
+                                }}
+                                className="btn float-right login_btn">
+                                Delete
+                            </button>
+                        </Link>
+                    </span>
                 }
                 <div className="profile">
 

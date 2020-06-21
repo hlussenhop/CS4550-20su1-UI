@@ -45,7 +45,7 @@ export default class StudyGroupPageComponent extends React.Component {
                 if (this.state.currentUser.role === "STUDENT") {
                     this.setState({ UserStatus: "STUDENT" })
                 } else if (this.state.currentUser.role === "ADMIN") {
-                    this.setState({ UserStatus: "STUDENT" })
+                    this.setState({ UserStatus: "ADMIN" })
                 }
             }
         });
@@ -66,11 +66,12 @@ export default class StudyGroupPageComponent extends React.Component {
                         newComments.push(comment.id)
                     }
                 })
-                console.log(newComments)
-                PostService.updatePost(post.id, {
-                    ...this.post,
-                    comments: newComments
-                })
+                if (post.posterId !== userId) {
+                    PostService.updatePost(post.id, {
+                        ...this.post,
+                        comments: newComments
+                    })
+                }
             }))
     }
 
@@ -159,7 +160,7 @@ export default class StudyGroupPageComponent extends React.Component {
                                                         this.state.currentUser.id !== user.id) &&
                                                         <span>
                                                             <button className="btn btn-danger btn-sm float-right"
-                                                                onClick={this.removeFromGroup}>
+                                                                onClick={() => this.removeFromGroup(user.id)}>
                                                                 REMOVE
                                                                 </button>
                                                         </span>
@@ -167,11 +168,11 @@ export default class StudyGroupPageComponent extends React.Component {
 
                                                     {
                                                         this.state.currentUser.id === user.id &&
-                                                        <Link to={`/profile`}>
+                                                        <Link to={`/`}>
                                                             <button className="btn btn-danger btn-sm float-right"
                                                                 onClick={() => this.removeFromGroup(user.id)}>
                                                                 LEAVE
-                                                                    </button>
+                                                            </button>
                                                         </Link>
                                                     }
                                                 </span>

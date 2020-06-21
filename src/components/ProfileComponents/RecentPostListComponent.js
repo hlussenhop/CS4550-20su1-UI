@@ -12,7 +12,9 @@ class RecentPostListComponent extends React.Component {
     componentDidMount() {
         PostService.findAllPosts()
             .then(posts => {
-                this.setState({ recentPosts: posts.filter(post => post.posterId === this.props.user.id) });
+                this.setState({
+                    recentPosts: posts.filter(post => post.posterId === this.props.user.id)
+                });
             })
     }
 
@@ -35,7 +37,7 @@ class RecentPostListComponent extends React.Component {
                                         </Link>
                                 </small>
                             </button>
-                        ).slice(0, 5)
+                        ).slice(this.state.recentPosts.length - 5, this.state.recentPosts.length)
                     }
                 </div>
             </div>

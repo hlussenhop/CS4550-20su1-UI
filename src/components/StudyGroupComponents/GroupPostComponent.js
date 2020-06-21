@@ -15,7 +15,7 @@ export default class GroupPostComponent extends React.Component {
 
     componentDidMount() {
         UserService.findUserById(this.props.post.posterId)
-            .then(user => this.setState({user: user}))
+            .then(user => this.setState({ user: user }))
     }
 
     changePost = () => {
@@ -38,8 +38,7 @@ export default class GroupPostComponent extends React.Component {
                         <h5>{this.state.editingTitle}</h5>
                         <span>{this.state.user.firstName}</span>
                         <p>{this.state.editingBody}</p>
-                        {this.props.post.posterId === this.props.currentUser.id 
-                        || this.props.currentUser.role === "ADMIN" &&
+                        {((this.props.post.posterId === this.props.currentUser.id) || (this.props.currentUser.role === "ADMIN")) &&
                             <button className="btn btn-primary"
                                 onClick={() => this.setState({ isBeingEdited: true })}>
                                 Edit Post
@@ -48,7 +47,7 @@ export default class GroupPostComponent extends React.Component {
 
                         <h5>Comments</h5>
                         {
-                            <CommentListComponent 
+                            <CommentListComponent
                                 userStatus={this.props.userstatus}
                                 currentCommenter={this.props.currentUser}
                                 postId={this.props.post.id} />
@@ -84,9 +83,9 @@ export default class GroupPostComponent extends React.Component {
                             <button className="btn btn-danger"
                                 onClick={() => {
                                     this.props.deletePost(this.props.post.id)
-                                    this.setState({isBeingEdited: false})
-                                    }}>
-                                        Delete Post</button>
+                                    this.setState({ isBeingEdited: false })
+                                }}>
+                                Delete Post</button>
                         </div>
 
                         {

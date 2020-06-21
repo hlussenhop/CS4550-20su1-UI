@@ -26,8 +26,7 @@ const update = (uid, updatedUser) => {
 
 const deleteUser = (uid) => {
     return fetch(`https://neustudyserver.herokuapp.com/api/users/${uid}`, {
-        method: 'DELETE',
-        credentials: "include"
+        method: 'DELETE'
     }).then(response => response.json())
 }
 

@@ -37,8 +37,7 @@ export default class GroupCommentComponent extends React.Component {
                         <p className="post-comment-text mt-1">
                             {this.state.editComment}
                         </p>
-                        {this.props.comment.commenterId === this.props.currentCommenter.id 
-                        || this.props.currentCommenter.role === "ADMIN" &&
+                        {((this.props.comment.commenterId === this.props.currentCommenter.id) || (this.props.currentCommenter.role === "ADMIN")) &&
                             <button className="btn btn-basic mt-2 float-right btn-sm"
                                 onClick={() => this.setState({ editingMode: true })}>
                                 Edit
