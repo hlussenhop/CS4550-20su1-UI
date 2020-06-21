@@ -1,7 +1,7 @@
 import React from "react";
 import UserService from "../../services/UserService";
 import GroupService from "../../services/GroupService";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default class SectionCardComponent extends React.Component {
     groups = [];
@@ -18,18 +18,18 @@ export default class SectionCardComponent extends React.Component {
             .catch(e => {
             })
             .then(user => {
-                this.setState({user: user})
+                this.setState({ user: user })
                 this.state.user.studyGroups.map(groupId => {
-                        GroupService.findGroupById(groupId).then(group => {
-                            if (group.courseId === parseInt(this.props.section.crn)) {
-                                this.setState(
-                                    {
-                                        enrolled: true,
-                                        groupId: group.id
-                                    })
-                            }
-                        })
-                    }
+                    GroupService.findGroupById(groupId).then(group => {
+                        if (group.courseId === parseInt(this.props.section.crn)) {
+                            this.setState(
+                                {
+                                    enrolled: true,
+                                    groupId: group.id
+                                })
+                        }
+                    })
+                }
                 )
             })
     }
@@ -37,14 +37,14 @@ export default class SectionCardComponent extends React.Component {
     addToStudyGroup(crn) {
         GroupService.findAllGroups()
             .then(groups => {
-                this.setState({groups: groups})
+                this.setState({ groups: groups })
                 let wasAlreadyCreated = false
                 groups.map(group => {
-                        if (group.courseId === crn) {
-                            this.putInStudyGroup(group)
-                            wasAlreadyCreated = true
-                        }
+                    if (group.courseId === crn) {
+                        this.putInStudyGroup(group)
+                        wasAlreadyCreated = true
                     }
+                }
                 )
                 if (wasAlreadyCreated === false) {
                     console.log("woos")
@@ -99,27 +99,27 @@ export default class SectionCardComponent extends React.Component {
                                 <h6 className="card-text course-enrollment text-muted">{this.props.section.seatsCapacity - this.props.section.seatsRemaining
                                 }</h6>
                                 {this.state.user !== undefined &&
-                                !this.state.enrolled &&
-                                <button href="#" className="btn btn-success float-right card-link"
+                                    !this.state.enrolled &&
+                                    <button href="#" className="btn btn-success float-right card-link"
                                         onClick={() => {
                                             this.addToStudyGroup(parseInt(this.props.section.crn))
                                             alert("You are enrolled! Check your profile or click the Go to group button to access the group.")
-                                            this.setState({enrolled: true})
+                                            this.setState({ enrolled: true })
                                         }}>
-                                    Enroll
+                                        Enroll
                                 </button>
                                 }
                                 {this.state.user !== undefined &&
-                                this.state.enrolled &&
-                                <Link to={`/group/${this.state.groupId}`}>
-                                    <button className="btn btn-primary float-right card-link">
-                                        Go to group
+                                    this.state.enrolled &&
+                                    <Link to={`/group/${this.state.groupId}`}>
+                                        <button className="btn btn-primary float-right card-link">
+                                            Go to group
                                     </button>
-                                </Link>
+                                    </Link>
 
                                 }
                                 {this.state.user === undefined &&
-                                <button className="btn btn-success float-right card-link"
+                                    <button className="btn btn-success float-right card-link"
                                         onClick={() => alert("Sign in to enroll in a study group.")}>Enroll</button>
                                 }
                             </div>

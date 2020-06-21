@@ -18,16 +18,25 @@ const createComment = (cid, comment) =>
 
 const updateComment = (cid, comment) =>
     fetch(`https://neustudyserver.herokuapp.com/api/posts/${cid}`, {
-        method: 'PUT', body: JSON.stringify(comment),
+        method: 'PUT', 
+        body: JSON.stringify(comment),
         headers: {
             'content-type': 'application/json'
         }
     })
         .then(response => response.json())
 
+const deleteComment = (cid) => {
+    return fetch(`https://neustudyserver.herokuapp.com/api/comments/${cid}`, {
+        method: 'DELETE',
+    })
+    .then(response => response.json())
+}
+
 export default {
     findCommentById,
     createComment,
     findCommentsForPost,
-    updateComment
+    updateComment,
+    deleteComment
 }

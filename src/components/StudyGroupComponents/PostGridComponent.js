@@ -42,8 +42,6 @@ export default class PostGridComponent extends React.Component {
                         count: posts.length})
                 })
         })
-
-
     };
 
     renderPosts = () => {

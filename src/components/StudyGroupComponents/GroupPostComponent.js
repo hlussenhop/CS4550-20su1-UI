@@ -19,7 +19,6 @@ export default class GroupPostComponent extends React.Component {
     }
 
     changePost = () => {
-        console.log(this.props.post.id)
         PostService.updatePost(this.props.post.id,
             {
                 id: this.props.post.id,
@@ -83,8 +82,9 @@ export default class GroupPostComponent extends React.Component {
 
                             <button className="btn btn-danger"
                                 onClick={() => {
+                                    console.log(this.props.post.id)
                                     PostService.deletePost(this.props.post.id)
-                                    .then(this.props.renderPosts())}}>
+                                    .then(posts => this.props.renderPosts())}}>
                                         Delete Post</button>
                         </div>
 

@@ -13,17 +13,23 @@ export default class CommentListComponent extends React.Component {
             .then(comments => this.setState({ comments: comments }))
     }
 
-    updateComments() {
-        CommentService.findCommentsForPost(this.props.postId)
-            .then(comments => this.setState({ comments: comments }))
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevState.comments.length !== this.state.comments.length) {
+            CommentService.findCommentsForPost(this.props.postId)
+            .then(comments => {
+                this.setState({ 
+                    comments: comments,
+                    count: comments.length})
+            })
+        }
     }
 
     renderComments = () => {
         CommentService.findCommentsForPost(this.props.postId)
             .then(comments => {
-                this.setState({ comments: comments })
-            })
-    }
+                this.setState({ 
+                    comments: comments})
+    })}
 
     render() {
         return (
@@ -33,6 +39,7 @@ export default class CommentListComponent extends React.Component {
                         <div className="row">
                             <PostCommentComponent
                                 userStatus={this.props.userStatus}
+                                renderComments={this.renderComments}
                                 currentCommenter={this.props.currentCommenter}
                                 comment={comment}
                                 postId={this.props.postId} />

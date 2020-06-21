@@ -72,7 +72,7 @@ export default class GroupCommentComponent extends React.Component {
                             <button className="btn btn-danger btn-sm"
                                 onClick={() => {
                                     CommentService.deleteComment(this.props.comment.id)
-                                        .then(this.props.renderComments())
+                                        .then(posts => this.props.renderComments())
                                 }}>
                                 Delete</button>
                         </div>

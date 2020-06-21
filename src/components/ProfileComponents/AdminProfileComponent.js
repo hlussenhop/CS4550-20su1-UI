@@ -6,17 +6,10 @@ import RecentPostListComponent from "./RecentPostListComponent";
 
 class AdminProfileComponent extends React.Component {
 
-    pendingRequest = {
-        // user: 'calbee',
-        id: 992199446,
-        date: 'June 18, 2020'
-    }
-
     state = {
         followers: [this.user, this.user],
         following: [this.user, this.user, this.user],
         courseList: [this.course, this.course],
-        pendingRequests: [this.pendingRequest, this.pendingRequest, this.pendingRequest],
         studyGroups: this.props.studyGroups,
         currentUser: this.props.currentUser
     }
