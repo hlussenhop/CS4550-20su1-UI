@@ -19,12 +19,15 @@ export default class GroupPostComponent extends React.Component {
     }
 
     changePost = () => {
+        console.log(this.props.post.id)
         PostService.updatePost(this.props.post.id,
             {
+                id: this.props.post.id,
                 studyGroupId: this.props.groupId,
                 posterId: this.props.currentUser.id,
                 title: this.state.editingTitle,
-                text: this.state.editingBody
+                text: this.state.editingBody,
+                comments: this.props.post.comments
             })
     }
 

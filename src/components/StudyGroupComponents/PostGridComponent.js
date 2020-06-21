@@ -6,6 +6,7 @@ import NewPostComponent from "./NewPostComponent";
 export default class PostGridComponent extends React.Component {
     state = {
         posts: [],
+        count: 0,
         commentInput: "",
         isMakingNewPost: false
     };
@@ -13,26 +14,32 @@ export default class PostGridComponent extends React.Component {
     componentDidMount() {
         PostService.findPostsByStudyGroup(this.props.groupId)
             .then(posts => {
-                this.setState({ posts: posts })
+                this.setState({ 
+                    posts: posts,
+                    count: posts.length
+                })
             })
 
     }
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevState.posts !== this.state.posts) {
+        if (prevState.count !== this.state.count) {
             PostService.findPostsByStudyGroup(this.props.groupId)
             .then(posts => {
-                this.setState({ posts: posts })
+                this.setState({ 
+                    posts: posts,
+                    count: posts.length})
             })
         }
     }
 
     makeNewPost = (post, bool) => {
         PostService.createPost(this.props.groupId, post).then(() => {
-
             this.setState({ isMakingNewPost: bool })
             PostService.findPostsByStudyGroup(this.props.groupId)
                 .then(posts => {
-                    this.setState({ posts: posts })
+                    this.setState({ 
+                        posts: posts,
+                        count: posts.length})
                 })
         })
 
@@ -42,7 +49,9 @@ export default class PostGridComponent extends React.Component {
     renderPosts = () => {
         PostService.findPostsByStudyGroup(this.props.groupId)
             .then(posts => {
-                this.setState({ posts: posts })
+                this.setState({ 
+                    posts: posts,
+                    count: posts.length})
             })
     }
 

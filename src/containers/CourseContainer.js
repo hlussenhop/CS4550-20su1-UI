@@ -13,6 +13,28 @@ export default class CourseContainer extends React.Component {
         //{ course: "CS4550", title: "Web Development", term: "Summer 1 2020", enrollment: "60" }
     };
 
+    componentDidMount() {
+        if ((this.state.subject !== "") && (this.state.term !== "")) {
+            SearchService.findCoursesBySubject(this.state.subject, this.state.term)
+                .then(actualArrayOfCourses =>
+                    this.setState({
+                        courses: actualArrayOfCourses
+                    }))
+        }
+
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if ((prevProps.match.params.subject !== this.props.match.params.subject)
+            || prevProps.match.params.term !== this.props.match.params.term || prevProps.match.params.courseNumber
+            !== this.props.match.params.courseNumber) {
+            this.setState({
+                subject: this.props.match.params.subject,
+                term: this.props.match.params.term
+            })
+        }
+    }
+
     findTerm = () => {
         SearchService.findCoursesBySubject(this.state.subject, this.state.term)
             .then(coursesFound => {
@@ -63,28 +85,6 @@ export default class CourseContainer extends React.Component {
                 }
             }))
             */
-
-    componentDidMount() {
-        if ((this.state.subject !== "") && (this.state.term !== "")) {
-            SearchService.findCoursesBySubject(this.state.subject, this.state.term)
-                .then(actualArrayOfCourses =>
-                    this.setState({
-                        courses: actualArrayOfCourses
-                    }))
-        }
-
-    }
-
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        if ((prevProps.match.params.subject !== this.props.match.params.subject)
-            || prevProps.match.params.term !== this.props.match.params.term || prevProps.match.params.courseNumber
-            !== this.props.match.params.courseNumber) {
-            this.setState({
-                subject: this.props.match.params.subject,
-                term: this.props.match.params.term
-            })
-        }
-    }
 
     setURL = () => {
         this.props.history.push(`/search/${this.state.term}/${this.state.subject}`)

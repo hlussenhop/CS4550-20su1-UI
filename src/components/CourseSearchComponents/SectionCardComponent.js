@@ -27,12 +27,10 @@ export default class SectionCardComponent extends React.Component {
                                         enrolled: true,
                                         groupId: group.id
                                     })
-
                             }
                         })
                     }
                 )
-
             })
     }
 
@@ -114,14 +112,14 @@ export default class SectionCardComponent extends React.Component {
                                 {this.state.user !== undefined &&
                                 this.state.enrolled &&
                                 <Link to={`/group/${this.state.groupId}`}>
-                                    <button href="#" className="btn btn-primary float-right card-link">
+                                    <button className="btn btn-primary float-right card-link">
                                         Go to group
                                     </button>
                                 </Link>
 
                                 }
                                 {this.state.user === undefined &&
-                                <button href="#" className="btn btn-success float-right card-link"
+                                <button className="btn btn-success float-right card-link"
                                         onClick={() => alert("Sign in to enroll in a study group.")}>Enroll</button>
                                 }
                             </div>

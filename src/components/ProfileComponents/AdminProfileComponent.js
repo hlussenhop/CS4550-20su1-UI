@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import StudyGroupList from "./StudyGroupList";
 import RecentPostListComponent from "./RecentPostListComponent";
 
@@ -23,7 +24,14 @@ class AdminProfileComponent extends React.Component {
     render() {
         return (
             <div>
-
+                {
+                    (!this.state.visiting) &&
+                    <Link to={`/${this.state.currentUser.id}/editProfile`}>
+                        <button className="btn login_btn">
+                            Edit
+                        </button>
+                    </Link>
+                }
 
                 <div className="profile">
 
@@ -52,14 +60,14 @@ class AdminProfileComponent extends React.Component {
                     <div>
                         <h5 className="profile-heading">Study Groups:</h5>
                         <StudyGroupList list={this.state.studyGroups}
-                                        visiting={this.props.visiting}/>
+                            visiting={this.props.visiting} />
                     </div>
-                    <br/>
+                    <br />
                     {
                         !this.props.visiting &&
                         <div>
                             <h5 className="profile-heading">Your Recent Posts:</h5>
-                            <RecentPostListComponent user={this.props.currentUser}/>
+                            <RecentPostListComponent user={this.props.currentUser} />
                         </div>
                     }
 

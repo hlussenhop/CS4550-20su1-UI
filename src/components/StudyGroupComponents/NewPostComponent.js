@@ -7,7 +7,7 @@ export default class NewPostComponent extends React.Component {
         posterId: this.props.poster.id,
         title: "",
         text: "",
-        commentIds: []
+        comments: []
     };
 
     changeTitle = (title) => {

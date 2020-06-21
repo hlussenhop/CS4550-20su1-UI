@@ -3,7 +3,8 @@ const findPostsByStudyGroup = (gid) =>
         .then(response => response.json());
 
 const findPostById = (pid) =>
-    fetch(`https://neustudyserver.herokuapp.com/api/posts/${pid}`);
+    fetch(`https://neustudyserver.herokuapp.com/api/posts/${pid}`)
+    .then(response => response.json());
 
 const findAllPosts = () =>
     fetch(`https://neustudyserver.herokuapp.com/api/posts/`)
@@ -12,7 +13,8 @@ const findAllPosts = () =>
 
 const updatePost = (pid, post) =>
     fetch(`https://neustudyserver.herokuapp.com/api/posts/${pid}`, {
-        method: 'PUT', body: JSON.stringify(post),
+        method: 'PUT', 
+        body: JSON.stringify(post),
         headers: {
             'content-type': 'application/json'
         }
