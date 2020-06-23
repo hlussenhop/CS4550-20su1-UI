@@ -93,7 +93,7 @@ class AdminProfileComponent extends React.Component {
         return (
             <div>
                 {
-                    (!this.state.visiting) &&
+                    (!this.props.visiting) &&
                     <span>
                         <Link to={`/${this.state.currentUser.id}/editProfile`}>
                             <button className="btn login_btn">

@@ -89,7 +89,9 @@ export default class GroupPostComponent extends React.Component {
                         </div>
 
                         {
-                            <CommentListComponent currentCommenter={this.props.currentUser}
+                            <CommentListComponent
+                                userStatus={this.props.userstatus}
+                                currentCommenter={this.props.currentUser}
                                 postId={this.props.post.id} />
                         }
                     </div>

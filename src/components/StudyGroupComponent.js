@@ -9,7 +9,6 @@ import CourseRowComponent from "./CourseSearchComponents/CourseRowComponent";
 import LoginComponent from "./LoginComponent";
 import SignUpComponent from "./SignUpComponent";
 import StudyGroupPageComponent from "./StudyGroupComponents/StudyGroupPageComponent";
-import AdminStudyGroupComponent from "./AdminStudyGroupComponent";
 import EditProfileComponent from "./ProfileComponents/EditProfileComponent";
 import ProfileComponent from "./ProfileComponents/ProfileComponent";
 import HomeComponent from "./HomeComponent";
@@ -77,11 +76,6 @@ class StudyGroupComponent extends React.Component {
                         path="/group/:groupId"
                         exact={true}
                         component={StudyGroupPageComponent} />
-
-                    <Route
-                        path="/admin/group"
-                        exact={true}
-                        component={AdminStudyGroupComponent} />
                 </div>
             </BrowserRouter>
         )

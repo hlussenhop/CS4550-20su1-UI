@@ -109,8 +109,8 @@ class SignUpComponent extends React.Component {
                                         </span>
                                     </div>
                                     <select className="form-control"
-                                            onChange={(event) =>
-                                                this.setState({ role: event.target.value })}>
+                                        onChange={(event) =>
+                                            this.setState({ role: event.target.value })}>
                                         <option value="STUDENT">Student</option>
                                         <option value="ADMIN">Admin</option>
                                     </select>

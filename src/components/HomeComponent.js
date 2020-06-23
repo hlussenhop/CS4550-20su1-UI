@@ -19,7 +19,6 @@ class HomeComponent extends React.Component {
         if (this.state.currentUser !== undefined) {
             PostService.findAllPosts().then(posts => {
                 this.setState({ posts: this.filterPosts(posts) });
-
             })
         }
     }
@@ -46,8 +45,6 @@ class HomeComponent extends React.Component {
     filterPosts = (posts) =>
         posts.filter(post => post)
         //(post.posterId === this.state.currentUser.id))
-
-
 
     render() {
         return (

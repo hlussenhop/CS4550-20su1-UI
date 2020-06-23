@@ -107,7 +107,6 @@ export default class StudyGroupPageComponent extends React.Component {
                 })
             )
         UserService.findUserById(userId).then(user => {
-            console.log(user)
             UserService.update(userId, {
                 ...user,
                 studyGroups: user.studyGroups.filter(id => id !== this.state.studyGroup.id)

@@ -92,7 +92,7 @@ class StudentProfileComponent extends React.Component {
     render() {
         return (
             <div>
-                {(!this.state.visiting) &&
+                {(!this.props.visiting) &&
                     <span>
                         <Link to={`/${this.state.currentUser.id}/editProfile`}>
                             <button className="btn login_btn">
